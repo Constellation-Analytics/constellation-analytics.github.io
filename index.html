@@ -48,6 +48,46 @@
       font-size: 1rem;
       line-height: 1.6;
     }
+    .nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav li {
+  position: relative;
+}
+
+.nav li a {
+  text-decoration: none;
+  color: #111;
+  padding: 0.5rem 1rem;
+  display: block;
+}
+
+.nav li:hover > a {
+  color: #007bff;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #213345;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown li a {
+  color: #fff;
+}
+
+.nav li:hover .dropdown {
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -56,13 +96,24 @@
   <a href="/">
     <img src="https://img1.wsimg.com/isteam/ip/afa3eeb1-8f24-4cd5-a351-338ae5b64a5e/CA-Logo-Landscape.png" alt="Constellation Analytics">
   </a>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about-me">About Me</a>
-    <a href="/experience">Experience</a>
-    <a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a>
-    <a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a>
-  </nav>
+<nav>
+  <ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about-me">About Me</a></li>
+    <li><a href="/experience">Experience</a></li>
+    <li>
+      <a href="#">Portfolio</a>
+      <ul class="dropdown">
+        <li><a href="<!-- INSERT LINK -->">All Projects</a></li>
+        <li><a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a></li>
+        <li><a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a></li>
+        <li><a href="<!-- INSERT LINK -->">Power BI Dashboards</a></li>
+        <li><a href="<!-- INSERT LINK -->">NSW Fuel Price Insights</a></li>
+      </ul>
+    </li>
+    <li><a href="<!-- INSERT LINK -->">Contact</a></li>
+  </ul>
+</nav>
 </header>
 
 <main>
