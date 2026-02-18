@@ -1,9 +1,7 @@
 <style>
 /* Font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
-
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: 'Avenir', Arial, sans-serif;
     margin: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
@@ -29,7 +27,65 @@ p, li, a, span {
     text-transform: none;
 }
 
-/* Responsive font */
+/* Simple nav */
+nav {
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+nav li {
+    position: relative;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #111;
+    padding: 0.5rem 1rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+nav li a:hover {
+    color: #007bff;
+}
+
+/* Dropdown menu */
+nav li ul.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #213345;
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+nav li ul.dropdown li a {
+    color: #fff;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
+}
+
+nav li ul.dropdown li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Show dropdown on hover */
+nav li:hover > ul.dropdown {
+    display: block;
+}
+
+/* Responsive font (optional if you want scaling) */
 @media (min-width: 768px) {
     p, li, a, span {
         font-size: 16px;
@@ -39,12 +95,5 @@ p, li, a, span {
     p, li, a, span {
         font-size: 16px;
     }
-}
-
-/* Simple nav */
-nav a {
-    text-decoration: none;
-    color: inherit;
-    margin-right: 16px;
 }
 </style>
