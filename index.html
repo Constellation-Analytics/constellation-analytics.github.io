@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Constellation Analytics</title>
   <style>
+    /* Font */
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: #fff;
       color: #111;
     }
+
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -26,15 +29,8 @@
     header img {
       max-height: 64px;
     }
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: #007bff;
-    }
+
+    /* Main */
     main {
       max-width: 1000px;
       margin: 2rem auto;
@@ -48,46 +44,66 @@
       font-size: 1rem;
       line-height: 1.6;
     }
+
+    /* Navigation */
     .nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 1rem;
-}
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 1rem;
+    }
+    .nav li {
+      position: relative;
+    }
+    .nav > li > a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      display: block;
+      transition: color 0.2s;
+    }
+    .nav > li:hover > a {
+      color: #007bff;
+    }
 
-.nav li {
-  position: relative;
-}
-
-.nav li a {
-  text-decoration: none;
-  color: #111;
-  padding: 0.5rem 1rem;
-  display: block;
-}
-
-.nav li:hover > a {
-  color: #007bff;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #213345;
-  min-width: 200px;
-  z-index: 1000;
-}
-
-.dropdown li a {
-  color: #fff;
-}
-
-.nav li:hover .dropdown {
-  display: block;
-}
+    /* Dropdown Menu */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #213345;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      min-width: 220px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .nav li:hover .dropdown {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .dropdown li {
+      list-style: none;
+    }
+    .dropdown li a {
+      color: #fff;
+      padding: 0.5rem 1rem;
+      display: block;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .dropdown li a:hover {
+      background: #2c3e50;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
@@ -96,33 +112,30 @@
   <a href="/">
     <img src="https://img1.wsimg.com/isteam/ip/afa3eeb1-8f24-4cd5-a351-338ae5b64a5e/CA-Logo-Landscape.png" alt="Constellation Analytics">
   </a>
-<nav>
-  <ul class="nav">
-    <li><a href="/">Home</a></li>
-    <li><a href="/about-me">About Me</a></li>
-    <li><a href="/experience">Experience</a></li>
-    <li>
-      <a href="#">Portfolio</a>
-      <ul class="dropdown">
-        <li><a href="<!-- INSERT LINK -->">All Projects</a></li>
-        <li><a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a></li>
-        <li><a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a></li>
-        <li><a href="<!-- INSERT LINK -->">Power BI Dashboards</a></li>
-        <li><a href="<!-- INSERT LINK -->">NSW Fuel Price Insights</a></li>
-      </ul>
-    </li>
-    <li><a href="<!-- INSERT LINK -->">Contact</a></li>
-  </ul>
-</nav>
+  <nav>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about-me">About Me</a></li>
+      <li><a href="/experience">Experience</a></li>
+      <li>
+        <a href="#">Portfolio</a>
+        <ul class="dropdown">
+          <li><a href="<!-- INSERT LINK -->">All Projects</a></li>
+          <li><a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a></li>
+          <li><a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a></li>
+          <li><a href="<!-- INSERT LINK -->">Power BI Dashboards</a></li>
+          <li><a href="<!-- INSERT LINK -->">NSW Fuel Price Insights</a></li>
+        </ul>
+      </li>
+      <li><a href="<!-- INSERT LINK -->">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main>
   <h1>Welcome to Constellation Analytics</h1>
   <p>
-    Hey there, I'm Paul, a certified data analyst based in Grenoble, France. 
-    With a passion for problem-solving, I thoroughly enjoy transforming data 
-    into stories and insights using tools such as Power BI, Excel, SQL, and Python. 
-    Constellation Analytics is my professional portfolio where I share my projects and experience
+    Hey there, I'm Paul, a certified data analyst based in Grenoble, France. With a passion for problem-solving, I thoroughly enjoy transforming data into stories and insights using tools such as Power BI, Excel, SQL, and Python. Constellation Analytics is my professional portfolio where I share my projects and experience
   </p>
 </main>
 
