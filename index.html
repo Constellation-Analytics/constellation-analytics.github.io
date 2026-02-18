@@ -2,71 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Constellation Analytics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <title>Constellation Analytics</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #f8f8f8;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img {
+      max-height: 64px;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #007bff;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-  
+
 <header>
-  <div class="container">
-    <h1 class="logo">Constellation Analytics</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
+  <a href="/">
+    <img src="https://img1.wsimg.com/isteam/ip/afa3eeb1-8f24-4cd5-a351-338ae5b64a5e/CA-Logo-Landscape.png" alt="Constellation Analytics">
+  </a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about-me">About Me</a>
+    <a href="/experience">Experience</a>
+    <a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a>
+    <a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a>
+  </nav>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <h2>Data Analytics & Engineering</h2>
-    <p>SQL | Power BI | Python | Data Modelling</p>
-  </div>
-</section>
-
-<section id="about" class="section">
-  <div class="container">
-    <h3>About</h3>
-    <p>
-      I'm Paul, a Data Analyst and Engineer based in Grenoble.
-      I build clean, scalable analytics solutions using SQL, Python and Power BI.
-    </p>
-  </div>
-</section>
-
-<section id="experience" class="section">
-  <div class="container">
-    <h3>Experience</h3>
-    <ul>
-      <li>Microsoft Certified: Power BI Data Analyst Associate</li>
-      <li>Microsoft Certified: Fabric Analytics Engineer Associate</li>
-      <li>Microsoft Certified: Excel Expert</li>
-    </ul>
-  </div>
-</section>
-
-<section id="portfolio" class="section">
-  <div class="container">
-    <h3>Portfolio</h3>
-    <p>Selected projects available on GitHub.</p>
-  </div>
-</section>
-
-<section id="contact" class="section">
-  <div class="container">
-    <h3>Contact</h3>
-    <p>Email: your@email.com</p>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>© 2026 Constellation Analytics</p>
-  </div>
-</footer>
+<main>
+  <h1>Welcome to Constellation Analytics</h1>
+  <p>
+    Helping businesses turn data into insights. Explore our projects, dashboards, and analytics tools.
+  </p>
+</main>
 
 </body>
 </html>
