@@ -3,141 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Constellation Analytics</title>
+  <title>Coming Soon</title>
   <style>
-    /* Font */
     body {
-      font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #fff;
-      color: #111;
-    }
-
-    /* Header */
-    header {
+      height: 100vh;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 1rem 2rem;
-      background: #f8f8f8;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    header img {
-      max-height: 64px;
-    }
-
-    /* Main */
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    /* Navigation */
-    .nav {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 1rem;
-    }
-    .nav li {
-      position: relative;
-    }
-    .nav > li > a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      display: block;
-      transition: color 0.2s;
-    }
-    .nav > li:hover > a {
-      color: #007bff;
-    }
-
-    /* Dropdown Menu */
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
       background: #213345;
-      border-radius: 8px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      min-width: 220px;
-      padding: 0.5rem 0;
-      z-index: 1000;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #FFFFFF;
+      text-align: center;
     }
-    .nav li:hover .dropdown {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
+
+    .container {
+      padding: 2.5rem 3.5rem;
+      background: #1E1E1E;
+      border-radius: 6px;          /* tighter corners */
+      border: 2px solid #FFA500;   /* thin, crisp border */
     }
-    .dropdown li {
-      list-style: none;
+
+    h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+      font-weight: 600;
     }
-    .dropdown li a {
-      color: #fff;
-      padding: 0.5rem 1rem;
-      display: block;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.2s;
+
+    p {
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: #95A5A6;
     }
-    .dropdown li a:hover {
-      background: #2c3e50;
-      border-radius: 4px;
+    
+    .accent-line {
+      width: 120px;
+      height: 4px;
+      background: #FFA500; /* Accent */
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <a href="/">
-    <img src="https://img1.wsimg.com/isteam/ip/afa3eeb1-8f24-4cd5-a351-338ae5b64a5e/CA-Logo-Landscape.png" alt="Constellation Analytics">
-  </a>
-  <nav>
-    <ul class="nav"> <!-- unordered list -->
-      <li><a href="/">Home</a></li>
-      <li><a href="coming_soon.html">About Me</a></li>
-      <li><a href="coming_soon.html">Experience</a></li>
-      <li>  <!--  list item -->
-        <a href="#">Portfolio</a>
-        <ul class="dropdown">
-          <li><a href="coming_soon.html">All Projects</a></li>
-          <li><a href="https://github.com/constellation-analytics/" target="_blank">My GitHub</a></li>
-          <li><a href="https://pythonforanalytics.streamlit.app/" target="_blank">PythonForAnalytics</a></li>
-          <li><a href="coming_soon.html">Power BI Dashboards</a></li>
-          <li><a href="coming_soon.html">NSW Fuel Price Insights</a></li>
-        </ul>
-      </li>
-      <li><a href="coming_soon.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <h1>Welcome to Constellation Analytics</h1>
-  <p>
-    Hey there, I'm Paul, a certified data analyst based in Grenoble, France. With a passion for problem-solving, I thoroughly enjoy transforming data into stories and insights using tools such as Power BI, Excel, SQL, and Python. Constellation Analytics is my professional portfolio where I share my projects and experience
-  </p>
-</main>
-
+  <div class="container">
+    <h1>Coming Soon</h1>
+    <p>This page is currently in development.</p>
+    <div class="accent-line"></div>
+  </div>
 </body>
 </html>
