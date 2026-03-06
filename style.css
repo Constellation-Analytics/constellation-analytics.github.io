@@ -98,7 +98,6 @@ main {
   padding: 0;
   margin: 0;
   gap: var(--space-md);
-  border: 1px dashed #aaa;
 }
 
 .navbar a{
@@ -141,6 +140,9 @@ main {
   .navbar .nav-menu.active{
     display: flex;
   }
+.navbar a.active {
+    text-decoration: underline;
+}
 
   .navbar a.active::after {
     display: none;
