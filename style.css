@@ -30,8 +30,19 @@
   box-sizing: border-box;
 }
 
-body{
-  margin:0; 
+html, body {
+  height: 100%;          /* full viewport height */
+}
+
+body {
+  margin: 0;             /* remove default spacing */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;     /* ensures full height */
+}
+
+main {
+  flex: 1;   /* take all remaining space */
 }
 
 /* ============================= 
