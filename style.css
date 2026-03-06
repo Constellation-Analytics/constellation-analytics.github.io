@@ -15,6 +15,10 @@
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
+
+  --space-sm-rel: 4%;
+  --space-md-rel: 8%;
+  --space-lg-rel: 16%;
 }
 /* ============================= */
 /* GLOBAL SETTINGS */
@@ -33,34 +37,39 @@ body{
 /* ============================= 
  Basic Layout 
  ============================= */
- 
+
 
 /* =============================================================================
    Navigation Bar  
    ============================================================================= */
 .navbar{
-  background-color: var(--neutrallightgrey);
-  border-bottom: 1px solid var(--primary);
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  padding: 0 var(--space-sm-rel);
+  background-color: var(--neutrallightgrey);
+  border-bottom: 1px solid var(--primary);
   position: sticky;
   top: 0;
-  z-index: 1000;
-  padding: 0 25px;
-  
+  z-index: 1000;  
 }
 
 .navbar img{
   max-height: 75px;
-  padding: 5px;
+  height: auto;
+  padding: var(--space-sm) 0;
 }
 
+@media (max-width: 600px) {
+  .navbar img {
+    max-height: 50px;
+  }
+}
 .navbar ul{
+  display: flex;   /* makes items horizontal */
+  border: 1px dashed #aaa;
   list-style: none;
   padding: 0;
-  display: flex;   /* makes items horizontal */
   gap: 25px;       /* spacing between items*/
 }
 
@@ -132,10 +141,8 @@ section{
    Another Section
    ============================================================================= */
 
-.hero { background: white; }
-.about { background: #f7f7f7; }
-.projects { background: white; }
-.contact { background: #f7f7f7; }
+.section1 { background: white; }
+.section2 { background: #f7f7f7; }
 
 /* =============================================================================
    Footer
@@ -144,7 +151,7 @@ section{
 footer {
   background: var(--primary);
   font-family: var(--font-main);
-  padding: 25px;
+  padding: 25px 50px ;
 }
 
 .footer-container {
