@@ -1,7 +1,7 @@
 # Personal Website
 
 This repository contains the source code for my personal website.
-constellation-analytics.github.io
+[constellation-analytics.github.io](https://constellation-analytics.github.io/)
 
 Previously, my site was built using a website builder.  
 This version is being developed entirely from scratch using HTML and CSS to give me full control over structure, performance, and design.
