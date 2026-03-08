@@ -193,32 +193,51 @@ main {
 section{
   padding: 25px 0;
 }
-
-.section1 { background: white; }
-.section2 { background: #f7f7f7; }
-
+.section1 { 
+  background: white; }
+.section2 { 
+  background: #f7f7f7; }
 
 /* =============================================================================
-   Container
+   Reusable Components
    ============================================================================= */
 
 .container{
   max-width: 1100px;
   margin: auto;
   padding: 0 20px;
-  border: 1px dashed #aaa;
+  /*border: 1px dashed #aaa;*/
+  text-align: center;
+  font-family: var(--font-main);
 }
 
 .flex-container{
   max-width: 1100px;
   margin: auto;
-  padding: 0 20px;
-  border: 1px dashed #aaa;
+  padding: 20px;
+  /*border: 1px dashed #aaa;*/
 
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm-rel);
+}
+
+/* button */
+button{
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 20px;
+  cursor: pointer;
+  font-family: var(--font-main);
+}
+
+button:hover{
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
 }
 
 /* =============================================================================
@@ -239,9 +258,9 @@ section{
 
 .tech_logo{
   height: 100%;
-  max-height: 90px;
+  max-height: 80px;
   aspect-ratio: 1/1;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* image */
@@ -269,24 +288,6 @@ h2{
 
 p{
   font-size: 22px;
-}
-
-
-/* button */
-button{
-  background: none;
-  border: none;
-  font-size: 22px;
-  font-weight: 500;
-  padding: 20px;
-  cursor: pointer;
-  font-family: var(--font-main);
-}
-
-button:hover{
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
 }
 
 @media (max-width: 768px){
@@ -318,7 +319,78 @@ button:hover{
    Section
    ============================================================================= */
 
+/* =============================================================================
+   Section featured
+   ============================================================================= */
 
+/* =============================================================================
+   Section featured
+   ============================================================================= */
+#special {
+  background: #f7f7f7;
+  border-radius: 5%;
+  padding: 25px;
+  border: 1px solid #ddd;
+}
+
+  .container {
+  position: relative;
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.featured-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.featured-container::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-card {
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  flex-shrink: 0;
+}
+
+/* image */
+.project-img{
+  width: 100%;
+  max-width: 250px;
+}
+
+.nav {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  border: 1px solid #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.prev { left: -20px; }
+.next { right: -20px; }
+
+@media (max-width: 768px){
+  .prev { left: 5px; }
+  .next { right: 5px; }
+}
 
 /* =============================================================================
    Footer
