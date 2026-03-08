@@ -186,211 +186,31 @@ main {
 }
 
 /* =============================================================================
-/* =============================================================================
-   Sections
+   Section + Container
    ============================================================================= */
-
 section{
   padding: 25px 0;
 }
-.section1 { 
-  background: white; }
-.section2 { 
-  background: #f7f7f7; }
-
-/* =============================================================================
-   Reusable Components
-   ============================================================================= */
 
 .container{
   max-width: 1100px;
   margin: auto;
   padding: 0 20px;
-  /*border: 1px dashed #aaa;*/
-  text-align: center;
-  font-family: var(--font-main);
+  border: 1px dashed #aaa;
 }
 
-.flex-container{
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-  /*border: 1px dashed #aaa;*/
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm-rel);
-}
-
-/* button */
-button{
-  background: none;
-  border: none;
-  font-size: 22px;
-  font-weight: 500;
-  padding: 20px;
-  cursor: pointer;
-  font-family: var(--font-main);
-}
-
-button:hover{
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-}
+.section1 { background: white; }
+.section2 { background: #f7f7f7; }
 
 /* =============================================================================
-   Hero
+   Hero Section
    ============================================================================= */
-
-.section1{
-  text-align: center;
-  font-family: var(--font-main);
-}
-
-
-/* layout pieces */
-.image,
-.text{
-  flex: 1;
-}
-
-.tech_logo{
-  height: 100%;
-  max-height: 80px;
-  aspect-ratio: 1/1;
-  padding: 10px;
-}
-
-/* image */
-.profile-img{
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-
-/* typography */
-h1{
-  font-size: 44px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-
-h2{
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: 2px;
-}
-
-p{
-  font-size: 22px;
-}
-
-@media (max-width: 768px){
-
-  .flex-container{
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .profile-img{
-    max-width: 250px;
-  }
-
-  h1{
-    font-size: 32px;
-  }
-
-  h2{
-    font-size: 24px;
-  }
-
-  p{
-    font-size: 18px;
-  }
-
-}
 
 /* =============================================================================
    Section
    ============================================================================= */
 
-/* =============================================================================
-   Section featured
-   ============================================================================= */
 
-/* =============================================================================
-   Section featured
-   ============================================================================= */
-#special {
-  background: #f7f7f7;
-  border-radius: 5%;
-  padding: 25px;
-  border: 1px solid #ddd;
-}
-
-  .container {
-  position: relative;
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 20px;
-  text-align: center;
-}
-
-.featured-container {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.featured-container::-webkit-scrollbar {
-  display: none;
-}
-
-.featured-card {
-  width: 300px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  flex-shrink: 0;
-}
-
-/* image */
-.project-img{
-  width: 100%;
-  max-width: 250px;
-}
-
-.nav {
-  position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: white;
-  border: 1px solid #ccc;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.prev { left: -20px; }
-.next { right: -20px; }
-
-@media (max-width: 768px){
-  .prev { left: 5px; }
-  .next { right: 5px; }
-}
 
 /* =============================================================================
    Footer
