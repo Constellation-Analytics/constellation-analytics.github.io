@@ -32,6 +32,8 @@
 
 html, body {
   height: 100%;          /* full viewport height */
+  overflow-x: hidden;
+
 }
 
 body {
@@ -140,13 +142,15 @@ main {
   .navbar .nav-menu.active{
     display: flex;
   }
-.navbar a.active {
+  .navbar a.active {
     text-decoration: underline;
 }
 
   .navbar a.active::after {
     display: none;
 }
+  .section1{
+  padding: 0px;}
 
 }
 
@@ -232,12 +236,14 @@ button{
   padding: 20px;
   cursor: pointer;
   font-family: var(--font-main);
+  color: var(--neutralblack)
 }
 
 button:hover{
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: var(--accent);
+  color: var(--neutralblack)
 }
 
 /* =============================================================================
@@ -258,9 +264,10 @@ button:hover{
 
 .tech_logo{
   height: 100%;
-  max-height: 80px;
+  max-height: 70px;
   aspect-ratio: 1/1;
   padding: 10px;
+  margin-inline: 15px;
 }
 
 /* image */
@@ -312,6 +319,9 @@ p{
   p{
     font-size: 18px;
   }
+  .tech_logo{
+  margin-inline: 0px;
+}
 
 }
 
@@ -328,8 +338,9 @@ p{
    ============================================================================= */
 #special {
   background: #f7f7f7;
-  border-radius: 5%;
+  border-radius: 10px;
   padding: 25px;
+  padding-top: 0px;
   border: 1px solid #ddd;
 }
 
@@ -390,8 +401,10 @@ p{
 @media (max-width: 768px){
   .prev { left: 5px; }
   .next { right: 5px; }
+  #special {
+  border-radius: 0px;
 }
-
+}
 /* =============================================================================
    Footer
    ============================================================================= */
