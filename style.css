@@ -32,6 +32,8 @@
 
 html, body {
   height: 100%;          /* full viewport height */
+  overflow-x: hidden;
+
 }
 
 body {
@@ -140,7 +142,7 @@ main {
   .navbar .nav-menu.active{
     display: flex;
   }
-.navbar a.active {
+  .navbar a.active {
     text-decoration: underline;
 }
 
@@ -193,8 +195,7 @@ main {
 section{
   padding: 25px 0;
 }
-.section1 { 
-  background: white; }
+
 .section2 { 
   background: #f7f7f7; }
 
@@ -232,19 +233,22 @@ button{
   padding: 20px;
   cursor: pointer;
   font-family: var(--font-main);
+  color: var(--neutralblack);
 }
 
 button:hover{
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: var(--accent);
+  color: var(--neutralblack)
 }
 
 /* =============================================================================
    Hero
    ============================================================================= */
 
-.section1{
+.hero{
+  background: white;
   text-align: center;
   font-family: var(--font-main);
 }
@@ -258,9 +262,14 @@ button:hover{
 
 .tech_logo{
   height: 100%;
-  max-height: 80px;
+  max-height: 70px;
   aspect-ratio: 1/1;
   padding: 10px;
+  margin-inline: 15px;
+  /*box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  border-radius: 10%;*/
+    
+
 }
 
 /* image */
@@ -291,6 +300,8 @@ p{
 }
 
 @media (max-width: 768px){
+  .hero{
+  padding: 0px;}
 
   .flex-container{
     flex-direction: column;
@@ -312,24 +323,20 @@ p{
   p{
     font-size: 18px;
   }
+  .tech_logo{
+  margin-inline: 0px;
+}
 
 }
 
 /* =============================================================================
-   Section
-   ============================================================================= */
-
-/* =============================================================================
-   Section featured
-   ============================================================================= */
-
-/* =============================================================================
-   Section featured
+   Section Featured Projects
    ============================================================================= */
 #special {
   background: #f7f7f7;
-  border-radius: 5%;
+  border-radius: 10px;
   padding: 25px;
+  padding-top: 0px;
   border: 1px solid #ddd;
 }
 
@@ -353,12 +360,17 @@ p{
 }
 
 .featured-card {
-  width: 300px;
+  width: 320px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
   flex-shrink: 0;
+  margin-block: 10px;
+}
+
+.featured-card:hover {
+  transform: scale(1.025);
 }
 
 /* image */
@@ -390,6 +402,61 @@ p{
 @media (max-width: 768px){
   .prev { left: 5px; }
   .next { right: 5px; }
+  #special {
+  border-radius: 0px;
+}
+}
+
+/* =============================================================================
+   Section Microsoft Certifications
+   ============================================================================= */
+.certifications {
+  text-align: center;
+}
+.cert-container{
+  max-width: 1100px;
+  margin: auto;
+  padding: 0px;
+  text-align: center;
+  font-family: var(--font-main);
+}
+
+.certifications h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  font-weight: 500;
+  color: var(--neutralblack);
+}
+
+.cert-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+}
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.cert-item img {
+  height: 50px;
+  width: auto;
+}
+
+.cert-item span {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--neutralblack);
 }
 
 /* =============================================================================
