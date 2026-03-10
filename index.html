@@ -10,57 +10,31 @@
 </head>
 
 <body>
-  <nav class="navbar">
+  <header>
+    <nav class="navbar">
 
-    <a href="" class="logo-link">
-      <img src="assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics Logo">
-    </a>
+      <a href="" class="logo-link">
+        <img src="assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics Logo">
+      </a>
 
-    <button class="hamburger">
-     <span></span>
-     <span></span>
-     <span></span>
-    </button>
+      <button class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+      </button>
 
-    <ul class="nav-menu">
-      <li><a href="" class="active">HOME</a></li>
-      <li><a href="">MY WORK</a></li>
-      <li><a href="">ABOUT</a></li>
-      <li><a href="">CONTACT</a></li>
-    </ul>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="active">HOME</a></li>
+        <li><a href="pages/my-work.html">MY WORK</a></li>
+        <li><a href="pages/about.html">ABOUT</a></li>
+        <li><a href="pages/contact.html">CONTACT</a></li>
+      </ul>
 
-  </nav>
+    </nav>
+  </header>
 
   <main>
-<!----
-    <section class="section1">
-      <div class="container">
-        <h1>Section Header</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem ullam minus quos ab eum modi nobis officia magni nisi dolorum ipsam in blanditiis excepturi eius, nihil omnis reiciendis error ex.</p>
-      </div>
-    </section>
 
-    <section class="section2">
-      <div class="container">
-        <h1>Section Header</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem ullam minus quos ab eum modi nobis officia magni nisi dolorum ipsam in blanditiis excepturi eius, nihil omnis reiciendis error ex.</p>
-      </div>
-    </section>
-
-    <section class="section1">
-      <div class="container">
-        <h1>Section Header</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem ullam minus quos ab eum modi nobis officia magni nisi dolorum ipsam in blanditiis excepturi eius, nihil omnis reiciendis error ex.</p>
-      </div>
-    </section>
-
-    <section class="section2">
-      <div class="container">
-        <h1>Section Header</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem ullam minus quos ab eum modi nobis officia magni nisi dolorum ipsam in blanditiis excepturi eius, nihil omnis reiciendis error ex.</p>
-      </div>
-    </section>
-  -->
     <section class="hero">
       <h1>Data Analyst & Analytics Engineer</h1>
 
@@ -80,10 +54,10 @@
       
       </div>
 
-      <div class="flex-container">
+      <div class="container flex-container">
 
         <div class="image">
-          <img src="assets/Hardis-Group-260625-130.jpg" class="profile-img">
+          <img src="assets/Hardis-Group-260625-130.jpg" class="profile-img" alt="Paul Chapman">
         </div>
 
         <div class="text">
@@ -91,8 +65,8 @@
             Hey there, I'm Paul, a certified data analyst based in Grenoble, France.
             With a passion for problem-solving, I thoroughly enjoy transforming data into stories and insights using tools such as Power BI, Excel, SQL, and Python. Constellation Analytics is my professional portfolio where I share my projects and experience
           </p>
-          <button>Explore my work ></button>
-          <button>Contact Me ></button>
+          <a href="pages/my-work.html" class="cta-links">Explore my work ></a>
+          <a href="pages/contact.html" class="cta-links">Contact Me ></a>
         </div>
 
       </div>
@@ -101,7 +75,7 @@
 
     
     <section >
-      <div id="special" class="container">
+      <div id="featured_outer" class="container">
 
         <h2>Featured Projects</h2>
 
@@ -157,8 +131,8 @@
           </div>
 
           <div class="cert-item">
-            <img src="assets/skills icons/microsoft-certified-associate-badge .svg" alt="Microsoft Fabric Data Analyst Associate">
-            <span>Microsoft Fabric Data Analyst</span>
+            <img src="assets/skills icons/microsoft-certified-associate-badge .svg" alt="Microsoft Fabric Data Engineer Associate">
+            <span>Microsoft Fabric Data Engineer</span>
           </div>
 
         </div>
@@ -186,25 +160,7 @@
     </div>
   </footer>
   
-<script>
+<script src="/main.js"></script>
 
-const hamburger = document.querySelector(".hamburger");
-const menu = document.querySelector(".nav-menu");
-
-hamburger.addEventListener("click", () => {
-  menu.classList.toggle("active");
-});
-
-const container = document.querySelector(".featured-container");
-
-document.querySelector(".next").onclick = () => {
-  container.scrollBy({ left: 320, behavior: "smooth" });
-};
-
-document.querySelector(".prev").onclick = () => {
-  container.scrollBy({ left: -320, behavior: "smooth" });
-};
-
-</script>
 </body>
 </html>
