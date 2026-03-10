@@ -21,57 +21,58 @@
   --space-lg-rel: 16%;
 }
 /* ============================= */
-/* GLOBAL SETTINGS */
+/* GLOBAL SETTINGS - Base HTML */
 /* ============================= */
 
-*,
-*::before,
-*::after {
+/* Apply border-box sizing to all elements for predictable layouts */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* Ensure html and body take full viewport height and prevent horizontal scroll */
 html, body {
-  height: 100%;          /* full viewport height */
+  height: 100%;
   overflow-x: hidden;
-
 }
 
+/* Body base styles */
 body {
-  margin: 0;             /* remove default spacing */
+  margin: 0; /* Remove default spacing */
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;     /* ensures full height */
-  font-family: var(--font-main);
-  color: var(--text-colour);
+  flex-direction: column; /* Makes main take remaining space easily */
+  min-height: 100vh; /* Full height of viewport */
+  font-family: var(--font-main); /* Reuse global font variable */
+  color: var(--text-colour); /* Base text color */
 }
 
+/* Main content fills remaining vertical space */
 main {
-  flex: 1;   /* take all remaining space */
+  flex: 1;
 }
 
-/* =============================================================================
-   Reusable Components
-   ============================================================================= */
+/* ============================= */
+/* REUSABLE LAYOUT STYLES */
+/* ============================= */
 
+/* Base section spacing */
 section{
   padding: 25px 0;
 }
 
-.section2 { 
-  background: #f7f7f7; }
+/* Alternate section background for visual separation */
+.section-alt {
+  background: #f7f7f7;
+}
 
-.container{
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 20px;
-  text-align: center;
+/* Generic container for page content */
+.container {
+  max-width: 1100px; /* Limit width on large screens */
+  margin: auto;       /* Center horizontally */
+  padding: 0 20px;    /* Small horizontal padding */
+  text-align: center; /* Default alignment; override if needed */
 }
 
 .flex-container{
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,7 +238,7 @@ a {
 }
 
 /* Hover effects for non-active links */
-.navbar a::after {
+.nav-menu a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -247,28 +248,24 @@ a {
   background: var(--accent);
 }
 
-.navbar a:not(.active):not(.logo-link):hover::after {
+.nav-menu a:hover::after {
   width: 100%;
 }
 
-.navbar a:not(.active):not(.logo-link):hover {
+.nav-menu a:hover {
   font-weight: 500;
 }
 
-
-/* Styles for active link */
-.navbar a.active {
-  font-weight: 600;      
+/* Active link */
+.nav-menu a.active {
+  font-weight: 600;
 }
-.navbar a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
+
+.nav-menu a.active::after {
   width: 100%;
-  height: 2px;
   background: var(--neutralblack);
 }
+
 
 /* =============================================================================
    Hero
@@ -291,11 +288,7 @@ a {
   max-height: 70px;
   aspect-ratio: 1/1;
   padding: 10px;
-  margin-inline: 15px;
-  /*box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-  border-radius: 10%;*/
-    
-
+  margin-inline: 15px;    
 }
 
 /* image */
@@ -305,6 +298,20 @@ a {
   aspect-ratio: 1/1;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.cta-links{
+  display: inline-block;
+  margin-top: var(--space-md);
+  margin-right: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--primary);
+  color: var(--neutralwhite);
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+.cta-links:hover {
+  transform: scale(1.025);
 }
 
 @media (max-width: 768px){
@@ -329,20 +336,13 @@ a {
 /* =============================================================================
    Section Featured Projects
    ============================================================================= */
-#special {
+#featured_outer {
+  position: relative;
   background: #f7f7f7;
   border-radius: 10px;
   padding: 25px;
   padding-top: 0px;
   border: 1px solid #ddd;
-}
-
-  .container {
-  position: relative;
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 20px;
-  text-align: center;
 }
 
 .featured-container {
@@ -399,8 +399,8 @@ a {
 @media (max-width: 768px){
   .prev { left: 5px; }
   .next { right: 5px; }
-  #special {
-  border-radius: 0px;
+  #featured_outer {
+  border-radius: 0;
 }
 }
 
