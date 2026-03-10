@@ -3,54 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coming Soon</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #213345;
-      font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #FFFFFF;
-      text-align: center;
-    }
-
-    .container {
-      padding: 2.5rem 3.5rem;
-      background: #1E1E1E;
-      border-radius: 6px;          /* tighter corners */
-      border: 2px solid #FFA500;   /* thin, crisp border */
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.4rem;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    p {
-      margin-top: 0.75rem;
-      font-size: 1rem;
-      color: #95A5A6;
-    }
-    
-    .accent-line {
-      width: 120px;
-      height: 4px;
-      background: #FFA500; /* Accent */
-      margin: 1.5rem auto 0;
-      border-radius: 2px;
-    }
-  </style>
+  <title>Constellation Analytics</title>
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <div class="container">
-    <h1>Coming Soon</h1>
-    <p>This page is currently in development.</p>
-    <div class="accent-line"></div>
-  </div>
+  <header>
+    <nav class="navbar">
+
+      <a href="" class="logo-link">
+        <img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics Logo">
+      </a>
+
+      <button class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+      </button>
+
+      <ul class="nav-menu">
+        <li><a href="/index.html">HOME</a></li>
+        <li><a href="/pages/my-work.html">MY WORK</a></li>
+        <li><a href="/pages/about.html" class="active">ABOUT</a></li>
+        <li><a href="/pages/contact.html">CONTACT</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+
+  <main>
+    <section>
+      <div class = "container grid btrim">
+        <h2 >About Me</h2>
+        <a class="cta-links" href="#skills">Skip to the good stuff ></a>
+      </div>
+      <div class="container text-left ttrim">
+          <p>Originally from Australia, I've been living in Grenoble, France since 2023, where I work as a data analyst and analytics engineer.</p>
+          <p>I didn't exactly take the direct route into data. I started out as an automotive mechanic in 2009, diagnosing faults and solving problems with my hands. What I didn't realise at the time was that I was already doing data work, just with a set of wrenches instead of a keyboard. The root-cause analysis, the systems thinking, the satisfaction of finding why something wasn't working: that instinct never left me, it just found a better home.</p>
+          <p>After completing a Bachelor of Business in 2016, I moved through corporate roles spanning sales, supply chain, strategic planning, and recruitment. Each gave me a different lens on how organisations actually function and their common pain points. It was once I moved into data-focused roles that everything clicked; I realised I could apply that same mechanical curiosity to information systems, at scale, with far less back pain.</p>
+          <p>In 2022, I fully committed to pursuing a career in data and began a Master of Business Analytics, not to change direction, but to formalise and deepen skills I'd already been building in practice. That combination of hands-on experience and rigorous study shapes how I approach every problem: with business context, not just technical output.</p>
+          <p>Today I specialise in Power BI, SQL, Python, and the Microsoft Fabric ecosystem. I hold Microsoft certifications as an Excel Expert, Power BI Data Analyst Associate, Fabric Analytics Engineer Associate, and Fabric Data Engineer Associate.</p>
+          <p>But honestly, what keeps me in this field is simpler than any credential: I find data genuinely interesting. The puzzle of it. The moment a messy dataset starts telling a coherent story. I dont think that will ever get old.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Under Construction</h2>
+        <p>This website is currently under construction. Please check back soon for updates!</p>
+      </div>
+    </section>
+    
+    <section class =alt>
+      <div id="skills" class="container dev">
+        <h2 class="text-center">Skills & Tools</h2>
+        <p>Here are some of the tools I use to turn data into insights:</p>
+      <div> 
+        <img src="/assets/skills icons/Python.svg" alt="Python" class="tech_logo" title="Python">
+        <img src="/assets/skills icons/Azure SQL Database.svg" alt="Azure SQL Database" class="tech_logo" title="Azure SQL Database">
+        <img src="/assets/skills icons/PostgresSQL.svg" alt="PostgreSQL" class="tech_logo" title="PostgreSQL">
+        <img src="/assets/skills icons/neon-icon-seeklogo.svg" alt="Neon (cloud PostgreSQL)" class="tech_logo" title="Neon (cloud PostgreSQL)">
+      </div>
+    </section>
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        Paul Chapman<br>© 2026 Constellation Analytics
+      </div>
+
+      <div class="footer-center">
+        <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics Logo">
+      </div>
+
+      <div class="footer-right">
+        <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"> <img src="/assets/linkedin.png" ></a>
+        <a href="https://github.com/constellation-analytics/" target="_blank"> <img src="/assets/github.png"></a>
+      </div>
+    </div>
+  </footer>
+  
+<script src="/main.js"></script>
+
 </body>
 </html>
