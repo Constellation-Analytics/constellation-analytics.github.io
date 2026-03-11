@@ -330,7 +330,7 @@ section{padding: 0px 0px;}
 #icon-container {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
