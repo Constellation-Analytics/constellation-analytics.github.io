@@ -12,21 +12,23 @@
   --font-main: 'Montserrat', Arial, sans-serif;
   --text-colour: #1e1e1e;
 
+  --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
 
+  --space-xs-rel: 2%;
   --space-sm-rel: 4%;
   --space-md-rel: 8%;
   --space-lg-rel: 16%;
 }
 /* ============================= */
-/* GLOBAL SETTINGS - Base HTML */
+/* GLOBAL RESET & BOX SIZING     */
 /* ============================= */
-
-/* Apply border-box sizing to all elements for predictable layouts */
 *, *::before, *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Makes padding/margin predictable */
+  margin: 0;
+  padding: 0;
 }
 
 /* Ensure html and body take full viewport height and prevent horizontal scroll */
@@ -48,23 +50,118 @@ body {
 }
 
 /* Main content fills remaining vertical space */
-main {
-  flex: 1;
+main {flex: 1;}
+
+/* ============================= */
+/* TYPOGRAPHY                    */
+/* ============================= */
+
+h1{
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+h2{
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  align-self: center; /* vertically center in grid cell */
+}
+
+h3 {
+  font-size: 26px;   
+    font-weight: 400;      /* normal weight so it doesn’t compete with h1/h2 */
+    
+  letter-spacing: 1px;  
+  line-height: 1.4;      
+}
+
+p{
+  font-size: 22px;
+  padding: var(--space-sm) 0;
 }
 
 /* ============================= */
-/* REUSABLE LAYOUT STYLES */
+/* LINKS & BUTTONS               */
+/* ============================= */
+
+a {
+  font-family: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+button{
+  background: none;
+  border: none;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+button:hover{
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+}
+
+.cta-links{
+  display: inline-block;
+  margin: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--primary);
+  color: var(--neutralwhite);
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+.cta-links:hover {
+  transform: scale(1.025);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+}
+
+/* ============================= */
+/* IMAGES             to be updated and standardised          */  
+/*============================== */
+
+.logo_img-small{
+  height: 100%;
+  height: 50px;
+  aspect-ratio: 1/1;   
+}
+
+.logo_img-medium{
+  height: 100%;
+  height: 70px;
+  aspect-ratio: 1/1;   
+}
+
+.profile-img{
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cert-item img {
+  height: 50px;
+  width: auto;
+}
+
+/* ============================= */
+/* LAYOUT CONTAINERS             */
 /* ============================= */
 
 /* Base section spacing */
-section{
-  padding: 0px 0px;
-}
+section{padding: 0px 0px;}
 
 /* Alternate background for visual separation */
-.alt {
-  background: #f7f7f7;
-}
+.alt {background: #f7f7f7;}
 
 /* Generic container for page content */
 .container {
@@ -74,37 +171,197 @@ section{
   text-align: center; /* Default alignment; override if needed */
 }
 
-.flex-container{
+.grid {display: grid;}
+
+.flex {display: flex;}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm-rel);
 }
 
-.grid{  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* ============================= */
+/* GRID SYSTEM                    */
+/* ============================= */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}
+
+.align-center {align-items: center;}
+
+.align-middle {justify-content: center;}
+
+.align-top {align-items: start;}
+
+.align-bottom {align-items: end;}
+
+.align-right {justify-content: end;}
+
+.align-left {justify-content: start;}
+
+.space-between {justify-content: space-between;}
+
+.self-left {justify-self: start;}
+
+.self-center {justify-self: center;}
+
+.self-right {justify-self: end;}
+
+
+@media (max-width: 768px) {
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ============================= */
+/* UTILITIES                     */
+/* ============================= */
+/* Text alignment */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+
+/* Margins */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--space-xs); }
+.m-2 { margin: var(--space-sm); }
+.m-3 { margin: var(--space-md); }
+.m-4 { margin: var(--space-lg); }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--space-xs); }
+.mt-2 { margin-top: var(--space-sm); }
+.mt-3 { margin-top: var(--space-md); }
+.mt-4 { margin-top: var(--space-lg); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--space-xs); }
+.mb-2 { margin-bottom: var(--space-sm); }
+.mb-3 { margin-bottom: var(--space-md); }
+.mb-4 { margin-bottom: var(--space-lg); }
+
+.my-0 { margin-top: 0; margin-bottom: 0; }
+.my-1 { margin-top: var(--space-xs); margin-bottom: var(--space-xs); }
+.my-2 { margin-top: var(--space-sm); margin-bottom: var(--space-sm); }
+.my-3 { margin-top: var(--space-md); margin-bottom: var(--space-md); }
+.my-4 { margin-top: var(--space-lg); margin-bottom: var(--space-lg); }
+
+/* Padding */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-xs); }
+.p-2 { padding: var(--space-sm); }
+.p-3 { padding: var(--space-md); }
+.p-4 { padding: var(--space-lg); }
+
+.pt-0 { padding-top: 0; }
+.pt-1 { padding-top: var(--space-xs); }
+.pt-2 { padding-top: var(--space-sm); }
+.pt-3 { padding-top: var(--space-md); }
+.pt-4 { padding-top: var(--space-lg); }
+
+.pb-0 { padding-bottom: 0; }
+.pb-1 { padding-bottom: var(--space-xs); }
+.pb-2 { padding-bottom: var(--space-sm); }
+.pb-3 { padding-bottom: var(--space-md); }
+.pb-4 { padding-bottom: var(--space-lg); }
+
+.py-0 { padding-top: 0; padding-bottom: 0; }
+.py-1 { padding-top: var(--space-xs); padding-bottom: var(--space-xs); }
+.py-2 { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+.py-3 { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+.py-4 { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+
+/*gap utilities */
+.gap-0 { gap: 0; }
+.gap-1 { gap: var(--space-xs); }
+.gap-2 { gap: var(--space-sm); }
+.gap-3 { gap: var(--space-md); }
+.gap-4 { gap: var(--space-lg); }
+
+/* Display utilities */
+.hidden { display: none; }
+.visible { display: block; }
+
+/* ============================= */
+/* Specific Section Components   */
+/* ============================= */
+
+   /*Microsoft Certifications*/
+.cert-item {
+  display: flex;
   align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
 }
 
-.grid h2 {
-  grid-column: 2;
-  text-align: center;
+.cert-item span {
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.grid a {
-  grid-column: 3;
-  justify-self: end;
+/* Icon container for skills and hero section */
+#icon-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.btrim{
-  margin-bottom: 0;
-  padding-bottom: 0;
+@media (max-width: 768px) {
+  #icon-container {
+    display: block;
+    text-align: center;}
+
+  /* About section header */
+  #about-header {
+    justify-self: center;
+    align-self: center; /* vertically center in grid cell */
 }
 
-.ttrim{
-  margin-top: 0;
-  padding-top: 0;
 }
+
+/* ============================= */
+/* V V V    OLD    V V V         */
+/* ============================= */
+
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -126,56 +383,7 @@ section{
 
 }
 
-.dev{
-  border: 2px dotted #7f8c8d;
-}
-
-/* button */
-button{
-  background: none;
-  border: none;
-  font-size: 22px;
-  font-weight: 500;
-  padding: 20px;
-  cursor: pointer;
-  font-family: inherit;
-  color: inherit;
-}
-
-button:hover{
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-}
-
-/* typography */
-h1{
-  font-size: 44px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-
-h2{
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: 2px;
-}
-
-p{
-  font-size: 22px;
-}
-
-a {
-  font-family: inherit;
-  color: inherit;
-  text-decoration: none;
-}
-.text-left {
-  text-align: left;
-}
-.text-center {
-  text-align: center;
-}
+.dev{border: 2px dotted #7f8c8d;}
 
 /* =============================================================================
    Responsive Design
@@ -328,48 +536,6 @@ a {
    Hero
    ============================================================================= */
 
-.hero{
-  background: white;
-  text-align: center;
-}
-
-
-/* layout pieces */
-.image,
-.text{
-  flex: 1;
-}
-
-.tech_logo{
-  height: 100%;
-  max-height: 70px;
-  aspect-ratio: 1/1;
-  padding: 10px;
-  margin-inline: 15px;    
-}
-
-/* image */
-.profile-img{
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.cta-links{
-  display: inline-block;
-  margin: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--primary);
-  color: var(--neutralwhite);
-  border-radius: 5px;
-  transition: background-color 0.2s ease;
-}
-.cta-links:hover {
-  transform: scale(1.025);
-}
-
 @media (max-width: 768px){
   .hero{
   padding: 0px;}
@@ -460,47 +626,6 @@ a {
 }
 }
 
-/* =============================================================================
-   Section Microsoft Certifications
-   ============================================================================= */
-.certifications {
-  text-align: center;
-}
-.cert-container{
-  max-width: 1100px;
-  margin: auto;
-  padding: 0px;
-  text-align: center;
-}
-
-.cert-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  align-items: center;
-}
-
-.cert-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
-}
-
-.cert-item img {
-  height: 50px;
-  width: auto;
-}
-
-.cert-item span {
-  font-weight: 500;
-  font-size: 16px;
-}
 
 /* =============================================================================
    Footer
