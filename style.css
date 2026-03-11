@@ -57,15 +57,24 @@ main {flex: 1;}
 /* ============================= */
 
 h1{
-  font-size: 44px;
+  font-size: 48px;
   font-weight: 600;
   letter-spacing: 2px;
 }
 
 h2{
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 500;
   letter-spacing: 2px;
+  align-self: center; /* vertically center in grid cell */
+}
+
+h3 {
+  font-size: 26px;   
+    font-weight: 400;      /* normal weight so it doesn’t compete with h1/h2 */
+    
+  letter-spacing: 1px;  
+  line-height: 1.4;      
 }
 
 p{
@@ -111,6 +120,8 @@ button:hover{
 }
 .cta-links:hover {
   transform: scale(1.025);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
 }
 
 /* ============================= */
@@ -337,8 +348,14 @@ section{padding: 0px 0px;}
 @media (max-width: 768px) {
   #icon-container {
     display: block;
-    text-align: center;
-  }
+    text-align: center;}
+
+  /* About section header */
+  #about-header {
+    justify-self: center;
+    align-self: center; /* vertically center in grid cell */
+}
+
 }
 
 /* ============================= */
