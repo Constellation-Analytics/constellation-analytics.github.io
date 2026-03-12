@@ -389,26 +389,27 @@ section{padding: 0px 0px;}
   grid-template-areas: "text image";
 }
 
-.grid-2 > img {
+.grid-2.skills, .grid-2.skills-alt > img {
   grid-area: image;
 }
 
-.grid-2 > div {
+.grid-2.skills, .grid-2.skills-alt > div {
   grid-area: text;
 }
 
 /* Mobile: stack items Image → Header → Paragraph */
 @media (max-width: 768px) {
-  .grid-2 {
+  .grid-2.skills,
+  .grid-2.skills-alt {
     display: flex;
     flex-direction: column; /* stack vertically */
   }
 
-  .grid-2 > img {
+  .grid-2.skills, .grid-2.skills-alt > img {
     order: 0; /* image first */
   }
 
-  .grid-2 > div {
+  .grid-2.skills, .grid-2.skills-alt > div {
     order: 1; /* text block second */
   }
 }
