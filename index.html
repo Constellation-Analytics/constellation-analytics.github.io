@@ -47,6 +47,7 @@
     --navy-950:  color-mix(in srgb, var(--navy) 30%, black);
 
     /* Amber */
+    --amber-ghost: color-mix(in srgb, var(--amber) 5%, white);
     --amber-50:   color-mix(in srgb, var(--amber) 20%, white);
     --amber-300:  color-mix(in srgb, var(--amber) 60%, white);
     --amber-500:  var(--amber);
@@ -61,6 +62,7 @@
     --slate-950:  color-mix(in srgb, var(--slate) 30%, black);
 
     /* Burnt Orange */
+    --orange-ghost: color-mix(in srgb, var(--burnt-orange) 5%, white);
     --burnt-orange-50:   color-mix(in srgb, var(--burnt-orange) 20%, white);
     --burnt-orange-300:  color-mix(in srgb, var(--burnt-orange) 60%, white);
     --burnt-orange-500:  var(--burnt-orange);
@@ -75,6 +77,7 @@
     --purple-950:  color-mix(in srgb, var(--purple) 30%, black);
 
     /* Green */
+    --green-ghost: color-mix(in srgb, var(--green) 5%, white);
     --green-50:   color-mix(in srgb, var(--green) 20%, white);
     --green-300:  color-mix(in srgb, var(--green) 60%, white);
     --green-500:  var(--green);
@@ -82,6 +85,7 @@
     --green-950:  color-mix(in srgb, var(--green) 30%, black);
 
     /* Blue */
+    --blue-ghost: color-mix(in srgb, var(--blue) 5%, white);
     --blue-50:   color-mix(in srgb, var(--blue) 20%, white);
     --blue-300:  color-mix(in srgb, var(--blue) 60%, white);
     --blue-500:  var(--blue);
@@ -113,6 +117,15 @@
     --surface-default: var(--white);
     --surface-raised:  var(--neutral-50);
     --surface-dark:    var(--navy-700);
+
+    /* Shadows and borders */
+    --shadow-sm: 0 2px 8px var(--neutral-100);
+    --shadow-md: 0 6px 20px var(--neutral-100);
+    --shadow-lg: 0 12px 40px var(--neutral-300);
+
+    --border-sm: 1px solid var(--neutral-100);
+    --border-md: 1.5px solid var(--neutral-300);
+    --border-lg: 1.5px solid var(--neutral-500);
 
     /* Text */
     --text-primary:       var(--neutral-950);
@@ -400,15 +413,15 @@
   .skill-card {
     background: var(--bg-super-subtle); border-radius: 14px;
     padding: 26px 22px; 
-    box-shadow: 0 6px 20px var(--neutral-100); 
-    border: 1px solid var(--neutral-300); 
+    box-shadow: var(--shadow-md); 
+    border: var(--border-sm); 
     border-top: 3px solid;
     transition: transform 0.25s, box-shadow 0.25s, border-top-color 0.25s;
   }
   .skill-icon {
     width: 44px; height: 44px; border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 6px 20px var(--neutral-300);    
+    box-shadow: var(--shadow-sm);    
     margin-bottom: 16px; /*border: 1.5px solid var(--white);*/
   }
   .skill-card h3 { font-size: 0.95rem; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
@@ -436,7 +449,8 @@
   .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1280px; margin: 0 auto; }
 
   .project-card {
-    border: 1.5px solid var(--neutral-50);
+    border: var(--border-md);
+    box-shadow: var(--shadow-lg); 
     border-radius: 14px;
     background: var(--surface-default);
     position: relative; overflow: hidden;
@@ -444,18 +458,67 @@
     cursor: pointer; text-decoration: none; display: flex; flex-direction: column; color: inherit;
   }
   
-  .project-card:hover { border-color: var(--navy-500); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(33,51,69,0.08); }
+  .project-card:hover { border: var(--border-lg); 
+    transform: translateY(-3px); 
+    }
 
-  .project-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .project-card::before { 
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    bottom: 0; 
+    width: 4px; 
+  }
 
-  .c-amber::before  { background: var(--amber-500); }
-  .c-blue::before   { background: var(--blue-500); }
-  .c-green::before  { background: var(--green-500); }
-  .c-orange::before { background: var(--burnt-orange-500); }
+  .c-amber::before  { background: var(--amber-500); z-index: 1;}
+  .c-blue::before   { background: var(--blue-500); z-index: 1;}
+  .c-green::before  { background: var(--green-500); z-index: 1;}
+  .c-orange::before { background: var(--burnt-orange-500); z-index: 1;}
 
-  .project-header { padding: 24px 24px 0; min-height: 116px; display: flex; flex-direction: column; justify-content: flex-end; position: relative; overflow: hidden; }
+  .background-amber {background:var(--amber-ghost); }
+  .background-blue {background:var(--blue-ghost); }
+  .background-green {background:var(--green-ghost); }
+  .background-orange {background:var(--orange-ghost); }
+
+  .project-header { 
+    padding: 24px 24px 0; 
+    min-height: 116px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    position: relative; 
+    overflow: hidden; 
+  }
+
+  .project-mini-chart { position: absolute; right: 18px; top: 14px; opacity: 0.14; }
+
+  .project-type { 
+    font-size: 0.63rem; 
+    font-weight: 900; 
+    letter-spacing: 0.12em; 
+    text-transform: 
+    uppercase; 
+    margin-bottom: 8px; 
+  }
+
+  .project-card h3 { font-size: 1rem; font-weight: 900; color: var(--primary); letter-spacing: -0.01em; }
+  .project-body { padding: 14px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+  .project-body p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.74; margin-bottom: 16px; }
+
+  .project-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .badge { font-size: 0.6rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; }
+  .badge-slate  { background: rgba(149,165,166,0.14); color: #5d7070; }
+  
+  .project-link {
+    margin-top: auto; font-size: 0.74rem; font-weight: 900;
+    color: var(--blue); letter-spacing: 0.07em; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    transition: gap 0.2s, color 0.2s;
+  }
 
 
+/*
   .project-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
   .project-type { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neutral-300); }
   .project-tools { display: flex; gap: 0.4rem; }
@@ -469,6 +532,7 @@
     padding-top: 1rem; border-top: 1px solid var(--neutral-50);
     display: flex; align-items: center; gap: 0.4rem;
   }
+  */
   .c-amber  .project-impact { color: var(--amber-700); }
   .c-blue   .project-impact { color: var(--blue-500); }
   .c-green  .project-impact { color: var(--green-700); }
@@ -723,123 +787,70 @@
     <div class="section-eyebrow">Selected Work</div>
     <h2 class="section-heading">Featured <span class="muted">Projects</span></h2>
     <div class="projects-grid">
-      <a href="/projects/project-1/project-template-light.html" class="project-card c-amber">
-        <div class="project-meta">
-          <span class="project-type">Predictive Modelling</span>
-          <div class="project-tools"><span class="tool-pill">Python</span><span class="tool-pill">scikit-learn</span><span class="tool-pill">Snowflake</span></div>
+      <a href="#" class="project-card c-amber">
+        <div class="project-header background-amber">
+          <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
+            <polyline points="0,50 20,30 40,38 60,10 80,18" fill="none" stroke="#1E1E1E" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="60" cy="10" r="4" fill="#1E1E1E"/>
+          </svg>
+          <span class="project-type" style="color:var(--amber)">Business Intelligence</span>
+          <h3>Executive Revenue Dashboard</h3>
         </div>
-        <h3>Customer Churn Prediction Engine</h3>
-        <p>Built an end-to-end ML pipeline to identify at-risk customers 90 days before churn. Integrated with CRM tooling to trigger automated retention flows.</p>
-        <div class="project-impact">&#8593; 22% reduction in monthly churn rate</div>
+        <div class="project-body">
+          <p>Replaced 14 disconnected weekly reports with a single real-time Power BI suite, giving the C-suite one source of truth for pipeline, ARR, and forecasts.</p>
+          <div class="project-badges">
+            <span class="badge badge-slate">Power BI</span>
+            <span class="badge badge-slate">SQL</span>
+            <span class="badge badge-slate">DAX</span>
+            <span class="badge badge-slate">Neon</span>
+          </div>
+            <span class="project-link">View project →</span>        
+          </div>
       </a>
+
+<!--- Template card ready to use --->
       <a href="#" class="project-card c-blue">
-        <div class="project-header" style="background:rgba(9,114,188,0.04)">
+        <div class="project-header background-blue">
+          <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
+            <polyline points="0,50 20,30 40,38 60,10 80,18" fill="none" stroke="#1E1E1E" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="60" cy="10" r="4" fill="#1E1E1E"/>
+          </svg>
           <span class="project-type" style="color:var(--blue)">Business Intelligence</span>
           <h3>Executive Revenue Dashboard</h3>
         </div>
-        <h3>Executive Revenue Intelligence Suite</h3>
-        <p>Replaced 14 disconnected weekly reports with a single real-time Power BI suite, giving the C-suite one source of truth for pipeline, ARR, and forecasts.</p>
-        <div class="project-impact">12 hrs saved per week across leadership team</div>
+        <div class="project-body">
+          <p>Replaced 14 disconnected weekly reports with a single real-time Power BI suite, giving the C-suite one source of truth for pipeline, ARR, and forecasts.</p>
+          <div class="project-badges">
+            <span class="badge badge-slate">Power BI</span>
+            <span class="badge badge-slate">SQL</span>
+            <span class="badge badge-slate">DAX</span>
+            <span class="badge badge-slate">Neon</span>
+          </div>
+            <span class="project-link">View project →</span>        
+          </div>
       </a>
+
       <a href="#" class="project-card c-green">
-        <div class="project-meta">
-          <span class="project-type">Experimentation</span>
-          <div class="project-tools"><span class="tool-pill">Python</span><span class="tool-pill">Statsmodels</span><span class="tool-pill">Tableau</span></div>
+        <div class="project-header background-green">
+          <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
+            <polyline points="0,50 20,30 40,38 60,10 80,18" fill="none" stroke="#1E1E1E" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="60" cy="10" r="4" fill="#1E1E1E"/>
+          </svg>
+          <span class="project-type" style="color:var(--green)">Business Intelligence</span>
+          <h3>Executive Revenue Dashboard</h3>
         </div>
-        <h3>Pricing A/B Test Framework</h3>
-        <p>Designed and ran a statistically rigorous A/B testing framework across 3 pricing tiers, establishing a repeatable methodology now used across all product experiments.</p>
-        <div class="project-impact">&#8593; $340K incremental ARR from optimal tier</div>
+        <div class="project-body">
+          <p>Replaced 14 disconnected weekly reports with a single real-time Power BI suite, giving the C-suite one source of truth for pipeline, ARR, and forecasts.</p>
+          <div class="project-badges">
+            <span class="badge badge-slate">Power BI</span>
+            <span class="badge badge-slate">SQL</span>
+            <span class="badge badge-slate">DAX</span>
+            <span class="badge badge-slate">Neon</span>
+          </div>
+            <span class="project-link">View project →</span>        
+          </div>
       </a>
-      <a href="#" class="project-card c-orange">
-        <div class="project-meta">
-          <span class="project-type">Data Engineering</span>
-          <div class="project-tools"><span class="tool-pill">dbt</span><span class="tool-pill">Airflow</span><span class="tool-pill">BigQuery</span></div>
-        </div>
-        <h3>Marketing Attribution Pipeline</h3>
-        <p>Rebuilt a broken last-click attribution model into a multi-touch data pipeline using dbt and BigQuery, revealing which channels truly drove conversions.</p>
-        <div class="project-impact">30% reallocation of ad budget to high-ROI channels</div>
-      </a>
     </div>
-  </div>
-</section>
-
-<!-- FEATURED PROJECTS -->
-<section class="projects" id="projects">
-  <div class="section-header">
-    <div class="section-tag">Featured Projects</div>
-    <h2>Work I'm proud of</h2>
-    <p class="section-desc">A selection of analytics work across different industries and problem types.</p>
-  </div>
-  <div class="projects-grid">
-
-    <div class="project-card accent-blue">
-      <div class="project-header" style="background:rgba(9,114,188,0.04)">
-        <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
-          <polyline points="0,50 20,30 40,38 60,10 80,18" fill="none" stroke="#0972BC" stroke-width="2.5" stroke-linejoin="round"/>
-          <circle cx="60" cy="10" r="4" fill="#0972BC"/>
-        </svg>
-        <span class="project-type" style="color:var(--blue)">Business Intelligence</span>
-        <h3>Executive Revenue Dashboard</h3>
-      </div>
-      <div class="project-body">
-        <p>Built a real-time Power BI dashboard giving leadership visibility into revenue, churn, and forecast vs actual. Replaced 12 manual Excel reports and cut reporting time by 80%.</p>
-        <div class="project-badges">
-          <span class="badge badge-blue">Power BI</span>
-          <span class="badge badge-slate">SQL</span>
-          <span class="badge badge-slate">DAX</span>
-          <span class="badge badge-slate">Neon</span>
-        </div>
-        <a class="project-link" href="#contact">Discuss this project &#8594;</a>
-      </div>
-    </div>
-
-    <div class="project-card accent-green">
-      <div class="project-header" style="background:rgba(35,169,66,0.04)">
-        <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
-          <rect x="5"  y="35" width="14" height="20" rx="3" fill="#23A942" opacity="0.7"/>
-          <rect x="25" y="20" width="14" height="35" rx="3" fill="#23A942" opacity="0.85"/>
-          <rect x="45" y="10" width="14" height="45" rx="3" fill="#23A942"/>
-          <rect x="65" y="25" width="14" height="30" rx="3" fill="#23A942" opacity="0.75"/>
-        </svg>
-        <span class="project-type" style="color:var(--green)">Sales Analytics</span>
-        <h3>Sales Performance Tracker</h3>
-      </div>
-      <div class="project-body">
-        <p>Designed a Tableau dashboard for a sales team to track individual and regional performance against quarterly targets, with automated weekly email exports.</p>
-        <div class="project-badges">
-          <span class="badge badge-green">Tableau</span>
-          <span class="badge badge-slate">SQL</span>
-          <span class="badge badge-slate">Python</span>
-          <span class="badge badge-slate">GitHub Actions</span>
-        </div>
-        <a class="project-link" href="#contact">Discuss this project &#8594;</a>
-      </div>
-    </div>
-
-    <div class="project-card accent-orange">
-      <div class="project-header" style="background:rgba(255,165,0,0.05)">
-        <svg class="project-mini-chart" width="80" height="60" viewBox="0 0 80 60">
-          <rect x="5"  y="25" width="10" height="30" rx="2" fill="#FFA500" opacity="0.5"/>
-          <rect x="20" y="15" width="10" height="40" rx="2" fill="#FFA500" opacity="0.7"/>
-          <rect x="35" y="5"  width="10" height="50" rx="2" fill="#FFA500"/>
-          <rect x="50" y="20" width="10" height="35" rx="2" fill="#FFA500" opacity="0.65"/>
-          <rect x="65" y="30" width="10" height="25" rx="2" fill="#FFA500" opacity="0.4"/>
-        </svg>
-        <span class="project-type" style="color:var(--orange-dk)">Data Automation</span>
-        <h3>Automated Reporting Pipeline</h3>
-      </div>
-      <div class="project-body">
-        <p>Replaced a brittle, manually-run Excel process with a Python and GitHub Actions pipeline that pulls, transforms, and delivers formatted reports to stakeholders on a schedule.</p>
-        <div class="project-badges">
-          <span class="badge badge-orange">Python</span>
-          <span class="badge badge-slate">GitHub Actions</span>
-          <span class="badge badge-slate">Excel / Power Query</span>
-          <span class="badge badge-slate">SQL</span>
-        </div>
-        <a class="project-link" href="#contact">Discuss this project &#8594;</a>
-      </div>
-    </div>
-
   </div>
 </section>
 
