@@ -577,13 +577,13 @@
   .titem::before{
     content:'';
     position:absolute;
-    left:-28px;
-    top:6px;
-    width:10px;
-    height:10px;
+    left:-30px;
+    top:1px;
+    width:14px;
+    height:14px;
     border-radius:50%;
     background:var(--blue);
-    border:2px solid var(--white);
+    border:3px solid var(--white);
     box-shadow:0 0 0 3px var(--blue);
   }
 
@@ -616,13 +616,39 @@
   .titem.past::before{
     background:color-mix(in srgb, var(--blue) 25%, transparent);
     box-shadow:0 0 0 3px color-mix(in srgb, var(--blue) 25%, transparent);
+    border: 3px solid color-mix(in srgb, var(--white) 75%, transparent);
   }
-
 
   .titem.past .titem-period{
     color:var(--blue-300);
   }
 
+.about-area {
+  background: var(--amber-ghost);
+  border-left: 3px solid var(--amber-500);
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  padding: 1.5rem 1.75rem;
+}
+
+.about-bio {
+  font-size: 0.95rem;
+  color: var(--navy-700);   /* was navy-300 */
+  line-height: 1.75;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.about-heading {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber-700);
+  margin-bottom: 0.6rem;
+}
   
   /* ── CONTACT ── */
   .contact-section { background-color: var(--bg-super-subtle); padding: 7rem 4rem; }
@@ -687,6 +713,7 @@
     .projects-grid { grid-template-columns: 1fr; }
     .skills { padding: 4rem 1.5rem; }
     .skills-grid { grid-template-columns: 1fr; }
+    .exp-layout { grid-template-columns: 1fr; }
     .contact-section { padding: 4rem 1.5rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
@@ -975,15 +1002,15 @@
             <div class="titem-desc">Diagnostic systems, fault analysis, root cause resolution. The original data pipeline.</div>
           </div>
         </div>
-        <div>
-          <p>How we got here</p>
-          <div>
-            <p>Originally from Australia, I've been living in Grenoble, France since 2023, where I work as a data analyst and analytics engineer.</p>
-            <p>I didn't exactly take the direct route into data. I started out as an automotive mechanic in 2009, diagnosing faults and solving problems with my hands. What I didn't realise at the time was that I was already doing data work, just with a set of wrenches instead of a keyboard. The root-cause analysis, the systems thinking, the satisfaction of finding why something wasn't working: that instinct never left me, it just found a better home.</p>
-            <p>After completing a Bachelor of Business in 2016, I moved through corporate roles spanning sales, supply chain, strategic planning, and recruitment. Each gave me a different lens on how organisations actually function and their common pain points. It was once I moved into data-focused roles that everything clicked; I realised I could apply that same mechanical curiosity to information systems, at scale, with far less back pain.</p>
-            <p>In 2022, I fully committed to pursuing a career in data and began a Master of Business Analytics, not to change direction, but to formalise and deepen skills I'd already been building in practice. That combination of hands-on experience and rigorous study shapes how I approach every problem: with business context, not just technical output.</p>
-            <p>Today I specialise in Power BI, SQL, Python, and the Microsoft Fabric ecosystem. I hold Microsoft certifications as an Excel Expert, Power BI Data Analyst Associate, Fabric Analytics Engineer Associate, and Fabric Data Engineer Associate.</p>
-            <p>What keeps me in this field is the same thing that kept me working on cars for years. There's always another problem to crack. Technology just gives you bigger, messier, more interesting problems. A tangled dataset that finally makes sense, a process that used to take all day now running in seconds. I don't think that feeling will ever get old.</p>
+        <div >
+          <p class = "about-heading">How we got here</p>
+          <div class = "about-area">
+            <p class = "about-bio">Originally from Australia, I've been living in Grenoble, France since 2023, where I work as a data analyst and analytics engineer.</p>
+            <p class = "about-bio">I didn't exactly take the direct route into data. I started out as an automotive mechanic in 2009, diagnosing faults and solving problems with my hands. What I didn't realise at the time was that I was already doing data work, just with a set of wrenches instead of a keyboard. The root-cause analysis, the systems thinking, the satisfaction of finding why something wasn't working: that instinct never left me, it just found a better home.</p>
+            <p class = "about-bio">After completing a Bachelor of Business in 2016, I moved through corporate roles spanning sales, supply chain, strategic planning, and recruitment. Each gave me a different lens on how organisations actually function and their common pain points. It was once I moved into data-focused roles that everything clicked; I realised I could apply that same mechanical curiosity to information systems, at scale, with far less back pain.</p>
+            <p class = "about-bio">In 2022, I fully committed to pursuing a career in data and began a Master of Business Analytics, not to change direction, but to formalise and deepen skills I'd already been building in practice. That combination of hands-on experience and rigorous study shapes how I approach every problem: with business context, not just technical output.</p>
+            <p class = "about-bio">Today I specialise in Power BI, SQL, Python, and the Microsoft Fabric ecosystem. I hold Microsoft certifications as an Excel Expert, Power BI Data Analyst Associate, Fabric Analytics Engineer Associate, and Fabric Data Engineer Associate.</p>
+            <p class = "about-bio">What keeps me in this field is the same thing that kept me working on cars for years. There's always another problem to crack. Technology just gives you bigger, messier, more interesting problems. A tangled dataset that finally makes sense, a process that used to take all day now running in seconds. I don't think that feeling will ever get old.</p>
           </div>
         </div>
       </div>    
@@ -996,7 +1023,8 @@
     <div class="contact-left">
       <div class="section-eyebrow">Get in touch</div>
       <h2>Let's work <span class="accent">together</span></h2>
-      <p class="contact-desc">Whether you need a one-off analysis, a full BI build, or an embedded analyst on your team, I'd love to hear about the problem you're trying to solve.</p>
+      <p class="contact-desc">If you have a data problem worth solving, I'd like to hear about it. I work across the full analytics stack -- from ELT pipelines and data modelling through to BI and reporting -- and I'm comfortable operating as a solo contributor or embedded within a larger team.</p>
+      <p class="contact-desc">Currently based in Grenoble, France. Returning to Sydney in early 2027 and open to opportunities there from that time.</p>      
       <div class="contact-links">
         <a href="mailto:hello@constellationanalytics.com" class="contact-link">
           <div class="contact-icon" style="background:#fff8e6">✉️</div>
