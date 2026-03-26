@@ -64,6 +64,7 @@
 --burnt-orange-950:  color-mix(in srgb, var(--burnt-orange) 30%, black);
 
 /* Purple */
+--purple-ghost: color-mix(in srgb, var(--purple) 10%, white);
 --purple-50:   color-mix(in srgb, var(--purple) 20%, white);
 --purple-300:  color-mix(in srgb, var(--purple) 60%, white);
 --purple-500:  var(--purple);
@@ -486,7 +487,7 @@ width: 4px;
 .background-orange {background:var(--orange-ghost); }
 
 .project-header { 
-padding: 24px 24px 0; 
+padding: 1.5rem 1.5rem .5rem; 
 min-height: 116px; 
 display: flex; 
 flex-direction: column; 
@@ -495,7 +496,7 @@ position: relative;
 overflow: hidden; 
 }
 
-.project-mini-chart { position: absolute; right: 18px; top: 14px; opacity: 0.14; }
+.project-mini-chart { position: absolute; right: 30px; top: 30px; opacity: 0.14; }
 
 .project-type { 
 font-size: 0.7rem; 
