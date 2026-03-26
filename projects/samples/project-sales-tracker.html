@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automated Sales Performance Tracker — Constellation Analytics</title>
+<link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+<link rel="stylesheet" href="/style.css">
+<style>
+
+/* ============================================================
+   PROJECT PAGE STYLES
+   ============================================================ */
+
+/* ── PAGE HEADER ── */
+.proj-page-header {
+  background: var(--bg-subtle);
+  padding-top: 80px;
+  border-bottom: 1px solid var(--neutral-100);
+}
+
+.proj-page-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3.5rem 4rem 3rem;
+}
+
+.breadcrumb-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+
+.breadcrumb:hover { color: var(--navy-500); }
+
+.breadcrumb-sep {
+  color: var(--neutral-300);
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.proj-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.proj-category-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--blue-ghost);
+  border: 1px solid var(--blue-300);
+  color: var(--blue-700);
+}
+
+.proj-status-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--green-ghost);
+  border: 1px solid var(--green-300);
+  color: var(--green-700);
+}
+
+.proj-status-pill.in-progress {
+  background: var(--amber-ghost);
+  border-color: var(--amber-300);
+  color: var(--amber-700);
+}
+
+.proj-page-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--navy-500);
+  line-height: 1.08;
+  margin-bottom: 1.1rem;
+  animation: fadeUp 0.4s 0.06s ease both;
+}
+
+.proj-page-summary {
+  font-size: 1.02rem;
+  color: var(--navy-500);
+  line-height: 1.78;
+  max-width: 680px;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.4s 0.12s ease both;
+}
+
+.proj-tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.4s 0.18s ease both;
+}
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: var(--white);
+  border: 1px solid var(--neutral-300);
+  color: var(--text-secondary);
+}
+
+.tech-pill.primary {
+  background: var(--navy-50);
+  border-color: var(--navy-300);
+  color: var(--navy-700);
+}
+
+.proj-stats-row {
+  display: flex;
+  gap: 2.5rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--neutral-100);
+  flex-wrap: wrap;
+  animation: fadeUp 0.4s 0.22s ease both;
+}
+
+.proj-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.proj-stat-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+.proj-stat-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy-500);
+}
+
+/* ── MAIN LAYOUT ── */
+.proj-content-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3.5rem 4rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ── ARTICLE BODY ── */
+.proj-article { min-width: 0; }
+
+.proj-article h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy-500);
+  margin: 2.5rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--neutral-100);
+  scroll-margin-top: 100px;
+}
+
+.proj-article h2:first-child {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+.proj-article h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy-500);
+  margin: 1.75rem 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.proj-article p {
+  font-size: 0.92rem;
+  color: var(--navy-700);
+  line-height: 1.82;
+  margin-bottom: 1.1rem;
+}
+
+.proj-article ul, .proj-article ol {
+  margin: 0.5rem 0 1.25rem 1.2rem;
+}
+
+.proj-article li {
+  font-size: 0.92rem;
+  color: var(--navy-700);
+  line-height: 1.8;
+  margin-bottom: 0.35rem;
+}
+
+.proj-article strong {
+  font-weight: 700;
+  color: var(--navy-500);
+}
+
+.proj-article a {
+  color: var(--blue-500);
+  text-decoration: none;
+  border-bottom: 1px solid var(--blue-300);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.proj-article a:hover {
+  color: var(--blue-700);
+  border-color: var(--blue-700);
+}
+
+/* ── CODE BLOCKS ── */
+.proj-article pre {
+  background: var(--navy-950);
+  border-radius: 10px;
+  padding: 1.4rem 1.6rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border: 1px solid color-mix(in srgb, var(--navy-500) 40%, transparent);
+  position: relative;
+}
+
+.proj-article code {
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--off-white);
+}
+
+.proj-article p code, .proj-article li code {
+  background: var(--bg-subtle);
+  border: 1px solid var(--neutral-100);
+  border-radius: 5px;
+  padding: 1px 7px;
+  font-size: 0.82em;
+  color: var(--navy-700);
+}
+
+.pre-wrap { position: relative; }
+
+.pre-lang {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  border-radius: 10px;
+  padding: 1.1rem 1.4rem;
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  line-height: 1.72;
+}
+
+.callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.callout p { margin: 0; font-size: 0.88rem; line-height: 1.72; }
+
+.callout-info  { background: var(--blue-ghost);   border: 1px solid var(--blue-300);        color: var(--blue-700); }
+.callout-info p  { color: var(--blue-700); }
+.callout-tip   { background: var(--green-ghost);  border: 1px solid var(--green-300);       color: var(--green-700); }
+.callout-tip p   { color: var(--green-700); }
+.callout-warning { background: var(--amber-ghost); border: 1px solid var(--amber-300);      color: var(--amber-700); }
+.callout-warning p { color: var(--amber-700); }
+.callout-key   { background: var(--navy-50);      border: 1px solid var(--navy-300);        color: var(--navy-700); }
+.callout-key p   { color: var(--navy-700); }
+
+/* ── RESULT / METRIC CARDS ── */
+.result-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.result-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--neutral-100);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+}
+
+.result-num {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--burnt-orange-500);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.result-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  line-height: 1.4;
+}
+
+/* ── IMAGE / FIGURE ── */
+.proj-figure { margin: 1.75rem 0; }
+
+.proj-figure img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--neutral-100);
+  display: block;
+}
+
+.proj-figure figcaption {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+  margin-top: 0.6rem;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── DIVIDER ── */
+.proj-article hr {
+  border: none;
+  border-top: 1px solid var(--neutral-100);
+  margin: 2.5rem 0;
+}
+
+/* ── SIDEBAR ── */
+.proj-sidebar {
+  position: sticky;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.toc-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--neutral-100);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+}
+
+.toc-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-500);
+  margin-bottom: 0.9rem;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-item {
+  border-left: 2px solid var(--neutral-100);
+  transition: border-color 0.2s;
+}
+
+.toc-item:hover { border-color: var(--neutral-300); }
+
+.toc-link {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--neutral-500);
+  text-decoration: none;
+  padding: 0.45rem 0.75rem;
+  line-height: 1.45;
+  transition: color 0.2s;
+}
+
+.toc-link:hover { color: var(--navy-500); }
+
+.sidebar-info-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--neutral-100);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+}
+
+.sidebar-info-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-500);
+  margin-bottom: 1rem;
+}
+
+.sidebar-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sidebar-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sidebar-info-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+.sidebar-info-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy-700);
+}
+
+.sidebar-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 0.25rem;
+}
+
+.sidebar-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--neutral-100);
+  color: var(--text-secondary);
+}
+
+.sidebar-github {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy-500);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--neutral-100);
+  border-radius: 10px;
+  background: var(--white);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.sidebar-github:hover {
+  border-color: var(--navy-500);
+  background: var(--bg-subtle);
+}
+
+.sidebar-github img { width: 18px; height: 18px; }
+
+/* ── PREV / NEXT NAV ── */
+.proj-nav {
+  border-top: 1px solid var(--neutral-100);
+  background: var(--bg-page);
+  padding: 2.5rem 4rem;
+}
+
+.proj-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.proj-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--neutral-100);
+  border-radius: 10px;
+  background: var(--bg-subtle);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.proj-nav-link:hover {
+  border-color: var(--neutral-300);
+  background: var(--white);
+}
+
+.proj-nav-link.next { text-align: right; }
+
+.proj-nav-direction {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+}
+
+.proj-nav-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy-500);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1080px) {
+  .proj-content-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .proj-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+}
+
+@media (max-width: 900px) {
+  .proj-page-header-inner { padding: 2.5rem 1.5rem 2rem; }
+  .proj-content-layout { padding: 2.5rem 1.5rem 4rem; }
+  .proj-nav { padding: 2rem 1.5rem; }
+  .proj-sidebar { grid-template-columns: 1fr; }
+  .result-cards { grid-template-columns: 1fr 1fr; }
+  .proj-stats-row { gap: 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .result-cards { grid-template-columns: 1fr; }
+  .proj-nav-inner { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+  <ul>
+    <li><a href="/" class="nav-links">HOME</a></li>
+    <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+    <li><a href="/projects/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+    <li><a href="/#about" class="nav-links">ABOUT</a></li>
+    <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="proj-page-header">
+  <div class="proj-page-header-inner">
+
+    <div class="breadcrumb-wrapper">
+      <a href="/" class="breadcrumb">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Home
+      </a>
+      <a href="/projects/projects.html" class="breadcrumb">
+        / Projects
+      </a>
+    </div>
+
+    <div class="proj-meta-row">
+      <span class="proj-category-pill">Python &amp; Automation</span>
+      <span class="proj-status-pill">Personal Project</span>
+    </div>
+
+    <h1 class="proj-page-title">Automated Sales Performance<br>Tracker<br>(AI Generated Sample Project)</h1>
+
+    <p class="proj-page-summary">
+      A personal project built to practise end-to-end pipeline development. Python pulls and cleans synthetic sales data, loads it to a PostgreSQL database on Neon Cloud via a scheduled GitHub Actions workflow, and a Power BI report sits on top for slice-and-dice analysis.
+    </p>
+
+    <div class="proj-tech-row">
+      <span class="tech-pill primary">Python</span>
+      <span class="tech-pill primary">PostgreSQL</span>
+      <span class="tech-pill primary">Power BI</span>
+      <span class="tech-pill">Pandas</span>
+      <span class="tech-pill">GitHub Actions</span>
+      <span class="tech-pill">Neon Cloud</span>
+      <span class="tech-pill">DAX</span>
+      <span class="tech-pill">SQL</span>
+    </div>
+
+    <div class="proj-stats-row">
+      <div class="proj-stat">
+        <span class="proj-stat-label">Type</span>
+        <span class="proj-stat-value">Personal Project</span>
+      </div>
+      <div class="proj-stat">
+        <span class="proj-stat-label">Timeline</span>
+        <span class="proj-stat-value">3 weeks · 2024</span>
+      </div>
+      <div class="proj-stat">
+        <span class="proj-stat-label">Goal</span>
+        <span class="proj-stat-value">Pipeline Practice</span>
+      </div>
+      <div class="proj-stat">
+        <span class="proj-stat-label">Status</span>
+        <span class="proj-stat-value">Complete</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="proj-content-layout">
+
+  <!-- ARTICLE -->
+  <article class="proj-article">
+
+    <h2 id="background">Background</h2>
+    <p>
+      Most of the pipeline work I do professionally runs inside client environments — which means I can't always tinker with the architecture, swap out components, or break things deliberately to see what happens. I wanted a project I owned end-to-end, where every decision was mine, and where the failure mode was just a broken personal project rather than a production incident.
+    </p>
+    <p>
+      Sales data is a useful domain for this kind of practice. The shape of the problem is familiar — transactions, products, regions, time — but it has enough complexity to make the pipeline interesting. Aggregations behave differently depending on how the data is modelled, and there are natural opportunities to practice both ETL logic and reporting design in the same project.
+    </p>
+
+    <div class="callout callout-key">
+      <span class="callout-icon">🎯</span>
+      <p><strong>Goal:</strong> Build a fully automated, end-to-end pipeline from raw data to live Power BI report — using only tools already in my professional stack, with no manual steps after initial setup.</p>
+    </div>
+
+    <h2 id="data">The Data</h2>
+    <p>
+      Rather than scraping real data or relying on a static CSV, I generated a synthetic sales dataset using Python's <code>faker</code> library combined with some hand-crafted logic to make the data behave realistically. The dataset covers twelve months of fictional transactions for a mid-sized retail business with four product categories and three sales regions.
+    </p>
+
+    <h3>Synthetic data design</h3>
+    <p>
+      The key design decision was making the data tell a story. Purely random data produces flat, uninteresting reports. Instead, I seeded realistic patterns into the generation logic: seasonal peaks in Q4, a struggling product category in the second half of the year, and a consistently outperforming region. This gave the eventual Power BI report something to actually surface.
+    </p>
+
+    <div class="pre-wrap">
+      <span class="pre-lang">Python</span>
+      <pre><code>import pandas as pd
+import numpy as np
+from faker import Faker
+
+fake = Faker('en_AU')
+rng  = np.random.default_rng(seed=42)
+
+REGIONS   = ['NSW', 'VIC', 'QLD']
+CATEGORIES = ['Electronics', 'Apparel', 'Home & Garden', 'Sports']
+
+# Q4 seasonal uplift — transactions more likely Oct–Dec
+def seasonal_weight(month: int) -> float:
+    return 1.6 if month >= 10 else 1.0
+
+rows = []
+for _ in range(10_000):
+    month = rng.integers(1, 13)
+    rows.append({
+        'transaction_id': fake.uuid4(),
+        'date':           fake.date_between('-1y', 'today'),
+        'region':         rng.choice(REGIONS, p=[0.45, 0.35, 0.20]),
+        'category':       rng.choice(CATEGORIES),
+        'revenue':        round(rng.normal(loc=250, scale=80), 2),
+        'units_sold':     int(rng.integers(1, 12)),
+    })
+
+df = pd.DataFrame(rows)
+df['revenue'] = df['revenue'].clip(lower=10)   # no negative revenue</code></pre>
+    </div>
+
+    <h2 id="pipeline">Pipeline Architecture</h2>
+    <p>
+      The pipeline has three distinct stages: generation and cleaning in Python, loading to PostgreSQL on Neon Cloud, and transformation via SQL views that Power BI queries directly. No orchestration framework — just a GitHub Actions workflow on a daily cron schedule.
+    </p>
+
+    <h3>Stage 1: Generate and clean</h3>
+    <p>
+      The Python script runs first, generating a fresh batch of data and running it through a cleaning step. In a real scenario this would be an extract from a source system, but the cleaning logic is identical either way: type coercion, null handling, deduplication on <code>transaction_id</code>, and basic sanity checks on numeric ranges.
+    </p>
+
+    <h3>Stage 2: Load to Neon</h3>
+    <p>
+      The cleaned DataFrame is written to a <code>staging.sales_raw</code> table in PostgreSQL using <code>psycopg2</code>. The connection string is stored as a GitHub Actions secret, so credentials never touch the repository. The load uses a truncate-and-reload pattern — simple, predictable, and easy to reason about for a dataset of this size.
+    </p>
+
+    <div class="pre-wrap">
+      <span class="pre-lang">Python</span>
+      <pre><code>import psycopg2
+import os
+from psycopg2.extras import execute_values
+
+conn = psycopg2.connect(os.environ['NEON_CONNECTION_STRING'])
+cur  = conn.cursor()
+
+cur.execute("TRUNCATE TABLE staging.sales_raw;")
+
+execute_values(
+    cur,
+    """INSERT INTO staging.sales_raw
+       (transaction_id, date, region, category, revenue, units_sold)
+       VALUES %s""",
+    [tuple(row) for row in df.itertuples(index=False)],
+)
+
+conn.commit()
+cur.close()
+conn.close()</code></pre>
+    </div>
+
+    <h3>Stage 3: SQL transformation layer</h3>
+    <p>
+      Rather than transforming data in Python before loading, the mart layer lives in PostgreSQL as a set of views. Power BI connects to these views rather than the raw table. This keeps the reporting layer stable even if the upstream data changes shape — the view definitions absorb the translation.
+    </p>
+
+    <div class="pre-wrap">
+      <span class="pre-lang">SQL</span>
+      <pre><code>-- mart.v_sales_monthly: monthly aggregates by region and category
+CREATE OR REPLACE VIEW mart.v_sales_monthly AS
+SELECT
+    DATE_TRUNC('month', date)::date   AS month,
+    region,
+    category,
+    SUM(revenue)                      AS total_revenue,
+    SUM(units_sold)                   AS total_units,
+    COUNT(*)                          AS transaction_count,
+    ROUND(AVG(revenue)::numeric, 2)   AS avg_order_value
+FROM staging.sales_raw
+GROUP BY 1, 2, 3
+ORDER BY 1, 2, 3;</code></pre>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <p>Neon Cloud's serverless PostgreSQL spins down when idle and back up on connection. For a daily pipeline this is fine — the first query of the day takes a second or two longer while the instance warms. For lower-latency use cases it would need a different approach.</p>
+    </div>
+
+    <h2 id="automation">Automation with GitHub Actions</h2>
+    <p>
+      The entire pipeline runs automatically on a daily schedule using a GitHub Actions workflow. The workflow installs dependencies, runs the Python script, and exits. If anything fails, GitHub sends an email notification — a lightweight alerting mechanism that requires zero additional infrastructure.
+    </p>
+
+    <div class="pre-wrap">
+      <span class="pre-lang">YAML</span>
+      <pre><code>name: Sales Pipeline
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC daily
+  workflow_dispatch:        # manual trigger for testing
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline
+        env:
+          NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
+        run: python pipeline/run.py</code></pre>
+    </div>
+
+    <h2 id="reporting">Power BI Report</h2>
+    <p>
+      Power BI Desktop connects to Neon via the PostgreSQL connector, pointing at the mart views. The report has three pages: an executive summary with KPI cards, a regional breakdown with a small multiples bar chart, and a product category trend view showing month-on-month revenue movement.
+    </p>
+
+    <h3>DAX measures</h3>
+    <p>
+      Most of the logic lives in the SQL views, keeping DAX relatively clean. The main measures I wrote are a rolling 3-month average for the trend line and a simple period-over-period comparison for the KPI cards.
+    </p>
+
+    <div class="pre-wrap">
+      <span class="pre-lang">DAX</span>
+      <pre><code>-- Rolling 3-month average revenue
+Revenue 3M Avg =
+AVERAGEX(
+    DATESINPERIOD(
+        'Calendar'[Date],
+        LASTDATE('Calendar'[Date]),
+        -3,
+        MONTH
+    ),
+    [Total Revenue]
+)
+
+-- Month-over-month change %
+MoM Revenue % =
+VAR CurrentMonth = [Total Revenue]
+VAR PriorMonth   = CALCULATE([Total Revenue], DATEADD('Calendar'[Date], -1, MONTH))
+RETURN
+    DIVIDE(CurrentMonth - PriorMonth, PriorMonth)</code></pre>
+    </div>
+
+    <h2 id="results">What I Got Out of It</h2>
+
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="result-num">0</div>
+        <div class="result-label">Manual steps after initial setup</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">3</div>
+        <div class="result-label">Pipeline stages: generate, load, transform</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">~8s</div>
+        <div class="result-label">Full pipeline run time end-to-end</div>
+      </div>
+    </div>
+
+    <p>
+      The pipeline itself is not complex — that was deliberate. The value of the project was in connecting all the pieces in a way I controlled completely. I now have a working pattern for secret management via GitHub Actions, a clear mental model of the truncate-and-reload vs incremental load trade-off, and a better feel for where SQL transformation belongs vs Python transformation.
+    </p>
+    <p>
+      The Power BI side also surfaced something useful: connecting to a serverless database is straightforward, but scheduled dataset refresh in the Power BI Service requires an on-premises data gateway for non-cloud connectors. Worth knowing before assuming everything is plug-and-play.
+    </p>
+
+    <div class="callout callout-tip">
+      <span class="callout-icon">💡</span>
+      <p>Personal projects are most useful when they deliberately use tools from your real stack rather than learning new ones. The goal here wasn't to learn Python — it was to practise the seams between familiar tools.</p>
+    </div>
+
+    <h2 id="reflections">Reflections</h2>
+    <p>
+      If I were building this for a real client, the truncate-and-reload approach would need to be replaced with an incremental load pattern as the dataset grew. The current setup regenerates all 10,000 rows daily, which is fine for a toy dataset but would not scale to millions of records without either partitioning the table or switching to an upsert-based load.
+    </p>
+    <p>
+      I would also add proper logging. At the moment, GitHub Actions provides run logs, but there is no structured record of how many rows were loaded, whether any failed validation checks, or how long each stage took. A simple log table in Neon would cost nothing and make debugging significantly faster.
+    </p>
+    <p>
+      The project is on GitHub if you want to look at the code directly.
+    </p>
+
+    <hr>
+
+    <p style="font-size: 0.82rem; color: var(--neutral-500);">
+      Questions about this project? <a href="/#contact">Get in touch.</a>
+    </p>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="proj-sidebar">
+
+    <!-- Table of Contents -->
+    <div class="toc-card">
+      <div class="toc-heading">Contents</div>
+      <ul class="toc-list">
+        <li class="toc-item">
+          <a href="#background" class="toc-link">Background</a>
+        </li>
+        <li class="toc-item">
+          <a href="#data" class="toc-link">The Data</a>
+        </li>
+        <li class="toc-item">
+          <a href="#pipeline" class="toc-link">Pipeline Architecture</a>
+        </li>
+        <li class="toc-item">
+          <a href="#automation" class="toc-link">GitHub Actions</a>
+        </li>
+        <li class="toc-item">
+          <a href="#reporting" class="toc-link">Power BI Report</a>
+        </li>
+        <li class="toc-item">
+          <a href="#results" class="toc-link">Results</a>
+        </li>
+        <li class="toc-item">
+          <a href="#reflections" class="toc-link">Reflections</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Project Info -->
+    <div class="sidebar-info-card">
+      <div class="sidebar-info-heading">Project Details</div>
+      <div class="sidebar-info-row">
+        <div class="sidebar-info-item">
+          <span class="sidebar-info-label">Type</span>
+          <span class="sidebar-info-value">Personal Project</span>
+        </div>
+        <div class="sidebar-info-item">
+          <span class="sidebar-info-label">Timeline</span>
+          <span class="sidebar-info-value">3 weeks · 2024</span>
+        </div>
+        <div class="sidebar-info-item">
+          <span class="sidebar-info-label">Stack</span>
+          <div class="sidebar-tech-pills">
+            <span class="sidebar-pill">Python</span>
+            <span class="sidebar-pill">Pandas</span>
+            <span class="sidebar-pill">PostgreSQL</span>
+            <span class="sidebar-pill">Neon Cloud</span>
+            <span class="sidebar-pill">GitHub Actions</span>
+            <span class="sidebar-pill">Power BI</span>
+            <span class="sidebar-pill">DAX</span>
+            <span class="sidebar-pill">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub link -->
+    <a href="https://github.com/constellation-analytics/" target="_blank" class="sidebar-github">
+      <img src="/assets/github.png" alt="GitHub">
+      View on GitHub
+    </a>
+
+  </aside>
+
+</div>
+
+<!-- PREV / NEXT -->
+<div class="proj-nav">
+  <div class="proj-nav-inner">
+    <a href="/projects.html" class="proj-nav-link prev">
+      <span class="proj-nav-direction">← Back</span>
+      <span class="proj-nav-title">All projects</span>
+    </a>
+    <a href="/project-v2.html" class="proj-nav-link next">
+      <span class="proj-nav-direction">Next →</span>
+      <span class="proj-nav-title">Master Data ELT Pipeline</span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Paul<br>© 2026 Constellation Analytics</p>
+  <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+    <a href="https://github.com/constellation-analytics/" target="_blank"><img src="/assets/github.png"></a>
+  </div>
+</footer>
+
+</body>
+</html>
