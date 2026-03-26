@@ -742,7 +742,7 @@ footer {
   }
 
   /* Stack everything and center */
-  .footer-container > * {
+  .footer-container {
     justify-self: center;
     margin-bottom: var(--space-sm);
   }
