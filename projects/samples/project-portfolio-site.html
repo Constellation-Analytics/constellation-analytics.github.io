@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building This Portfolio Site — Constellation Analytics</title>
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+
+
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+
+      <a href="/projects.html" class="breadcrumb">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        Home
+        <span class="breadcrumb-sep">/</span>
+        Projects
+      </a>
+
+      <div class="proj-meta-row">
+        <span class="proj-category-pill">Personal · Web</span>
+        <span class="proj-status-pill">Live</span>
+      </div>
+
+      <h1 class="proj-page-title">Building This Portfolio Site<br>as a Non-Developer</h1>
+
+      <p class="proj-page-summary">
+        How I designed and built constellationanalytics.com.au from scratch using vanilla HTML and CSS, a short
+        foundational course, and an iterative AI-assisted workflow — without any prior web development experience.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">HTML</span>
+        <span class="tech-pill primary">CSS</span>
+        <span class="tech-pill">GitHub</span>
+        <span class="tech-pill">Claude (AI)</span>
+        <span class="tech-pill">CSS Variables</span>
+        <span class="tech-pill">color-mix()</span>
+      </div>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Personal Project</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Timeline</span>
+          <span class="proj-stat-value">Ongoing · 2025</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Prior web dev experience</span>
+          <span class="proj-stat-value">Zero</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Framework used</span>
+          <span class="proj-stat-value">None</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <h2 id="background">Why Build It At All</h2>
+      <p>
+        As a data analyst and analytics engineer, most of my work lives inside client environments — dashboards that
+        aren't mine to share, pipelines in codebases I can't publish, and outputs that go into internal reporting
+        systems. A portfolio that just says "I did things, trust me" is not very useful. I wanted something I could
+        point people to that showed actual work, in a form I had full ownership of.
+      </p>
+      <p>
+        The obvious option was a template site. Something like Squarespace or a pre-built portfolio theme would have
+        taken an afternoon. But I decided against it deliberately. A template tells visitors that you know how to
+        configure software. Building something from scratch — even imperfectly — tells them something more interesting
+        about how you approach problems you don't already know how to solve.
+      </p>
+      <p>
+        I had no web development background going into this. My experience was Python, SQL, and Excel. HTML and CSS were
+        things I had seen in passing but never written. The question was whether I could produce something professional
+        without spending months learning a new discipline.
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The constraint:</strong> Build a professional, custom portfolio site in vanilla HTML and CSS. No
+          frameworks, no templates, no web development background. Use a short course to build fundamentals, then AI
+          assistance for the rest.</p>
+      </div>
+
+      <h2 id="foundation">Building the Foundation</h2>
+
+      <h3>The 4-hour HTML/CSS course</h3>
+      <p>
+        Before writing a single line of site code, I completed a short introductory HTML and CSS course — roughly four
+        hours of structured content. The goal was not to become a web developer. It was to understand the vocabulary
+        well enough to have a productive conversation with an AI assistant, and to be able to read and reason about the
+        output it produced.
+      </p>
+      <p>
+        That distinction matters. There is a significant difference between using AI to write code you cannot evaluate,
+        and using AI to write code you can read, question, and modify. The course gave me enough to do the latter. I
+        came out of it understanding the box model, how CSS inheritance works, what <code>flexbox</code> and
+        <code>grid</code> are doing, and how specificity resolves conflicts. That was enough.
+      </p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <p>Four hours of structured fundamentals is not enough to build something complex. But it is enough to stop AI
+          output being a black box. You can read it, catch obvious problems, and ask better follow-up questions. That
+          changes everything about the workflow.</p>
+      </div>
+
+      <h3>Choosing the constraints</h3>
+      <p>
+        Before starting, I made a few deliberate decisions about scope. Vanilla HTML and CSS only — no JavaScript at
+        this stage, which kept the mental model simple and forced clean, semantic HTML. No CSS frameworks like Tailwind
+        or Bootstrap, because I wanted to understand the design system I was building rather than configuring someone
+        else's. And version control from day one: every meaningful iteration saved as a new file, so I could always roll
+        back.
+      </p>
+
+      <h2 id="design-system">The Design System</h2>
+      <p>
+        The first real technical challenge was colour. I had a rough palette in mind — navy, amber, blue, slate — but
+        implementing it consistently across a whole site is harder than it sounds. Hardcoded hex values scattered
+        through a stylesheet become a maintenance problem immediately.
+      </p>
+      <p>
+        Working iteratively with Claude, I built a CSS custom properties system using named base colours and a five-step
+        scale generated by <code>color-mix()</code>. The scale convention — lower numbers lighter, higher numbers darker
+        — mirrors Tailwind's approach, which I found intuitive once I understood the direction.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">CSS</span>
+        <pre><code>/* Base colour + 5-step scale using color-mix() */
+--navy:       #213345;
+--navy-50:    color-mix(in srgb, var(--navy) 20%, white);
+--navy-300:   color-mix(in srgb, var(--navy) 60%, white);
+--navy-500:   var(--navy);
+--navy-700:   color-mix(in srgb, var(--navy) 65%, black);
+--navy-950:   color-mix(in srgb, var(--navy) 30%, black);
+
+/* Semantic aliases — these are what the rest of the stylesheet uses */
+--bg-page:        var(--white);
+--bg-subtle:      var(--neutral-50);
+--text-primary:   var(--neutral-950);
+--text-muted:     var(--neutral-500);</code></pre>
+      </div>
+
+      <p>
+        This pattern — base variables feeding semantic aliases — means the whole site can be recoloured by changing a
+        handful of base values. It also means I can read the stylesheet and understand immediately what
+        <code>var(--text-muted)</code> means without looking it up.
+      </p>
+      <p>
+        Understanding <em>why</em> this architecture works came from the course. Without that foundation, I would have
+        accepted whatever Claude generated without understanding the trade-offs.
+      </p>
+
+      <h2 id="iterations">The Iterative Build Process</h2>
+      <p>
+        The site was not designed and then built. It was built and then redesigned, repeatedly. Each major iteration
+        involved a prompt to Claude describing what I wanted, a generated output, my own review and editing pass, and
+        then a decision about what to tackle next. The version number in the filename went up with each meaningful
+        change.
+      </p>
+
+      <ul class="iteration-list">
+        <li class="iteration-item">
+          <div class="iteration-num">v1</div>
+          <div class="iteration-body">
+            <div class="iteration-title">First structure — nav, hero, basic sections</div>
+            <p class="iteration-desc">A working skeleton: fixed nav, hero with heading and CTA buttons, placeholder
+              sections. Heavily orange-accented, which was later walked back significantly.</p>
+          </div>
+        </li>
+        <li class="iteration-item">
+          <div class="iteration-num">v2</div>
+          <div class="iteration-body">
+            <div class="iteration-title">Colour system and design tokens</div>
+            <p class="iteration-desc">Replaced hardcoded hex values with a full CSS variable architecture. This was the
+              most technically dense session — the colour scale, semantic aliases, shadow system, and border tokens all
+              came together here.</p>
+          </div>
+        </li>
+        <li class="iteration-item">
+          <div class="iteration-num">v3–v4</div>
+          <div class="iteration-body">
+            <div class="iteration-title">Skills section, project cards, experience timeline</div>
+            <p class="iteration-desc">Content sections built out. Skill cards with coloured top borders. Project cards
+              with colour accent stripes and tech badge pills. The timeline using a CSS pseudo-element vertical line.
+            </p>
+          </div>
+        </li>
+        <li class="iteration-item">
+          <div class="iteration-num">v5–v6</div>
+          <div class="iteration-body">
+            <div class="iteration-title">Colour direction settled — blue primary, orange reserved</div>
+            <p class="iteration-desc">Orange was initially used widely as the primary accent. After reviewing the
+              overall feel, it was reserved only for KPI numbers and the hero eyebrow text. Blue became the primary
+              interactive colour.</p>
+          </div>
+        </li>
+        <li class="iteration-item">
+          <div class="iteration-num">v7+</div>
+          <div class="iteration-body">
+            <div class="iteration-title">Sub-pages: projects listing and individual project template</div>
+            <p class="iteration-desc">Separate HTML pages with their own page headers, breadcrumb navigation, and
+              layouts — all sharing the same stylesheet. The project page template introduced the two-column
+              article/sidebar layout seen on this page.</p>
+          </div>
+        </li>
+      </ul>
+
+      <h2 id="ai-workflow">How AI Assistance Actually Worked</h2>
+      <p>
+        It is worth being specific about what AI did and did not do in this build, because "I used AI" means very
+        different things depending on how it is used.
+      </p>
+
+      <h3>What Claude generated</h3>
+      <p>
+        Claude wrote the first draft of most components. Given a description of what I wanted — a sticky nav with a logo
+        on the left and links on the right, a CTA button that pulses subtly on hover — it would produce working HTML and
+        CSS. That first draft was usually close but rarely finished. It needed reviewing, trimming, and adjusting.
+      </p>
+
+      <h3>What I changed manually</h3>
+      <p>
+        Almost every section had manual edits after generation. Content was entirely mine — Claude does not know my
+        career history, my writing voice, or what I actually want to say about my work. Spacing, sizing, and proportion
+        decisions were often adjusted by eye. Some components were regenerated two or three times with refined prompts
+        before they looked right. And the colour direction decisions — orange in, orange out, blue primary — were
+        aesthetic calls I made after looking at the full page.
+      </p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <p>The most useful thing about AI in this workflow was not that it wrote perfect code. It was that it eliminated
+          the blank page problem. Starting from a working draft that is 70% right is far faster than starting from
+          nothing, even when the 30% requires real work.</p>
+      </div>
+
+      <h3>Where it fell short</h3>
+      <p>
+        AI assistance is less useful when the problem is aesthetic rather than technical. "Make this feel more refined"
+        produces output that is different but not necessarily better. The most productive prompts were specific and
+        technical: "Change the skill tag background to use <code>color-mix(in srgb, var(--slate) 5%, white)</code> and
+        add a 1px dashed amber border." Vague prompts produced vague improvements.
+      </p>
+      <p>
+        It also cannot catch design inconsistencies it cannot see. Several issues — a section that felt cramped, a font
+        size that looked off against the heading — were only visible in the browser and required me to identify the
+        problem and describe it precisely before Claude could help fix it.
+      </p>
+
+      <h2 id="decisions">Key Design Decisions</h2>
+
+      <h3>No JavaScript</h3>
+      <p>
+        JavaScript was explicitly excluded from this version of the site. This was partly about keeping the complexity
+        manageable while learning, and partly a deliberate choice. Pure HTML and CSS forces you to solve problems at the
+        markup and styling layer, which produces leaner, more maintainable output. The filter functionality on the
+        projects page, for example, uses CSS-only category labels rather than a JS-powered filter — simpler, and one
+        less thing to break.
+      </p>
+
+      <h3>Uniform skill tag styling</h3>
+      <p>
+        An earlier version had colour-coded skill tags — blue for SQL tools, amber for Python, orange for visualisation.
+        It looked busy and the colour associations felt arbitrary. The settled approach uses a single uniform slate
+        style for all tags, which is cleaner and lets the content speak rather than the decoration.
+      </p>
+
+      <h3>Version control discipline</h3>
+      <p>
+        Every meaningful iteration was saved as a new numbered file before changes were made. This felt overly cautious
+        at first. It became essential when a colour direction was tried, rejected, and needed to be partially recovered
+        three versions later. Rolling back to a previous iteration is straightforward when each version exists as a
+        discrete file.
+      </p>
+
+      <h2 id="results">What the Build Produced</h2>
+
+      <div class="result-cards">
+        <div class="result-card">
+          <div class="result-num">0</div>
+          <div class="result-label">Frameworks or libraries used</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">7+</div>
+          <div class="result-label">Design iterations before the palette settled</div>
+        </div>
+        <div class="result-card">
+          <div class="result-num">4 hrs</div>
+          <div class="result-label">Formal HTML/CSS study before starting</div>
+        </div>
+      </div>
+
+      <p>
+        The result is a site I understand completely. Every line of CSS has a reason I can explain. If something breaks,
+        I can read the stylesheet and find it. If the design needs to change, I know where to make the change. That
+        level of ownership would not have been possible with a template.
+      </p>
+      <p>
+        The AI-assisted workflow also produced something I did not expect: a faster feedback loop than working alone
+        would have given me. Each iteration took hours rather than days. The design evolved through many small
+        experiments that would have been impractical to run manually.
+      </p>
+
+      <h2 id="reflections">Reflections</h2>
+      <p>
+        The four hours of upfront study was the best investment in the project. Without it, the AI workflow degrades
+        into copying and pasting code you cannot evaluate — which is both risky and slow when something goes wrong. With
+        it, the output becomes something you can read, critique, and improve.
+      </p>
+      <p>
+        If I were starting again, I would spend more time upfront on the design system before building any components.
+        The colour architecture and spacing variables were built partway through the first version, which meant earlier
+        components had to be refactored to use the new variables. Designing the token layer first would have made the
+        whole process cleaner.
+      </p>
+      <p>
+        The site is still evolving. More project pages, a refined colour system, and eventual JavaScript functionality
+        as my understanding grows. But the foundation is solid, and it is entirely mine.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the build process? <a href="/#contact">Get in touch.</a>
+      </p>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">Why Build It At All</a></li>
+          <li class="toc-item"><a href="#foundation" class="toc-link">Building the Foundation</a></li>
+          <li class="toc-item"><a href="#design-system" class="toc-link">The Design System</a></li>
+          <li class="toc-item"><a href="#iterations" class="toc-link">The Iterative Process</a></li>
+          <li class="toc-item"><a href="#ai-workflow" class="toc-link">AI Assistance in Practice</a></li>
+          <li class="toc-item"><a href="#decisions" class="toc-link">Key Design Decisions</a></li>
+          <li class="toc-item"><a href="#results" class="toc-link">Results</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Reflections</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Personal Project</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Timeline</span>
+            <span class="sidebar-info-value">Ongoing · 2025</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">HTML</span>
+              <span class="sidebar-pill">CSS</span>
+              <span class="sidebar-pill">CSS Variables</span>
+              <span class="sidebar-pill">GitHub</span>
+              <span class="sidebar-pill">Claude AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://github.com/constellation-analytics/" target="_blank" class="sidebar-github">
+        <img src="/assets/github.png" alt="GitHub">
+        View on GitHub
+      </a>
+
+    </aside>
+
+  </div>
+
+  <!-- PREV / NEXT -->
+  <div class="proj-nav">
+    <div class="proj-nav-inner">
+      <a href="/projects.html" class="proj-nav-link prev">
+        <span class="proj-nav-direction">← Back</span>
+        <span class="proj-nav-title">All projects</span>
+      </a>
+      <a href="/project-sales-tracker.html" class="proj-nav-link next">
+        <span class="proj-nav-direction">Next →</span>
+        <span class="proj-nav-title">Automated Sales Performance Tracker</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://github.com/constellation-analytics/" target="_blank"><img src="/assets/github.png"></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
