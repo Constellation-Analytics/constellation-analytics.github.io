@@ -8,6 +8,18 @@
   <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/projects/style_projects.css">
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-dax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powerquery.min.js"></script>
+
 </head>
 
 <body>
@@ -22,13 +34,13 @@
       <li><a href="/#about" class="nav-links">ABOUT</a></li>
       <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
     </ul>
-  </nav> 
+  </nav>
 
   <!-- PAGE HEADER -->
   <div class="proj-page-header">
     <div class="proj-page-header-inner">
 
-      <a href="/projects.html" class="breadcrumb">
+      <a href="/projects/projects.html" class="breadcrumb">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
             stroke-linejoin="round" />
@@ -140,7 +152,7 @@
 
       <div class="pre-wrap">
         <span class="pre-lang">SQL</span>
-        <pre><code>-- mart.v_stock_position: current on-hand by SKU and warehouse
+        <pre><code class="language-sql">-- mart.v_stock_position: current on-hand by SKU and warehouse
 CREATE OR REPLACE VIEW mart.v_stock_position AS
 WITH movements AS (
     SELECT
@@ -192,7 +204,7 @@ LEFT JOIN ref.supplier_lead_times s USING (sku_code);</code></pre>
 
       <div class="pre-wrap">
         <span class="pre-lang">DAX</span>
-        <pre><code>Stock Risk Status =
+        <pre><code class="language-dax">Stock Risk Status =
 VAR DaysOfCover =
     DIVIDE(
         SUM(StockPosition[qty_on_hand]),
@@ -268,7 +280,7 @@ RETURN
 
       <div class="pre-wrap">
         <span class="pre-lang">Python</span>
-        <pre><code>import pandas as pd
+        <pre><code  class="language-python">import pandas as pd
 import psycopg2
 import os
 from pathlib import Path
