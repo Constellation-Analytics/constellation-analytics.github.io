@@ -1,6 +1,47 @@
 /* ============================================================
    PROJECTS LANDING PAGE
    ============================================================ */
+   
+/* ── PUBLISHED DATE ── */
+.proj-published {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  letter-spacing: 0.02em;
+}
+/* ── FIGURE SIZE VARIANTS ── */
+
+/* Half width — centred */
+.proj-figure.half {
+  width: 62%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Float right — small, text wraps */
+.proj-figure.float-right {
+  float: right;
+  width: 38%;
+  margin: 0.25rem 0 1rem 1.75rem;
+  clear: right;
+}
+
+/* Float left — small, text wraps */
+.proj-figure.float-left {
+  float: left;
+  width: 38%;
+  margin: 0.25rem 1.75rem 1rem 0;
+  clear: left;
+}
+
+.proj-article .clearfix::after {
+  content: '';
+  display: table;
+  clear: both;}
+  
 /* ── PAGE HEADER ── */
 .page-header {
     background: var(--bg-subtle);
@@ -11,7 +52,7 @@
 .page-header-inner {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 4rem 4rem 3.5rem;
+    padding: 3rem 0rem 3rem;
 }
 
 .page-header-inner .section-eyebrow {
@@ -38,25 +79,6 @@
     line-height: 1.75;
     max-width: 560px;
     animation: fadeUp 0.4s 0.14s ease both;
-}
-
-/* ── BREADCRUMB ── */
-.breadcrumb {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--neutral-500);
-    text-decoration: none;
-    margin-bottom: 1.25rem;
-    transition: color 0.2s;
-}
-
-.breadcrumb:hover {
-    color: var(--navy-500);
 }
 
 /* ── PROJECTS MAIN SECTION ── */
@@ -901,6 +923,7 @@
 }
 
 @media (max-width: 900px) {
+	.toc-card { display: none;}
     .proj-page-header-inner {
         padding: 2.5rem 1.5rem 2rem;
     }
