@@ -19,7 +19,7 @@
     <ul>
       <li><a href="/" class="nav-links">HOME</a></li>
       <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
-      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/projects/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
       <li><a href="/#about" class="nav-links">ABOUT</a></li>
       <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
     </ul>
@@ -48,44 +48,57 @@
       <div class="proj-list-grid">
 
         <!-- Constellation Analytics — Portfolio Site -->
-        <a class="proj-card">
+        <a href="/projects/1-website/project-portfolio-site.html" class="proj-card">
           <div class="proj-thumb" style="background: var(--blue-ghost);">
-            <div class="proj-thumb-placeholder">
-              <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
-                <rect x="14" y="12" width="92" height="56" rx="5" stroke="var(--blue)" stroke-width="1.5" fill="none" />
-                <rect x="14" y="12" width="92" height="14" rx="5" fill="var(--blue-50)" stroke="var(--blue)"
-                  stroke-width="1.5" />
-                <circle cx="24" cy="19" r="3" fill="var(--blue-300)" />
-                <circle cx="34" cy="19" r="3" fill="var(--blue-300)" />
-                <circle cx="44" cy="19" r="3" fill="var(--blue-300)" />
-                <rect x="22" y="34" width="32" height="5" rx="2" fill="var(--blue-300)" fill-opacity="0.5" />
-                <rect x="22" y="43" width="50" height="3" rx="1.5" fill="var(--blue-300)" fill-opacity="0.3" />
-                <rect x="22" y="49" width="42" height="3" rx="1.5" fill="var(--blue-300)" fill-opacity="0.3" />
-                <rect x="72" y="34" width="26" height="18" rx="4" fill="var(--blue-300)" fill-opacity="0.2"
-                  stroke="var(--blue-300)" stroke-width="1" />
-              </svg>
-            </div>
+            <img src="/assets/logo/CA-Logo-Icon.png" alt="Constellation Analytics"
+              style="position:absolute; width:auto; height:120px; opacity: 0.9;" />
             <div class="proj-thumb-stripe" style="background: var(--blue-500);"></div>
-            <span class="proj-status in-progress">In Progress</span>
+            <span class="proj-status live">Live</span>
           </div>
           <div class="proj-body">
             <div class="proj-category">Personal · Web</div>
-            <div class="proj-title">Constellation Analytics — Portfolio Site</div>
-            <p class="proj-desc">This site. Designed and built from scratch using vanilla HTML and CSS with a custom
-              design system. No frameworks, no templates.</p>
+            <div class="proj-title">Building This Site as a Non-Developer</div>
+            <p class="proj-desc">How I designed and built this portfolio from scratch using vanilla HTML and CSS, with
+              no prior web development experience. A four-hour foundations course, version control from day one, and an
+              iterative AI-assisted workflow.</p>
             <div class="proj-footer">
               <div class="proj-tags">
                 <span class="proj-tag">HTML</span>
                 <span class="proj-tag">CSS</span>
                 <span class="proj-tag">GitHub</span>
+                <span class="proj-tag">Claude (AI)</span>
               </div>
               <span class="proj-arrow">Read →</span>
             </div>
           </div>
         </a>
 
+        <!-- CARD AMBER - IN-PROGRESS -->
+        <div class="proj-card">
+          <div class="proj-thumb" style="background: var(--amber-ghost);">
+            <img src="/projects/2-lego/assets/Lego Challenge image.png" alt=""
+              style="position:absolute; width:auto; height:180px; ">
+            <div class="proj-thumb-stripe" style="background: var(--amber-500);"></div>
+            <span class="proj-status coming-soon">Coming Soon</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-category">Personal · Data Visualisation</div>
+            <div class="proj-title">50 Years of Lego - Power BI</div>
+            <p class="proj-desc">Designed and built an interactive dashboard exploring the history and evolution of LEGO
+              sets over the past five decades, as part of the Maven Analytics 2024 data challenge series.
+            </p>
+            <div class="proj-footer">
+              <div class="proj-tags">
+                <span class="proj-tag">Power BI</span>
+                <span class="proj-tag">Python</span>
+              </div>
+              <span class="proj-arrow">Read →</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Master Data ELT Pipeline — Schneider Electric-->
-        <a href="/projects/samples/project.html" class="proj-card">
+        <div class="proj-card">
           <div class="proj-thumb" style="background: var(--green-ghost);">
             <div class="proj-thumb-placeholder">
               <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
@@ -101,7 +114,7 @@
               </svg>
             </div>
             <div class="proj-thumb-stripe" style="background: var(--green-500);"></div>
-            <span class="proj-status live">Live</span>
+            <span class="proj-status coming-soon">Coming Soon</span>
           </div>
           <div class="proj-body">
             <div class="proj-category">Analytics Engineering</div>
@@ -118,7 +131,7 @@
               <span class="proj-arrow">Read →</span>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- CARD BLUE - LIVE 
       <a href="/projects/samples/project.html" class="proj-card">
@@ -151,6 +164,46 @@
           </div>
         </div>
       </a> -->
+
+        <!-- Constellation Analytics — Portfolio Site 
+        <a href="/projects/1-website/project-portfolio-site.html" class="proj-card">
+          <div class="proj-thumb" style="background: var(--blue-ghost);">
+            <div class="proj-thumb-placeholder">
+              <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+                <rect x="14" y="12" width="92" height="56" rx="5" stroke="var(--blue)" stroke-width="1.5" fill="none" />
+                <rect x="14" y="12" width="92" height="14" rx="5" fill="var(--blue-50)" stroke="var(--blue)"
+                  stroke-width="1.5" />
+                <circle cx="24" cy="19" r="3" fill="var(--blue-300)" />
+                <circle cx="34" cy="19" r="3" fill="var(--blue-300)" />
+                <circle cx="44" cy="19" r="3" fill="var(--blue-300)" />
+                <rect x="22" y="34" width="32" height="5" rx="2" fill="var(--blue-300)" fill-opacity="0.5" />
+                <rect x="22" y="43" width="50" height="3" rx="1.5" fill="var(--blue-300)" fill-opacity="0.3" />
+                <rect x="22" y="49" width="42" height="3" rx="1.5" fill="var(--blue-300)" fill-opacity="0.3" />
+                <rect x="72" y="34" width="26" height="18" rx="4" fill="var(--blue-300)" fill-opacity="0.2"
+                  stroke="var(--blue-300)" stroke-width="1" />
+              </svg>
+            </div>
+            <div class="proj-thumb-stripe" style="background: var(--blue-500);"></div>
+            <span class="proj-status live">Live</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-category">Personal · Web</div>
+            <div class="proj-title">Building This Site as a Non-Developer</div>
+            <p class="proj-desc">How I designed and built this portfolio from scratch using vanilla HTML and CSS, with
+              no prior web development experience. A four-hour foundations course, version control from day one, and an
+              iterative AI-assisted workflow.</p>
+            <div class="proj-footer">
+              <div class="proj-tags">
+                <span class="proj-tag">HTML</span>
+                <span class="proj-tag">CSS</span>
+                <span class="proj-tag">GitHub</span>
+                <span class="proj-tag">Claude (AI)</span>
+              </div>
+              <span class="proj-arrow">Read →</span>
+            </div>
+          </div>
+        </a>
+        -->
 
         <!-- CARD 1 -->
         <a href="/projects/samples/project-sales-tracker.html" class="proj-card">
