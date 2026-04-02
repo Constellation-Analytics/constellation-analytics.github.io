@@ -318,7 +318,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.7rem;
+    vertical-align: middle;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -413,6 +414,7 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     padding: 5px 12px;
+    padding: 5px 12px;
     border-radius: 100px;
     background: var(--white);
     border: 1px solid var(--neutral-300);
@@ -420,9 +422,9 @@
 }
 
 .tech-pill.primary {
-    background: var(--navy-50);
-    border-color: var(--navy-300);
-    color: var(--navy-700);
+    background: var(--blue-50);
+    border: 1.5px solid var(--blue-500);
+    color: var(--blue-700);
 }
 
 /* Project stat bar */
@@ -905,6 +907,31 @@
     font-size: 0.88rem;
     font-weight: 700;
     color: var(--navy-500);
+}
+
+.proj-article .back-to-top {
+    border-bottom: 1.5px solid var(--neutral-300);
+}
+
+.back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    border: 1.5px solid var(--neutral-300);
+    padding: 8px 20px;
+    border-radius: 100px;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.back-to-top:hover {
+    border-color: var(--blue-500);
+    color: var(--blue-500);
 }
 
 /* ── RESPONSIVE ── */
