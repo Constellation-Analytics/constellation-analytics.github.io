@@ -120,7 +120,7 @@
 
 /* Thumbnail */
 .proj-thumb {
-    height: 148px;
+    height: 200px;
     background: var(--bg-subtle);
     position: relative;
     overflow: hidden;
