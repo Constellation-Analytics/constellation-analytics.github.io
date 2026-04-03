@@ -588,6 +588,14 @@
     color: var(--neutral-500);
 }
 
+pre[class*="language-"] {
+    font-size: 0.9rem !important;
+}
+
+code[class*="language-"] {
+    font-size: inherit !important;
+}
+
 /* ── CALLOUT BOXES ── */
 .callout {
     border-radius: 10px;
