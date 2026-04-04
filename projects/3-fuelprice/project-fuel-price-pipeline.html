@@ -2,321 +2,537 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building This Portfolio Site — Constellation Analytics</title>
-    <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/projects/style_projects.css">
-    <!-- Prism CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSW Fuel Price Pipeline — Constellation Analytics</title>
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
 
-    <!-- Prism core first -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
 
-    <!-- Language support -->
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-dax.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-powerquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
-
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
 </head>
 
 <body id="top">
 
-    <!-- NAV -->
-    <nav>
-        <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
-        <ul>
-            <li><a href="/" class="nav-links">HOME</a></li>
-            <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
-            <li><a href="/projects/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
-            <li><a href="/#about" class="nav-links">ABOUT</a></li>
-            <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+      <div>
+        <a class="breadcrumb" href="/">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <a class="breadcrumb" href="/projects/projects.html">
+          <span>/</span>
+          Projects
+        </a>
+      </div>
+
+      <div class="proj-meta-row">
+        <span class="proj-published">Published April 2026</span>
+      </div>
+
+      <h1 class="proj-page-title">Building a Cloud-Hosted<br>Fuel Price Pipeline</h1>
+
+      <p class="proj-page-summary">
+        How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions,
+        Neon PostgreSQL, and Python.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">Python</span>
+        <span class="tech-pill primary">PostgreSQL</span>
+        <span class="tech-pill">GitHub Actions</span>
+        <span class="tech-pill">Neon</span>
+      </div>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Personal Project</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Timeline</span>
+          <span class="proj-stat-value">8 weeks · 2026</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Goal</span>
+          <span class="proj-stat-value">Practice Cloud Skills</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Data source</span>
+          <span class="proj-stat-value">NSW Government FuelCheck</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <!-- INTRO + PROBLEM -->
+      <h2 id="background">From manual process to automated pipeline</h2>
+      <p>
+        Every month, the NSW Government publishes a dataset through its FuelCheck program listing petrol prices
+        across the state. It covers every major fuel type including E10, U91, P95, P98, diesel, and LPG, across
+        more than a thousand stations. It is genuinely useful data. And for a while, I had been processing it
+        manually.
+      </p>
+      <p>
+        The old process had a consistent set of problems. I had to check the NSW Government website each month to
+        see if a new file was available, then download it and run a Python script locally. Errors required manual
+        investigation with no structured log to reference. The database lived on my PC with no remote access, so
+        nothing ran if I was not at my desk. And there was no data quality layer at all — a bad record either
+        caused a crash or slipped through silently into the fact table.
+      </p>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p>The core problem was not any single one of these issues — it was that they compounded. No logging meant errors were invisible. No remote access meant the pipeline was tied to one machine. No DQ layer meant bad data had nowhere to be caught. Fixing one without the others would not have solved much.</p>
+      </div>
+
+      <!-- THE GOAL -->
+      <h2 id="goal">The goal</h2>
+      <p>
+        Rebuild the pipeline as a fully automated, cloud-hosted system with zero local dependencies, structured
+        logging, and a proper data quality layer. Specifically:
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The goal:</strong> a fully automated, cloud-hosted ELT pipeline with zero local dependencies, structured logging on every run, and automated data quality checks that catch and fix problems before they reach production.</p>
+      </div>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-label">Compute</div>
+          <div class="pillar-desc">GitHub Actions on a monthly CRON schedule — runs whether I am at my desk or not</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Storage</div>
+          <div class="pillar-desc">Neon PostgreSQL hosted in the cloud — no local database, accessible from anywhere</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Scripts</div>
+          <div class="pillar-desc">Python modules version-controlled in GitHub — no local files, fully reproducible</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Quality</div>
+          <div class="pillar-desc">Automated DQ checks and autofix stored procedures — bad data is caught and corrected before it reaches production</div>
+        </div>
+      </div>
+
+      <style>
+        .pillar-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.85rem;
+          margin: 1.5rem 0 2rem;
+        }
+        .pillar-card {
+          background: var(--bg-subtle);
+          border: 1px solid var(--neutral-100);
+          border-top: 3px solid var(--blue-500);
+          border-radius: 10px;
+          padding: 1.1rem 1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+        }
+        .pillar-icon {
+          font-size: 1.2rem;
+          margin-bottom: 0.1rem;
+        }
+        .pillar-label {
+          font-size: 0.78rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          color: var(--navy-500);
+          text-transform: uppercase;
+        }
+        .pillar-desc {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+        @media (max-width: 700px) {
+          .pillar-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      </style>
+
+      <!-- ENVIRONMENT -->
+      <h2 id="environment">Environment and components</h2>
+      <p>The pipeline is made up of five distinct layers that work together: Python modules, API connections, stored procedures, the database, and logging.</p>
+
+      <p><strong>Python modules</strong> handle orchestration, file retrieval, and data loading. They are thin by design. Each module is responsible for a single stage of the pipeline and hands off to the next via the orchestrator. Transformation and validation logic lives in the database, not in Python.</p>
+
+      <p><strong>API connections</strong> are how the Python modules talk to the outside world. SQLAlchemy manages the connection to Neon PostgreSQL, handling query execution and data loading. The NSW Government open data portal is called once per run by the file retrieval module to download the latest monthly file. GitHub's API is used throughout the pipeline to commit log files and config updates back to the repository.</p>
+
+      <p><strong>Stored procedures</strong> are where the meaningful logic lives. Because data is loaded into staging tables early, all quality checking, autofixing, and production promotion is written in SQL and executed as callable procedures from Python. This keeps the logic close to the data, version-controlled, and easy to test independently.</p>
+
+      <p><strong>The database</strong> is a Neon PostgreSQL instance organised into three layers:</p>
+      <ul>
+        <li><em>Staging tables</em> — temporary working tables that hold raw and partially processed data for the current run: <code>stg_fuel_price</code>, <code>stg_new_stations</code>, <code>stg_inactive_stations</code>, and <code>stg_updated_stations</code></li>
+        <li><em>Fact table</em> — <code>fact_fuel_prices</code>, the central table holding daily price observations that have passed quality checks and been promoted from staging</li>
+        <li><em>Dimension tables</em> — <code>dim_fuel_stations</code>, <code>dim_fuel_types</code>, and <code>dim_date</code>, which provide the reference data that fact records join to for analysis</li>
+      </ul>
+
+      <p><strong>Logging</strong> operates at two levels. The orchestrator generates a timestamped log file for every run, capturing the start and end of each module, any skip events, and the full stderr output of any failure before the workflow exits. These files are committed to GitHub immediately on failure and at the end of every successful run. Inside the database, the <code>sys_run_log</code> table tracks stored procedure execution, recording the procedure name, the operation performed, and the number of rows affected. The retention policy automatically clears workflow logs in GitHub older than 90 days and deletes database records older than 24 months.</p>
+
+      <!-- ARCHITECTURE -->
+      <h2 id="architecture">Architecture overview</h2>
+      <p>
+        The pipeline runs on a monthly CRON schedule defined in GitHub Actions, aligned to the NSW Government's
+        release cycle. There is nothing saved locally. Compute runs in GitHub Actions, scripts are version-controlled
+        in GitHub, and data lives in Neon PostgreSQL.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">YAML</span>
+        <pre><code class="language-yaml"># pipeline.yml (simplified)
+on:
+  schedule:
+    - cron: '0 6 2 * *'  # 6am on the 2nd of each month
+  workflow_dispatch:       # manual trigger for testing</code></pre>
+      </div>
+
+      <p>
+        The key architectural decision was to push data into PostgreSQL as early as possible and do all meaningful
+        transformation and validation inside the database. This is an ELT approach: raw data lands in staging tables
+        first, and the logic lives in SQL from that point forward. The previous version processed everything in Python
+        before writing to the database. Moving to ELT means the transformation logic is closer to the data, easier to
+        test, and straightforward to extend.
+      </p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <p>This is an ELT pipeline, not ETL. The distinction matters: data lands in PostgreSQL first, and all transformation, quality checking, and promotion logic lives in SQL stored procedures. Python modules are thin orchestration layers only — they do not process data themselves.</p>
+      </div>
+
+      <!-- ORCHESTRATOR -->
+      <h2 id="orchestrator">The orchestrator</h2>
+      <p>
+        The orchestrator has two core functions: <code>run_module()</code> and <code>push_file_to_repo()</code>.
+      </p>
+      <p>
+        <code>run_module()</code> executes each Python module as a subprocess, passes the shared log file path as an
+        argument, and handles three possible outcomes: a clean exit, a graceful skip (return code 10, used when
+        conditions are not met such as no new file being available), and a failure.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">Python</span>
+        <pre><code class="language-python">def run_module(module_path):
+    """Runs python files as a subprocess"""
+    try:
+        logger.info(f"Starting {module_path}")
+
+        result = subprocess.run(
+            ["python", module_path, "--log-file", log_file],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+        if result.returncode == 10:
+            logger.info(f"Conditions not met in {module_path} - Skipping Module")
+            return
+
+        logger.info(f"Finished {module_path}")
+
+        if result.returncode != 0:
+            logger.error(f"Module {module_path} failed with exit code {result.returncode}")
+            logger.error(f"{module_path} errors before failure:\n{result.stderr}")
+            push_file_to_repo(log_file, f"Workflow log before failure in {module_path}")
+            sys.exit(1)
+
+    except Exception as e:
+        logger.exception(f"Unexpected error running {module_path}: {e}")
+        push_file_to_repo(log_file, f"Workflow log before failure in {module_path}")
+        raise</code></pre>
+      </div>
+
+      <p>
+        If a module fails, the log is pushed to GitHub immediately before the workflow exits. This means there is
+        always a retrievable record of what went wrong, even if the run never completes.
+      </p>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <p>Pushing the log to GitHub on failure before the workflow exits was one of the most useful decisions in the build. Without it, a failed run in a cloud environment leaves nothing behind to debug. With it, there is always a retrievable record regardless of where the pipeline stopped.</p>
+      </div>
+
+      <p>
+        <code>push_file_to_repo()</code> authenticates using <code>GITHUB_TOKEN</code> from the Actions environment
+        and commits the file directly to the repository:
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">Python</span>
+        <pre><code class="language-python">def push_file_to_repo(file_path, commit_message):
+    """Adds, commits, and pushes a file to GitHub using GITHUB_TOKEN"""
+    try:
+        repo_url = (
+            f"https://x-access-token:{os.environ['GITHUB_TOKEN']}"
+            f"@github.com/{os.environ['GITHUB_REPOSITORY']}.git"
+        )
+        subprocess.run(["git", "config", "user.name", "github-actions"], check=True)
+        subprocess.run(["git", "config", "user.email", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f68667b677a6d226e6c7b6660617c4f68667b677a6d216c6062">[email&#160;protected]</a>"], check=True)
+        subprocess.run(["git", "add", file_path], check=True)
+        subprocess.run(["git", "commit", "-m", commit_message], check=False)
+        subprocess.run(["git", "push", repo_url, "HEAD:main"], check=True)
+        logger.info(f"Successfully pushed {file_path} to repo")
+
+    except subprocess.CalledProcessError as e:
+        logger.exception(f"Failed to push {file_path}: {e}")
+        raise</code></pre>
+      </div>
+
+      <!-- ELT FLOW -->
+      <h2 id="elt-flow">The ELT flow</h2>
+      <p>
+        The six modules run sequentially. The first two handle extraction and initial loading into staging;
+        everything after that happens inside PostgreSQL via stored procedures.
+      </p>
+      <ol>
+        <li><strong>file_retrieval.py</strong> hits the NSW Government endpoint, downloads the monthly FuelCheck Excel file, converts it to CSV, and commits it to the repository.</li>
+        <li><strong>transform_data.py</strong> does light Python-side cleaning, expands the monthly snapshot into a complete daily price time series, and loads it into <code>stg_fuel_price</code>.</li>
+        <li><strong>api_integration.py</strong> identifies new stations, inactive stations, and stations with name or address changes, writing results to the relevant staging tables.</li>
+        <li><strong>data_quality.py</strong> calls two stored procedures in sequence: <code>check_data_quality()</code> to surface defects, then <code>update_data_quality_autofix()</code> to resolve what it can.</li>
+        <li><strong>data_update.py</strong> promotes validated staging data into the production fact and dimension tables.</li>
+        <li><strong>retention_policy.py</strong> runs last, deleting workflow logs older than 90 days from GitHub and fact data older than 24 months from the database.</li>
+      </ol>
+
+      <!-- DATA QUALITY -->
+      <h2 id="data-quality">Data quality: detect, log, autofix</h2>
+      <p>
+        Rather than halting on bad data or silently passing it through, every defect is categorised, logged to a
+        <code>dq_issues</code> table, and where possible fixed automatically before anything touches production.
+      </p>
+      <p>
+        <code>check_data_quality()</code> runs a series of named checks. Each check has a defect code (e.g.
+        <code>MIS_01</code>, <code>INC_04</code>) and writes results to <code>dq_issues</code> using
+        <code>INSERT ... ON CONFLICT DO UPDATE</code>, so re-runs are idempotent. At the start of every run, all
+        existing defects are marked inactive and any that are not re-detected are deleted at the end, leaving only
+        live issues in the table.
+      </p>
+      <p>
+        Here is an example check. <code>MIS_01</code> identifies price records in staging that cannot be matched
+        to any known station in the dimension table or any of the new or updated station staging tables:
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">SQL</span>
+        <pre><code class="language-sql">INSERT INTO dq_issues (dq_id, entity, key_var, key_var1, key_var2, attribute_name, attribute_value)
+SELECT
+    'MIS_01',
+    'stg_fuel_price',
+    f.servicestationname,
+    f.address,
+    'NA',
+    NULL,
+    NULL
+FROM stg_fuel_price f
+WHERE NOT EXISTS (
+    SELECT 1 FROM dim_fuel_stations d
+    WHERE UPPER(f.servicestationname) = UPPER(d.name)
+    AND UPPER(f.address) = UPPER(d.address)
+)
+AND NOT EXISTS (
+    SELECT 1 FROM stg_new_stations n
+    WHERE UPPER(f.servicestationname) = UPPER(n.name)
+    AND UPPER(f.address) = UPPER(n.address)
+)
+AND NOT EXISTS (
+    SELECT 1 FROM stg_updated_stations u
+    WHERE UPPER(f.servicestationname) = UPPER(u.name)
+    AND UPPER(f.address) = UPPER(u.address)
+)
+GROUP BY f.servicestationname, f.address
+ON CONFLICT (dq_id, entity, key_var, key_var1, key_var2)
+DO UPDATE SET is_active = TRUE;</code></pre>
+      </div>
+
+      <p>
+        After all checks run, <code>update_data_quality_autofix()</code> steps through the <code>dq_issues</code>
+        table and applies fixes where the resolution is deterministic. For example, <code>INC_05</code> handles
+        duplicate active station records by deactivating the oldest one:
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">SQL</span>
+        <pre><code class="language-sql">WITH duplicates AS (
+    SELECT
+        dim.stationid,
+        ROW_NUMBER() OVER (
+            PARTITION BY UPPER(dim.name), UPPER(dim.address)
+            ORDER BY dim.last_update ASC
+        ) AS rn
+    FROM dim_fuel_stations dim
+    INNER JOIN dq_issues dq
+        ON UPPER(dim.name) = dq.key_var
+        AND UPPER(dim.address) = dq.key_var1
+    WHERE dq.dq_id = 'INC_05'
+    AND active = true
+)
+UPDATE dim_fuel_stations dim
+SET active = FALSE
+FROM duplicates dup
+WHERE dim.stationid = dup.stationid
+AND dup.rn = 1;</code></pre>
+      </div>
+
+      <p>Every fix is logged to <code>sys_run_log</code> with a row count, giving a complete audit trail of what was corrected on each run.</p>
+
+      <!-- DATA MODEL -->
+      <h2 id="data-model">The data model</h2>
+      <p>
+        The database follows a Kimball-style star schema, designed to be ready for direct use in Power BI. The
+        central fact table holds price observations keyed to dimension tables for stations, fuel types, and dates.
+        The staging-to-production promotion checks <code>dq_issues</code> before acting, so production tables only
+        ever receive data that has passed or been successfully autofixed.
+      </p>
+
+      <!-- DOCUMENTATION -->
+      <h2 id="documentation">Documentation</h2>
+      <p>Every Python module and stored procedure in this project is documented using a consistent spec format. The headings are the same across every component:</p>
+      <ul>
+        <li><strong>Module overview</strong> — the purpose of the module in plain language</li>
+        <li><strong>Upstream dependencies</strong> — what this module relies on to run (other modules, files, environment variables)</li>
+        <li><strong>Downstream dependencies</strong> — what relies on this module having run successfully</li>
+        <li><strong>Inputs and outputs</strong> — exactly what the module consumes and produces, including file paths, database tables, and config values</li>
+        <li><strong>Logic and steps</strong> — execution broken into named blocks so the intent of each stage is clear without reading the code</li>
+        <li><strong>Conditional checks</strong> — situations where the module exits early or skips, and why</li>
+        <li><strong>Error handling and logging</strong> — how failures are captured, logged, and surfaced to the orchestrator</li>
+        <li><strong>Helper functions</strong> — reusable functions defined in the module and what they do</li>
+      </ul>
+      <p>
+        Good documentation on a solo project can feel optional. It is not. The spec format forces you to think
+        through a module's boundaries before you build it, which catches design problems early. It also means
+        coming back to a module three months later does not require reverse-engineering your own code to remember
+        what it does.
+      </p>
+
+      <!-- REFLECTIONS -->
+      <h2 id="reflections">Reflections</h2>
+      <p>
+        The most valuable decision in this project was committing to ELT from the start. Keeping transformation
+        and validation logic in SQL stored procedures — rather than Python — meant that the code lived close to
+        the data, was easy to test in isolation, and did not need to be re-run through the full pipeline to
+        verify a fix. That pattern held up well as the project grew.
+      </p>
+      <p>
+        The data quality layer took longer to build than the rest of the pipeline combined, but it was worth the
+        investment. The <code>dq_issues</code> table and the autofix stored procedure mean that problems are
+        surfaced explicitly and corrected in a controlled, auditable way rather than crashing the run or
+        silently corrupting the output. That changes how confident you can be in the data downstream.
+      </p>
+      <p>
+        If I were starting again, I would build the documentation spec before writing the first module, not
+        after. Having to retrofit the spec format to existing modules meant some of the early thinking about
+        dependencies and conditional checks was done backwards. Writing the spec first forces the right
+        questions earlier.
+      </p>
+      <p>
+        The pipeline is running and the foundation is solid. The next step is connecting it to a Power BI
+        dashboard for exploring fuel price trends by fuel type, region, station, and time — the star schema was
+        designed with this in mind from the start.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the pipeline design? <a href="/#contact">Get in touch.</a>
+      </p>
+
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <!-- TOC -->
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">From manual process to automated pipeline</a></li>
+          <li class="toc-item"><a href="#goal" class="toc-link">The goal</a></li>
+          <li class="toc-item"><a href="#environment" class="toc-link">Environment and components</a></li>
+          <li class="toc-item"><a href="#architecture" class="toc-link">Architecture overview</a></li>
+          <li class="toc-item"><a href="#orchestrator" class="toc-link">The orchestrator</a></li>
+          <li class="toc-item"><a href="#elt-flow" class="toc-link">The ELT flow</a></li>
+          <li class="toc-item"><a href="#data-quality" class="toc-link">Data quality: detect, log, autofix</a></li>
+          <li class="toc-item"><a href="#data-model" class="toc-link">The data model</a></li>
+          <li class="toc-item"><a href="#documentation" class="toc-link">Documentation</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Reflections</a></li>
         </ul>
-    </nav>
+      </div>
 
-    <!-- PAGE HEADER -->
-    <div class="proj-page-header">
-        <div class="proj-page-header-inner">
-            <div>
-                <a class="breadcrumb" href="/">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    Home
-                </a>
-                <a class="breadcrumb" href=" /projects/projects.html">
-                    <span>/</span>
-                    Projects
-                </a>
+      <!-- Project details -->
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Personal Project</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Completed</span>
+            <span class="sidebar-info-value">April 2026</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">Python</span>
+              <span class="sidebar-pill">PostgreSQL</span>
+              <span class="sidebar-pill">GitHub Actions</span>
+              <span class="sidebar-pill">Neon</span>
             </div>
-
-            <div class="proj-meta-row">
-                <span class="proj-published">Published April 2026</span>
-            </div>
-
-            <h1 class="proj-page-title">Building This Website<br>as a Non-Developer</h1>
-
-            <p class="proj-page-summary">
-                How I designed and built this website from scratch using HTML and CSS, a short
-                foundational course, and an iterative AI-assisted workflow (without any prior web development
-                experience).
-            </p>
-
-            <div class="proj-tech-row">
-                <span class="tech-pill primary">HTML</span>
-                <span class="tech-pill primary">CSS</span>
-                <span class="tech-pill">GitHub</span>
-                <span class="tech-pill">Claude (AI)</span>
-            </div>
-
-            <div class="proj-stats-row">
-                <div class="proj-stat">
-                    <span class="proj-stat-label">Type</span>
-                    <span class="proj-stat-value">Personal Project</span>
-                </div>
-                <div class="proj-stat">
-                    <span class="proj-stat-label">Timeline</span>
-                    <span class="proj-stat-value">6 weeks · 2026</span>
-                </div>
-                <div class="proj-stat">
-                    <span class="proj-stat-label">Goal</span>
-                    <span class="proj-stat-value">Learn a Skill</span>
-                </div>
-                <div class="proj-stat">
-                    <span class="proj-stat-label">Prior web dev experience</span>
-                    <span class="proj-stat-value">Zero</span>
-                </div>
-            </div>
-
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- CONTENT -->
-    <div class="proj-content-layout">
+      <a href="https://github.com/Constellation-Analytics/NSW-Fuel-Price-Insights" target="_blank" class="sidebar-github">
+        <img src="/assets/github.png" alt="GitHub">
+        View on GitHub
+      </a>
 
-        <article class="proj-article">
+    </aside>
 
-            <h2 id="why">Why Build a Website At All</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
+  </div>
 
-            <div class="callout callout-key">
-                <span class="callout-icon">🎯</span>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                    odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora
-                    earum
-                    est dolorum!
-                </p>
-
-            </div>
-
-            <h2 id="foundation">Building the Foundation</h2>
-
-            <h3>The 4-hour HTML/CSS course</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <div class="callout callout-tip">
-                <span class="callout-icon">💡</span>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                    odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora
-                    earum
-                    est dolorum!
-                </p>
-
-            </div>
-
-            <h3>Choosing the constraints</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h2 id="design">The Design System</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-            <div class="pre-wrap">
-                <span class="pre-lang">CSS</span>
-                <pre><code class="language-css">/* Base colour + 5-step scale using color-mix() */
---navy:       #213345;
---navy-50:    color-mix(in srgb, var(--navy) 20%, white);
---navy-300:   color-mix(in srgb, var(--navy) 60%, white);
---navy-500:   var(--navy);
---navy-700:   color-mix(in srgb, var(--navy) 65%, black);
---navy-950:   color-mix(in srgb, var(--navy) 30%, black);
-
-/* Semantic aliases — these are what the rest of the stylesheet uses */
---bg-page:        var(--white);
---bg-subtle:      var(--neutral-50);
---text-primary:   var(--neutral-950);
---text-muted:     var(--neutral-500);</code></pre>
-            </div>
-
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h2 id="build">The Iterative Build Process</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h3>Where Claude generated components directly</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h3>Where I wrote sections first and used Claude for review
-            </h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <div class="callout callout-info">
-                <span class="callout-icon">ℹ️</span>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                    odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora
-                    earum
-                    est dolorum!
-                </p>
-
-            </div>
-
-            <h3>Where it fell short</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h2 id="decisions">Key Design Decisions</h2>
-
-            <h3>No JavaScript</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h3>Uniform skill tag styling</h3>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-
-            <h2 id="reflections">Reflections</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci ipsum alias nihil, nulla error qui
-                odio magni aut blanditiis dolorem distinctio repudiandae aliquam pariatur laboriosam eius tempora earum
-                est dolorum!
-            </p>
-
-            <hr>
-
-            <p style="font-size: 0.82rem; color: var(--neutral-500);">
-                Questions about this project or the build process? <a href="/#contact">Get in touch.</a>
-            </p>
-
-            <a href="#top" class="back-to-top">↑ Back to top</a>
-        </article>
-
-        <!-- SIDEBAR -->
-        <aside class="proj-sidebar">
-
-            <!-- TOC -->
-            <div class="toc-card">
-                <div class="toc-heading">Contents</div>
-                <ul class="toc-list">
-                    <li class="toc-item"><a href="#why" class="toc-link">Why Build a Website At All</a></li>
-                    <li class="toc-item"><a href="#foundation" class="toc-link">Building the Foundation</a></li>
-                    <li class="toc-item"><a href="#design" class="toc-link">The Design System</a></li>
-                    <li class="toc-item"><a href="#build" class="toc-link">The Iterative Build Process</a></li>
-                    <li class="toc-item"><a href="#decisions" class="toc-link">Key Design Decisions</a></li>
-                    <li class="toc-item"><a href="#reflections" class="toc-link">Reflections</a></li>
-                </ul>
-            </div>
-
-            <!-- Project details -->
-            <div class="sidebar-info-card">
-                <div class="sidebar-info-heading">Project Details</div>
-                <div class="sidebar-info-row">
-                    <div class="sidebar-info-item">
-                        <span class="sidebar-info-label">Type</span>
-                        <span class="sidebar-info-value">Personal Project</span>
-                    </div>
-                    <div class="sidebar-info-item">
-                        <span class="sidebar-info-label">Completed</span>
-                        <span class="sidebar-info-value">March 2026</span>
-                    </div>
-                    <div class="sidebar-info-item">
-                        <span class="sidebar-info-label">Stack</span>
-                        <div class="sidebar-tech-pills">
-                            <span class="sidebar-pill">HTML</span>
-                            <span class="sidebar-pill">CSS</span>
-                            <span class="sidebar-pill">GitHub</span>
-                            <span class="sidebar-pill">Claude</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a href="https://github.com/Constellation-Analytics/constellation-analytics.github.io" target="_blank"
-                class="sidebar-github">
-                <img src="/assets/github.png" alt="GitHub">
-                View on GitHub
-            </a>
-
-        </aside>
-
-    </div>
-
-
-    <!-- FOOTER -->
-    <footer>
-        <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
-        <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
-        <div class="footer-links">
-            <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
-            <a href="https://github.com/constellation-analytics/" target="_blank"><img src="/assets/github.png"></a>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://g
