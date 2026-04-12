@@ -238,7 +238,7 @@ CALCULATE (
       </div>
       <h3>Bookmark-based measure switching</h3>
       <div class="clearfix">
-        <figure class="proj-figure float-right">
+        <figure class="proj-figure float-left">
           <img src="/projects/assets/lego_project_img3.webp" alt="Bookmark feature">
           <figcaption> Bookmark Feature - Used for measure switching
           </figcaption>
@@ -257,12 +257,6 @@ CALCULATE (
         <img src="/projects/assets/lego_project_img4.webp" alt="Power BI Charts">
         <figcaption>Power BI Charts - Measure switching through use of bookmarks</figcaption>
       </figure>
-
-      <div class="callout callout-tip">
-        <span class="callout-icon">💡</span>
-        <p>Bookmarks are clean solution for this kind of layout control. Three charts that swap in and out based on
-          a button selection is simpler to set up and maintain than it sounds, and the user experience is seamless.</p>
-      </div>
 
       <h3>Conditional formatting for top themes</h3>
       <div class="clearfix">
@@ -286,12 +280,34 @@ RETURN
         </div>
       </div>
       <h3>Dynamic images using URL fields</h3>
+      <div class="clearfix">
+        <figure class="proj-figure float-right">
+          <img src="/projects/assets/lego_project_img6.webp" alt="Millennium Falcon">
+          <figcaption> Dynamic images - Used to display product images
+          </figcaption>
+        </figure>
+        <p>
+          The dataset includes web-based image URLs for each set. Power BI supports displaying these URLs directly
+          in a table visual, which made it possible to show the top set per decade alongside an actual image of
+          the product. This was a new feature for me on this project. My initial plan was to use bookmarks for
+          this too, but the URL-based table approach turned out to be considerably simpler and more scalable.
+        </p>
+
+      </div>
+
+      <h3>The final outcome</h3>
       <p>
-        The dataset includes web-based image URLs for each set. Power BI supports displaying these URLs directly
-        in a table visual, which made it possible to show the top set per decade alongside an actual image of
-        the product. This was a new feature for me on this project. My initial plan was to use bookmarks for
-        this too, but the URL-based table approach turned out to be considerably simpler and more scalable.
+        The final dashboard was an interactive dashboard with Lego inspired colours and theme that allows users to
+        explore the history of Lego over the past five decades. The dashboard includes dynamic text commentary, measure
+        switching through bookmarks, conditional formatting to highlight top themes, and dynamic images to bring the
+        data to life.
       </p>
+
+      <figure class="proj-figure full">
+        <img src="/projects/assets/lego_project_img.png" alt="Power BI Dashboard">
+        <figcaption> Final submission - Interactive Power BI dashboard exploring 50 years of LEGO set data
+        </figcaption>
+      </figure>
 
       <!-- REFLECTIONS -->
       <h2 id="reflections">Reflections</h2>
@@ -300,12 +316,24 @@ RETURN
         there were several moments where I knew a particular visual or measure was achievable and had to work
         out the right method.
       </p>
+
+      <h3>Changing the measure within a chart</h3>
       <p>
         The bookmark trick for switching measures is worth keeping in the toolkit. It is not the most elegant
         solution architecturally, but it is reliable and easy to understand when maintaining the report later.
-        The dynamic image feature was the standout discovery on this project — it opened up a category of
-        visual storytelling I had not used before and will use again.
       </p>
+
+      <h3>Changing the image with a slicer</h3>
+      <p> The dynamic image feature was a completely new feature for me, and I absolutely love it. This would have to be
+        the standout discovery on this project and it opened up a category of
+        visual storytelling I had not used before and will certainly use again.
+      </p>
+      <p>
+        Here is the youtube tutorial I used DYNAMIC Images in Power BI <a
+          href="https://www.youtube.com/watch?v=-IUKUkVgJ38">DYNAMIC Images in Power BI </a>
+      </p>
+
+      <h3>Finally</h3>
       <p>
         Doing the exploratory work in Excel before touching Power BI saved real time. The decision to drop
         retail price and age range from the main analysis was made in a few minutes with a pivot table. Making
