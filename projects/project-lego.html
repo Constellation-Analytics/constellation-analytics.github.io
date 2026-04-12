@@ -17,6 +17,10 @@
   <!-- Language support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-dax.min.js"></script>
+
+  <!-- Line numbers plugin -->
+  <link href="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
+  <script src="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </head>
 
 <body id="top">
@@ -166,15 +170,40 @@ df['decade'] = (df['year'] / 10).astype(int) * 10</code></pre>
       <h2 id="analysis">Data analysis</h2>
       <p>
         With a clean dataset, I spent time putting pen to paper and brainstorming what the data could support
-        before opening Power BI. Themes, piece counts, and set volume over time were the three main angles —
-        each naturally maps to a page of the dashboard.
+        before opening Power BI. Themes, piece counts, and set volume over time were the three main angles I chose to
+        explore.
       </p>
+
+      <figure class="proj-figure half">
+        <img src="/projects/assets/lego_project_img1.webp" alt="Brainstorming example diagram">
+        <figcaption> Brainstorming example diagram - sketching out metrics by theme, peices, and sets
+        </figcaption>
+      </figure>
+
       <p>
-        In Power BI, I created one tab per attribute and built measures and charts from there. One goal was to
-        surface the top set within the selected decade. This required some care: several large education resource
-        sets were appearing at the top of the piece count rankings and skewing the results. I excluded those
-        sets from the top set calculation to keep the output relevant to someone interested in LEGO as a product.
+        In Power BI, I created one tab per attribute and started to draft measures and charts from there. <br> To
+        extract the top set within the selected decade, I use the following DAX. I found several large education
+        resources which skewed my results. Therefore, I excluded these sets from the Top Set calculation to make the
+        insights more relevant to Lego enthusiasts.
       </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">DAX</span>
+        <pre class="line-numbers">
+<code class="language-dax">Top_Set = 
+CALCULATE (
+    SELECTEDVALUE ( lego_sets_Cleaned[name] ),
+    TOPN (
+        1,
+        FILTER (
+            ALLSELECTED ( lego_sets_Cleaned ),
+            lego_sets_Cleaned[themeGroup] <> "Educational"
+                && NOT CONTAINSSTRING ( lego_sets_Cleaned[name], "Educat" )
+        ),
+        [Sum_Pieces], DESC
+    )
+)</code></pre>
+      </div>
 
       <!-- VISUALISATION -->
       <h2 id="visualisation">Dashboard design and build</h2>
@@ -183,6 +212,13 @@ df['decade'] = (df['year'] / 10).astype(int) * 10</code></pre>
         elements around without worrying about measure logic made it much easier to settle on a structure. Once
         the layout was decided, I moved to Power BI to build the measures and finalise the design.
       </p>
+
+      <figure class="proj-figure half">
+        <img src="/projects/assets/lego_project_img2.webp" alt="Layout example diagram">
+        <figcaption> Layout draft - created in PowerPoint
+        </figcaption>
+      </figure>
+
       <p>
         The final dashboard uses a LEGO-inspired colour palette — primary red, yellow, and blue — to make the
         visual theme immediately recognisable without becoming distracting.
@@ -194,27 +230,61 @@ df['decade'] = (df['year'] / 10).astype(int) * 10</code></pre>
         commentary. <code>UNICHAR(10)</code> handles line breaks within the text output, keeping the commentary
         readable across different filter states.
       </p>
-
+      <div class="pre-wrap">
+        <span class="pre-lang">DAX</span>
+        <pre class="line-numbers"><code class="language-dax">text_biggestset = 
+"The bigget set in " & [Decade] & " is " & UNICHAR ( 10 ) & [Top_Set] & " with "
+    & UNICHAR ( 10 ) & [Maxpeice_excl_Education] & " pieces!"</code></pre>
+      </div>
       <h3>Bookmark-based measure switching</h3>
-      <p>
-        To let users switch between different measures on the same chart, I built three separate charts and
-        used Power BI bookmarks to hide or display the relevant one based on a button selection. Power BI
-        doesn't support dynamic measure binding on axis fields directly, so the bookmark approach was the
-        clean solution for achieving the same outcome without any workarounds.
-      </p>
+      <div class="clearfix">
+        <figure class="proj-figure float-right">
+          <img src="/projects/assets/lego_project_img3.webp" alt="Bookmark feature">
+          <figcaption> Bookmark Feature - Used for measure switching
+          </figcaption>
+        </figure>
+        <p>
+          To let users switch between different measures on the same chart, I built three separate visuals and used
+          Power BI bookmarks to dynamically show or hide them based on button selection.
+        </p>
+        <p>
+          Since creating this in 2024, I’ve learned more efficient approaches, such as using field parameters to switch
+          measures within a single visual. However, at the time, I was unfamiliar with this technique, and the bookmark
+          approach provided a clean and effective solution without requiring additional complexity.
+        </p>
+      </div>
+      <figure class="proj-figure">
+        <img src="/projects/assets/lego_project_img4.webp" alt="Power BI Charts">
+        <figcaption>Power BI Charts - Measure switching through use of bookmarks</figcaption>
+      </figure>
 
       <div class="callout callout-tip">
         <span class="callout-icon">💡</span>
-        <p>Bookmarks are underused for this kind of layout control. Three charts that swap in and out based on
+        <p>Bookmarks are clean solution for this kind of layout control. Three charts that swap in and out based on
           a button selection is simpler to set up and maintain than it sounds, and the user experience is seamless.</p>
       </div>
 
       <h3>Conditional formatting for top themes</h3>
-      <p>
-        The leading theme in each decade is highlighted automatically using a DAX measure driving conditional
-        formatting. This means the highlighting stays correct when filters change, with no manual annotation required.
-      </p>
+      <div class="clearfix">
+        <figure class="proj-figure float-right">
+          <img src="/projects/assets/lego_project_img5.webp" alt="Conditional formatting">
+          <figcaption> Conditional formatting - Used to highlight top sets
+          </figcaption>
+        </figure>
+        <p>
+          The leading theme in each decade is highlighted automatically using a DAX measure driving conditional
+          formatting. This means the highlighting stays correct when filters change, with no manual annotation required.
+        </p>
 
+        <div class="pre-wrap">
+          <span class="pre-lang"></span>
+          <pre class="line-numbers"><code class="language-dax">colourformatting = 
+VAR maxcount = [Maximumthemecount]
+RETURN
+    SWITCH ( TRUE (), 
+    [Count_Sets] = maxcount, "#ffcf00", "#0d69ab" )</code></pre>
+        </div>
+      </div>
       <h3>Dynamic images using URL fields</h3>
       <p>
         The dataset includes web-based image URLs for each set. Power BI supports displaying these URLs directly
