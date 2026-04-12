@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Years of LEGO — Constellation Analytics</title>
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-dax.min.js"></script>
+</head>
+
+<body id="top">
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+      <div>
+        <a class="breadcrumb" href="/">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <a class="breadcrumb" href="/projects.html">
+          <span>/</span>
+          Projects
+        </a>
+      </div>
+
+      <div class="proj-meta-row">
+        <span class="proj-published">Published January 2024</span>
+      </div>
+
+      <h1 class="proj-page-title">50 Years of LEGO:<br>An Interactive Power BI Dashboard</h1>
+
+      <p class="proj-page-summary">
+        An interactive Power BI dashboard exploring five decades of LEGO set data, built as an entry for the
+        Maven Analytics LEGO Challenge.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">Power BI</span>
+        <span class="tech-pill primary">DAX</span>
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Power Query</span>
+      </div>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Data Challenge</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Year</span>
+          <span class="proj-stat-value">2024</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Challenge</span>
+          <span class="proj-stat-value">Maven LEGO Challenge</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Dataset</span>
+          <span class="proj-stat-value">CSV: 18,459 rows · 14 columns</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <!-- BACKGROUND -->
+      <h2 id="background">The challenge</h2>
+      <p>
+        This project is a submission for the Maven LEGO Challenge, the first data challenge Maven Analytics ran
+        in 2024. The objective was to build an interactive dashboard or visual that lets users explore the
+        history and evolution of LEGO sets over the past five decades.
+      </p>
+      <p>
+        The dataset is a single CSV file containing every LEGO set released from 1970 to 2022, with details on
+        each set's theme, piece count, recommended age, retail price, and image. In total: 18,459 records across
+        14 fields.
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The goal:</strong> <br>Build an interactive dashboard or visual for users to explore the history and
+          evolution of LEGO over past 5 decades</p>
+      </div>
+
+      <!-- EXPLORATION -->
+      <h2 id="exploration">Data exploration and cleaning</h2>
+      <p>
+        Because the dataset is relatively small, I started in Excel. A few pivot tables gave me a quick read of
+        the shape of the data. Which fields were well populated, how the themes were distributed, and where
+        the gaps were.
+      </p>
+      <p>
+        The most important decision at this stage was which columns I could and couldn't use. Both the retail
+        price and age range fields had a high frequency of null values, with usable data only from 2010 onwards.
+        Rather than carry those fields into the analysis and risk misleading visuals, I removed them from my scope and
+        set them aside early.
+      </p>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p>"Retail price" and "age range" are only reliably populated from 2010 onwards. Any analysis involving
+          these fields would be limited to that window.</p>
+      </div>
+
+      <p>
+        With a clear picture of the usable fields, I moved to Python to prepare the dataset for Power BI. The
+        key steps were dropping unused columns, removing non-LEGO product categories that were polluting the
+        theme analysis, dropping rows with missing piece count or theme group values, and generating a decade
+        column for time-based grouping.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">Python</span>
+        <pre><code class="language-python"># Drop columns that are not needed
+df = df.drop(columns=["subtheme", "bricksetURL", "thumbnailURL", "imageURL"])
+
+# Look at the number of unique categories
+unique_category = df['category'].unique()
+print(unique_category)
+
+# Remove categories that are not real LEGO sets
+exclude = ['Book', 'Other', 'Gear', 'Random']
+df = df[df['category'].isin(exclude) == False]
+
+# Drop rows with missing values in key fields
+df = df.dropna(subset=['pieces'])
+df = df.dropna(subset=['themeGroup'])
+
+# Create a decade column for time-based grouping
+df['decade'] = (df['year'] / 10).astype(int) * 10</code></pre>
+      </div>
+
+      <!-- ANALYSIS -->
+      <h2 id="analysis">Data analysis</h2>
+      <p>
+        With a clean dataset, I spent time putting pen to paper and brainstorming what the data could support
+        before opening Power BI. Themes, piece counts, and set volume over time were the three main angles —
+        each naturally maps to a page of the dashboard.
+      </p>
+      <p>
+        In Power BI, I created one tab per attribute and built measures and charts from there. One goal was to
+        surface the top set within the selected decade. This required some care: several large education resource
+        sets were appearing at the top of the piece count rankings and skewing the results. I excluded those
+        sets from the top set calculation to keep the output relevant to someone interested in LEGO as a product.
+      </p>
+
+      <!-- VISUALISATION -->
+      <h2 id="visualisation">Dashboard design and build</h2>
+      <p>
+        Before building anything in Power BI, I drafted the layout in PowerPoint. Being able to quickly move
+        elements around without worrying about measure logic made it much easier to settle on a structure. Once
+        the layout was decided, I moved to Power BI to build the measures and finalise the design.
+      </p>
+      <p>
+        The final dashboard uses a LEGO-inspired colour palette — primary red, yellow, and blue — to make the
+        visual theme immediately recognisable without becoming distracting.
+      </p>
+
+      <h3>Dynamic text commentary</h3>
+      <p>
+        To add context that updates alongside the user's selections, I used DAX to generate dynamic text
+        commentary. <code>UNICHAR(10)</code> handles line breaks within the text output, keeping the commentary
+        readable across different filter states.
+      </p>
+
+      <h3>Bookmark-based measure switching</h3>
+      <p>
+        To let users switch between different measures on the same chart, I built three separate charts and
+        used Power BI bookmarks to hide or display the relevant one based on a button selection. Power BI
+        doesn't support dynamic measure binding on axis fields directly, so the bookmark approach was the
+        clean solution for achieving the same outcome without any workarounds.
+      </p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <p>Bookmarks are underused for this kind of layout control. Three charts that swap in and out based on
+          a button selection is simpler to set up and maintain than it sounds, and the user experience is seamless.</p>
+      </div>
+
+      <h3>Conditional formatting for top themes</h3>
+      <p>
+        The leading theme in each decade is highlighted automatically using a DAX measure driving conditional
+        formatting. This means the highlighting stays correct when filters change, with no manual annotation required.
+      </p>
+
+      <h3>Dynamic images using URL fields</h3>
+      <p>
+        The dataset includes web-based image URLs for each set. Power BI supports displaying these URLs directly
+        in a table visual, which made it possible to show the top set per decade alongside an actual image of
+        the product. This was a new feature for me on this project. My initial plan was to use bookmarks for
+        this too, but the URL-based table approach turned out to be considerably simpler and more scalable.
+      </p>
+
+      <!-- REFLECTIONS -->
+      <h2 id="reflections">Reflections</h2>
+      <p>
+        This was a clean project to work through. There were no points where I became genuinely stuck, but
+        there were several moments where I knew a particular visual or measure was achievable and had to work
+        out the right method.
+      </p>
+      <p>
+        The bookmark trick for switching measures is worth keeping in the toolkit. It is not the most elegant
+        solution architecturally, but it is reliable and easy to understand when maintaining the report later.
+        The dynamic image feature was the standout discovery on this project — it opened up a category of
+        visual storytelling I had not used before and will use again.
+      </p>
+      <p>
+        Doing the exploratory work in Excel before touching Power BI saved real time. The decision to drop
+        retail price and age range from the main analysis was made in a few minutes with a pivot table. Making
+        that call after visuals were already built around those fields would have been significantly more
+        painful to unwind.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the dashboard design? <a href="/#contact">Get in touch.</a>
+      </p>
+
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <!-- TOC -->
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">The challenge</a></li>
+          <li class="toc-item"><a href="#exploration" class="toc-link">Data exploration and cleaning</a></li>
+          <li class="toc-item"><a href="#analysis" class="toc-link">Data analysis</a></li>
+          <li class="toc-item"><a href="#visualisation" class="toc-link">Dashboard design and build</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Reflections</a></li>
+        </ul>
+      </div>
+
+      <!-- Project details -->
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Data Challenge</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Completed</span>
+            <span class="sidebar-info-value">January 2024</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">Power BI</span>
+              <span class="sidebar-pill">DAX</span>
+              <span class="sidebar-pill">Python</span>
+              <span class="sidebar-pill">Power Query</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://github.com/constellation-analytics/" target="_blank"><img src="/assets/github.png"></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
