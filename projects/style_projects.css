@@ -1,47 +1,49 @@
 /* ============================================================
    PROJECTS LANDING PAGE
    ============================================================ */
-   
+
 /* ── PUBLISHED DATE ── */
 .proj-published {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--neutral-500);
-  letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--neutral-500);
+    letter-spacing: 0.02em;
 }
+
 /* ── FIGURE SIZE VARIANTS ── */
 
 /* Half width — centred */
 .proj-figure.half {
-  width: 62%;
-  margin-left: auto;
-  margin-right: auto;
+    width: 62%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Float right — small, text wraps */
 .proj-figure.float-right {
-  float: right;
-  width: 38%;
-  margin: 0.25rem 0 1rem 1.75rem;
-  clear: right;
+    float: right;
+    width: 38%;
+    margin: 0.25rem 0 1rem 1.75rem;
+    clear: right;
 }
 
 /* Float left — small, text wraps */
 .proj-figure.float-left {
-  float: left;
-  width: 38%;
-  margin: 0.25rem 1.75rem 1rem 0;
-  clear: left;
+    float: left;
+    width: 38%;
+    margin: 0.25rem 1.75rem 1rem 0;
+    clear: left;
 }
 
 .proj-article .clearfix::after {
-  content: '';
-  display: table;
-  clear: both;}
-  
+    content: '';
+    display: table;
+    clear: both;
+}
+
 /* ── PAGE HEADER ── */
 .page-header {
     background: var(--bg-subtle);
@@ -661,6 +663,37 @@ code[class*="language-"] {
     color: var(--navy-700);
 }
 
+/* ── DQ CHECKS GRID ── */
+.dq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.dq-card {
+    background: var(--bg-subtle);
+    border: 1px solid var(--neutral-100);
+    border-left: 3px solid var(--blue-500);
+    border-radius: 10px;
+    padding: 1rem 1rem 0.9rem;
+}
+
+.dq-card-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--neutral-500);
+    margin-bottom: 0.35rem;
+}
+
+.dq-card-text {
+    font-size: 0.8rem;
+    color: var(--navy-700);
+    line-height: 1.6;
+}
+
 /* ── RESULT / METRIC CARDS ── */
 .result-cards {
     display: grid;
@@ -938,5 +971,14 @@ code[class*="language-"] {
 
     .proj-nav-inner {
         grid-template-columns: 1fr;
+    }
+
+    .dq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flow-stage-body {
+        flex-wrap: wrap;
+        gap: 0.4rem;
     }
 }

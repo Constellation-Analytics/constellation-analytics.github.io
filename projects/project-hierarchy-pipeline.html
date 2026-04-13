@@ -97,15 +97,20 @@
     <article class="proj-article">
 
       <!-- BACKGROUND -->
+      <p style="font-style: italic;">
+        <strong>NOTE:</strong> As this is a real client project, some details have been modified or anonymised for confidentiality
+        reasons.
+      </p>
       <h2 id="background">The problem with doing it manually</h2>
       <p>
-        The product sales data team at Schneider Electric manages a hierarchy of around 9,000 classification codes.
-        These codes are not products themselves — they are the structural backbone that categorises products, and
+        The product product data team at Schneider Electric manages a hierarchy of around 9,000 classification codes.
+        These codes are not products themselves, they are the structure used to categorise products, and
         each code carries a set of attributes that must be correctly set and consistent across the hierarchy at all
         times.
       </p>
       <p>
-        The hierarchy is layered, something like A, A1, A13, A13B. Attribute values flow between levels in both
+        The hierarchy is layered, something like A, A1, A13, A13B for example. Attribute values flow between levels in
+        both
         directions depending on the attribute type: sometimes a child value is pushed up to the parent, sometimes a
         parent value is inherited by the child. Keeping this consistent manually, across thousands of codes, was
         exactly as difficult as it sounds.
@@ -132,7 +137,7 @@
 
       <div class="callout callout-key">
         <span class="callout-icon">🎯</span>
-        <p><strong>The goal:</strong> a three-stage automated pipeline that detects changes, validates them against
+        <p><strong>The goal:</strong> Create an automated pipeline that detects changes, validates them against
           80+ business rules, propagates them correctly through the hierarchy, and produces a full audit trail of
           every change, pass, and rejection.</p>
       </div>
@@ -140,15 +145,16 @@
       <!-- ARCHITECTURE -->
       <h2 id="architecture">Pipeline architecture</h2>
       <p>
-        The pipeline is built entirely in SQL stored procedures and runs in three distinct stages, each triggered
-        through an orchestration tool. The master data team makes their changes to the workfile, then triggers the
-        pipeline. The stages run sequentially and the workfile is updated automatically with the approved changes at
-        the end.
+        The pipeline is built entirely in SQL stored procedures and runs in three distinct stages. The master
+        data team makes their changes to the workfile and triggers the first workflow, which runs Stage 1 and
+        Stage 2 sequentially. This gives the team a chance to review any data quality issues before committing
+        changes. Once satisfied, they trigger the second workflow to run Stage 3 and apply the updates.
       </p>
 
       <figure class="proj-figure full">
         <img src="/projects/assets/schneider_pipeline_img.webp" alt="Process Flow Diagram">
-        <figcaption> Final submission - Interactive Power BI dashboard exploring 50 years of LEGO set data
+        <figcaption> Process Flow - Automated pipeline with three stages: change detection, data quality checks, and
+          data update.
         </figcaption>
       </figure>
 
@@ -171,19 +177,19 @@
         <pre><code class="language-sql">WITH changes AS (
     -- Rows in new version but not current state
     SELECT *, 'new' AS record_type
-    FROM temp_in
+    FROM stg_temp_in
     EXCEPT
     SELECT *, 'new' AS record_type
-    FROM temp_out
+    FROM stg_temp_out
 
     UNION ALL
 
     -- Rows in current state but not new version
     SELECT *, 'existing' AS record_type
-    FROM temp_out
+    FROM stg_temp_out
     EXCEPT
     SELECT *, 'existing' AS record_type
-    FROM temp_in
+    FROM stg_temp_in
 ),
 change_type AS (
     SELECT DISTINCT code,
@@ -217,8 +223,11 @@ INSERT INTO change_log
         as they like and only genuinely new changes will flow into the log.
       </p>
 
+      <!-- DATA QUALITY -->
+      <h2 id="data-quality">Stage 2: Data quality checks</h2>
+
       <!-- HIERARCHY EXPANSION -->
-      <h2 id="expansion">Hierarchy expansion</h2>
+      <h3>Hierarchy expansion</h3>
       <p>
         Before any data quality checks can run, each requested change needs to be expanded across the hierarchy.
         This is not straightforward, because the direction of propagation depends on the attribute.
@@ -236,9 +245,6 @@ INSERT INTO change_log
           stages. By resolving the full hierarchy impact before validation begins, the checks can operate on a
           complete, consistent dataset rather than checking one record at a time in isolation.</p>
       </div>
-
-      <!-- DATA QUALITY -->
-      <h2 id="data-quality">Stage 2: Data quality checks</h2>
       <p>
         The data quality check stage runs more than 80 business rules against the expanded change set. Each check
         is implemented as a SQL validation and writes any failures to a defect table with a defect code and a
@@ -316,7 +322,8 @@ INSERT INTO change_log
       <!-- REFLECTIONS -->
       <h2 id="reflections">Reflections</h2>
       <p>
-        The most important design decision in this project was separating the pipeline into three distinct, independently
+        The most important design decision in this project was separating the pipeline into three distinct,
+        independently
         triggerable stages rather than running everything in one pass. It gives the team control over timing, makes
         failures easier to diagnose, and means a rejection does not require restarting the whole process from scratch.
       </p>
@@ -359,7 +366,6 @@ INSERT INTO change_log
           <li class="toc-item"><a href="#goal" class="toc-link">The goal</a></li>
           <li class="toc-item"><a href="#architecture" class="toc-link">Pipeline architecture</a></li>
           <li class="toc-item"><a href="#change-detection" class="toc-link">Stage 1: Change detection</a></li>
-          <li class="toc-item"><a href="#expansion" class="toc-link">Hierarchy expansion</a></li>
           <li class="toc-item"><a href="#data-quality" class="toc-link">Stage 2: Data quality checks</a></li>
           <li class="toc-item"><a href="#data-update" class="toc-link">Stage 3: Data update</a></li>
           <li class="toc-item"><a href="#audit-trail" class="toc-link">The audit trail</a></li>
