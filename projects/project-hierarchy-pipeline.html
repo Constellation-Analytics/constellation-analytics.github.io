@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automating Product Hierarchy Data Management — Constellation Analytics</title>
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+
+</head>
+
+<body id="top">
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+      <div>
+        <a class="breadcrumb" href="/">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <a class="breadcrumb" href="/projects.html">
+          <span>/</span>
+          Projects
+        </a>
+      </div>
+
+      <div class="proj-meta-row">
+        <span class="proj-published">Published April 2026</span>
+      </div>
+
+      <h1 class="proj-page-title">Automating Product Hierarchy<br>Data Management</h1>
+
+      <p class="proj-page-summary">
+        How I replaced a manual, error-prone master data process with a three-stage automated pipeline
+        built entirely in SQL stored procedures, delivering accurate, auditable hierarchy attribute changes
+        at scale for Schneider Electric.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">SQL</span>
+        <span class="tech-pill primary">Stored Procedures</span>
+        <span class="tech-pill">Data Quality</span>
+        <span class="tech-pill">Master Data</span>
+      </div>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Client Project</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Client</span>
+          <span class="proj-stat-value">Schneider Electric</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Hierarchy size</span>
+          <span class="proj-stat-value">~9,000 codes</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">DQ checks automated</span>
+          <span class="proj-stat-value">80+</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <!-- BACKGROUND -->
+      <p style="font-style: italic;">
+        <strong>NOTE:</strong> As this is a real client project, some details have been modified or anonymised for confidentiality
+        reasons.
+      </p>
+      <h2 id="background">The problem with doing it manually</h2>
+      <p>
+        The product product data team at Schneider Electric manages a hierarchy of around 9,000 classification codes.
+        These codes are not products themselves, they are the structure used to categorise products, and
+        each code carries a set of attributes that must be correctly set and consistent across the hierarchy at all
+        times.
+      </p>
+      <p>
+        The hierarchy is layered, something like A, A1, A13, A13B for example. Attribute values flow between levels in
+        both
+        directions depending on the attribute type: sometimes a child value is pushed up to the parent, sometimes a
+        parent value is inherited by the child. Keeping this consistent manually, across thousands of codes, was
+        exactly as difficult as it sounds.
+      </p>
+      <p>
+        When the team needed to update an attribute, the process involved manually replicating values across the
+        relevant hierarchy levels, and then running through more than 80 data quality checks against business rules
+        to validate the result. Both steps were done by hand, in Excel.
+      </p>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p>The core issue was reliability, not just time. With 80+ checks applied manually across a hierarchy of
+          thousands of codes, the risk of a missed check or a propagation error was structural. The process was
+          not set up to catch what it could not see.</p>
+      </div>
+
+      <!-- GOAL -->
+      <h2 id="goal">The goal</h2>
+      <p>
+        Replace the manual process with a fully automated pipeline that handles hierarchy propagation, data quality
+        validation, and data update without any manual intervention once a change is submitted.
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The goal:</strong> Create an automated pipeline that detects changes, validates them against
+          80+ business rules, propagates them correctly through the hierarchy, and produces a full audit trail of
+          every change, pass, and rejection.</p>
+      </div>
+
+      <!-- ARCHITECTURE -->
+      <h2 id="architecture">Pipeline architecture</h2>
+      <p>
+        The pipeline is built entirely in SQL stored procedures and runs in three distinct stages. The master
+        data team makes their changes to the workfile and triggers the first workflow, which runs Stage 1 and
+        Stage 2 sequentially. This gives the team a chance to review any data quality issues before committing
+        changes. Once satisfied, they trigger the second workflow to run Stage 3 and apply the updates.
+      </p>
+
+      <figure class="proj-figure full">
+        <img src="/projects/assets/schneider_pipeline_img.webp" alt="Process Flow Diagram">
+        <figcaption> Process Flow - Automated pipeline with three stages: change detection, data quality checks, and
+          data update.
+        </figcaption>
+      </figure>
+
+      <!-- CHANGE DETECTION -->
+      <h2 id="change-detection">Stage 1: Change detection</h2>
+      <p>
+        The first stage compares the edited workfile against the current state of the database to identify what
+        has changed. Rather than asking the user to declare what they changed, the pipeline detects it
+        automatically by diffing the two states.
+      </p>
+      <p>
+        The detection logic classifies each changed code as an INSERT, UPDATE, or DELETE. An INSERT is a code
+        present in the new version but not the current state. A DELETE is the reverse. An UPDATE is a code present
+        in both but with different attribute values. All three are written to the change log with a status of
+        "Requested" and a timestamp.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">SQL</span>
+        <pre><code class="language-sql">WITH changes AS (
+    -- Rows in new version but not current state
+    SELECT *, 'new' AS record_type
+    FROM stg_temp_in
+    EXCEPT
+    SELECT *, 'new' AS record_type
+    FROM stg_temp_out
+
+    UNION ALL
+
+    -- Rows in current state but not new version
+    SELECT *, 'existing' AS record_type
+    FROM stg_temp_out
+    EXCEPT
+    SELECT *, 'existing' AS record_type
+    FROM stg_temp_in
+),
+change_type AS (
+    SELECT DISTINCT code,
+        CASE
+            WHEN COUNT(record_type) OVER (PARTITION BY code) = 1
+                AND record_type = 'new'      THEN 'INSERT'
+            WHEN COUNT(record_type) OVER (PARTITION BY code) = 1
+                AND record_type = 'existing' THEN 'DELETE'
+            ELSE 'UPDATE'
+        END AS change_type
+    FROM changes
+)
+INSERT INTO change_log
+    SELECT
+        changes.*,
+        CURRENT_TIMESTAMP(0) AS request_datetime,
+        change_type,
+        'REQUESTED' AS status
+    FROM changes
+    INNER JOIN change_type ON changes.code = change_type.code
+    WHERE NOT EXISTS (
+        SELECT 1 FROM change_log cl
+        WHERE cl.code = changes.code
+        AND cl.status = 'IN PROGRESS'
+    );</code></pre>
+      </div>
+
+      <p>
+        The final <code>WHERE NOT EXISTS</code> clause is an important guard. If a code already has a change in
+        progress, it will not be overwritten by a new submission. The team can submit the workfile as many times
+        as they like and only genuinely new changes will flow into the log.
+      </p>
+
+      <!-- DATA QUALITY -->
+      <h2 id="data-quality">Stage 2: Data quality checks</h2>
+
+      <!-- HIERARCHY EXPANSION -->
+      <h3>Hierarchy expansion</h3>
+      <p>
+        Before any data quality checks can run, each requested change needs to be expanded across the hierarchy.
+        This is not straightforward, because the direction of propagation depends on the attribute.
+      </p>
+      <p>
+        For some attributes, a change at a child level needs to be pushed up to the parent. For others, the parent
+        value is the authoritative one and needs to be passed down to children. The expansion stored procedure
+        handles both cases, inserting the full set of affected hierarchy codes into a staging table so that every
+        downstream check and update operates on the complete picture rather than just the directly edited record.
+      </p>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <p>The expanded table is the central working surface for both the data quality check and the data update
+          stages. By resolving the full hierarchy impact before validation begins, the checks can operate on a
+          complete, consistent dataset rather than checking one record at a time in isolation.</p>
+      </div>
+      <p>
+        The data quality check stage runs more than 80 business rules against the expanded change set. Each check
+        is implemented as a SQL validation and writes any failures to a defect table with a defect code and a
+        description of the issue. A change that fails any check is marked as "Rejected" in the change log and
+        will not proceed to the update stage.
+      </p>
+      <p>
+        The checks cover several categories of business rule. Three examples illustrate the range:
+      </p>
+
+      <div class="dq-grid">
+        <div class="dq-card">
+          <div class="dq-card-label">Hierarchy completeness</div>
+          <div class="dq-card-text">Every level of the hierarchy must have a value set. A chain like A1, A14,
+            A244 would be flagged because the expected intermediate level is missing.</div>
+        </div>
+        <div class="dq-card">
+          <div class="dq-card-label">Attribute range validation</div>
+          <div class="dq-card-text">Certain hierarchy codes have a specific wholesale tariff attached to them.
+            The associated attribute value must fall within the expected range for that code.</div>
+        </div>
+        <div class="dq-card">
+          <div class="dq-card-label">Level-specific rules</div>
+          <div class="dq-card-text">Some checks are conditional on hierarchy level. If a level-4 code contains
+            a particular attribute value, the code itself must conform to a specific structural pattern.</div>
+        </div>
+      </div>
+
+      <p>
+        Changes that pass all checks are updated to "In Progress" in the change log and queued for the update
+        stage. Rejected changes remain in the log with their rejection status and a corresponding row in the
+        defect table explaining what failed. The team can review the defect output, correct the source data, and
+        resubmit.
+      </p>
+
+      <!-- DATA UPDATE -->
+      <h2 id="data-update">Stage 3: Data update</h2>
+      <p>
+        The final stage picks up all changes with an "In Progress" status, re-expands them across the hierarchy
+        one more time, and applies them to the production tables. The expansion step is repeated here rather than
+        relying on the earlier staging data, which ensures the update is always working from a fresh, consistent
+        state.
+      </p>
+      <p>
+        Once the updates are applied, the change log is updated to "Completed" with a timestamp and the output
+        workfile is refreshed. The team then uses this updated workfile to apply the changes across all affected
+        products in the update campaign.
+      </p>
+      <p>
+        After each run, the change log and defect table are exported so the team has a full record of what was
+        processed, what passed, what was rejected, and why.
+      </p>
+
+      <!-- AUDIT TRAIL -->
+      <h2 id="audit-trail">The audit trail</h2>
+      <p>
+        Every change that flows through the pipeline leaves a complete record in the change log. The log captures
+        the code, the attribute values before and after the change, the request timestamp, the change type, and
+        the final status. Rejected records include a link to the defect table entry that explains the failure.
+      </p>
+      <p>
+        This was not part of the manual process at all. Previously, if a question arose about when a change was
+        made or why a value was set a particular way, there was no structured record to consult. The change log
+        provides that traceability at no additional cost, as a natural output of the pipeline.
+      </p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <p>When building the 80+ automated checks, we identified several records in the existing master data that
+          had not been detected by the manual process. These were legitimate data quality issues that had been
+          present in production, invisible to the previous approach. The automated checks surfaced them on the
+          first run.</p>
+      </div>
+
+      <!-- REFLECTIONS -->
+      <h2 id="reflections">Reflections</h2>
+      <p>
+        The most important design decision in this project was separating the pipeline into three distinct,
+        independently
+        triggerable stages rather than running everything in one pass. It gives the team control over timing, makes
+        failures easier to diagnose, and means a rejection does not require restarting the whole process from scratch.
+      </p>
+      <p>
+        The hierarchy expansion step was the most technically complex part of the build. Getting the propagation
+        direction right for each attribute type, and ensuring the expanded table was always complete before checks
+        ran, required careful thought about sequencing. Building it as a reusable stored procedure called by both
+        Stage 2 and Stage 3 was the right call.
+      </p>
+      <p>
+        The business rules were handed to me as a written specification and I converted them into SQL checks. That
+        translation process is worth taking seriously. A rule that reads simply in plain language can have edge
+        cases that only become visible when you try to express it as a query. Working closely with the product sales
+        data team throughout the build meant those edge cases were caught during development rather than in production.
+      </p>
+      <p>
+        The outcome the team valued most was not the time saving, significant as it was. It was knowing that every
+        change had been checked against every rule, every time, without exception. That reliability is something a
+        manual process structured around human attention simply cannot guarantee at scale.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the pipeline design? <a href="/#contact">Get in touch.</a>
+      </p>
+
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <!-- TOC -->
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">The problem with doing it manually</a></li>
+          <li class="toc-item"><a href="#goal" class="toc-link">The goal</a></li>
+          <li class="toc-item"><a href="#architecture" class="toc-link">Pipeline architecture</a></li>
+          <li class="toc-item"><a href="#change-detection" class="toc-link">Stage 1: Change detection</a></li>
+          <li class="toc-item"><a href="#data-quality" class="toc-link">Stage 2: Data quality checks</a></li>
+          <li class="toc-item"><a href="#data-update" class="toc-link">Stage 3: Data update</a></li>
+          <li class="toc-item"><a href="#audit-trail" class="toc-link">The audit trail</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Reflections</a></li>
+        </ul>
+      </div>
+
+      <!-- Project details -->
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Client Project</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Client</span>
+            <span class="sidebar-info-value">Schneider Electric</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Employer</span>
+            <span class="sidebar-info-value">Hardis Group</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">SQL</span>
+              <span class="sidebar-pill">Stored Procedures</span>
+              <span class="sidebar-pill">Master Data</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://github.com/constellation-analytics/" target="_blank"><img src="/assets/github.png"></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
