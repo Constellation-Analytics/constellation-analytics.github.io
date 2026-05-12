@@ -621,7 +621,7 @@ SECTIONS
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 1.5rem;
 }
 
 .project-card {
@@ -774,7 +774,7 @@ SECTIONS
 
 .projects-cta {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
 }
 
 .btn-outline {
@@ -796,6 +796,87 @@ SECTIONS
 .btn-outline:hover {
     background: var(--navy-500);
     color: var(--surface-default);
+}
+
+/* ── LIVE BUILDS ── */
+.live-builds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.live-build-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface-default);
+    border: var(--border-sm);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-sm);
+}
+
+.live-build-card:hover {
+    border-color: var(--neutral-300);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.live-build-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--bg-subtle);
+    border: var(--border-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.live-build-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.live-build-tech {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--neutral-500);
+}
+
+.live-build-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--navy-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-build-arrow {
+    color: var(--blue-500);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.live-build-card:hover .live-build-arrow {
+    transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+    .live-builds-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ── ABOUT ── */
