@@ -47,7 +47,7 @@
 /* ── PAGE HEADER ── */
 .page-header {
     background: var(--bg-subtle);
-    padding: 5rem 4rem 0rem;
+    padding-top: 4rem;
     border-bottom: 1px solid var(--neutral-100);
 }
 
