@@ -2,12 +2,53 @@
 <html lang="en">
 
 <head>
+  <!-- Page setup -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#213345">
+
+  <!-- SEO -->
   <title>Automating Product Hierarchy Data Management — Constellation Analytics</title>
+  <meta name="description" content="How I built a three-stage SQL stored procedure pipeline that automates product hierarchy propagation, runs 80+ data quality checks, and produces a full audit trail of every change — replacing a manual Excel-based process for a global energy management company.">
+  <meta name="author" content="Paul Chapman">
+  <link rel="canonical" href="https://constellation-analytics.com/projects/project-hierarchy-pipeline.html">
+
+  <!-- Open Graph -->
+  <meta property="og:url" content="https://constellation-analytics.com/projects/project-hierarchy-pipeline.html">
+  <meta property="og:site_name" content="Constellation Analytics">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:title" content="Automating Product Hierarchy Data Management — Constellation Analytics">
+  <meta property="og:description" content="A three-stage SQL stored procedure pipeline that automates product hierarchy propagation, runs 80+ data quality checks, and produces a full audit trail of every change.">
+  <meta property="og:image" content="https://constellation-analytics.com/projects/assets/schneider_hierachy.png">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Automating Product Hierarchy Data Management",
+    "description": "A three-stage SQL stored procedure pipeline that automates product hierarchy propagation, runs 80+ data quality checks, and produces a full audit trail of every change.",
+    "author": {
+      "@type": "Person",
+      "name": "Paul Chapman",
+      "url": "https://constellation-analytics.com"
+    },
+    "datePublished": "2026-04-01",
+    "url": "https://constellation-analytics.com/projects/project-hierarchy-pipeline.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Constellation Analytics",
+      "url": "https://constellation-analytics.com"
+    }
+  }
+  </script>
+
+  <!-- Assets -->
   <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/projects/style_projects.css">
+
   <!-- Prism CSS -->
   <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
 
@@ -16,7 +57,6 @@
 
   <!-- Language support -->
   <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
-
 </head>
 
 <body id="top">
