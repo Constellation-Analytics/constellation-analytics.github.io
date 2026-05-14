@@ -9,7 +9,8 @@
 
   <!-- SEO -->
   <title>NSW Fuel Price Insights — Constellation Analytics</title>
-  <meta name="description" content="Interactive Power BI dashboard exploring NSW fuel price trends by fuel type, region, and station — built on a live automated ELT pipeline.">
+  <meta name="description"
+    content="Interactive Power BI dashboard exploring NSW fuel price trends by fuel type, region, and station — built on a live automated ELT pipeline.">
   <meta name="author" content="Paul Chapman">
   <link rel="canonical" href="https://constellation-analytics.com/projects/NSW-Fuel-Price-Insights.html">
 
@@ -19,8 +20,28 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_AU">
   <meta property="og:title" content="NSW Fuel Price Insights — Constellation Analytics">
-  <meta property="og:description" content="Interactive Power BI dashboard exploring NSW fuel price trends by fuel type, region, and station — built on a live automated ELT pipeline.">
+  <meta property="og:description"
+    content="Interactive Power BI dashboard exploring NSW fuel price trends by fuel type, region, and station — built on a live automated ELT pipeline.">
   <meta property="og:image" content="https://constellation-analytics.com/assets/logo/CA-Logo-Main-Blue.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "NSW Fuel Price Insights",
+  "description": "Interactive Power BI dashboard exploring NSW petrol and diesel price trends by fuel type, region, and station across New South Wales, built on live automated ELT pipeline data sourced from NSW Government FuelCheck.",
+  "url": "https://constellation-analytics.com/projects/NSW-Fuel-Price-Insights.html",
+  "creator": {
+    "@type": "Person",
+    "name": "Paul Chapman",
+    "url": "https://constellation-analytics.com"
+  },
+  "keywords": ["NSW fuel prices", "petrol prices NSW", "fuel price dashboard", "Power BI", "FuelCheck"],
+  "license": "https://www.nsw.gov.au/",
+  "temporalCoverage": "2026/.."
+}
+</script>
 
   <!-- Assets -->
   <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
@@ -56,12 +77,37 @@
     </div>
   </div>
 
-  <!-- PROJECTS GRID -->
+  <!-- Dashboard -->
   <section class="section-main">
     <div class="section-inner" style="display: flex; justify-content: center">
       <iframe title="Fuel Analysis Dashboard" width="1024" height="612"
         src="https://app.powerbi.com/view?r=eyJrIjoiMGIxNjlhMmEtMjM4YS00YzkwLTkxN2MtYjRmNDI2NGI0Y2Y2IiwidCI6ImVhN2UyYTQzLWY0NDQtNDczNC1hNTY1LTgwYmI3MjZmNDkwNSJ9"
         frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+  </section>
+
+  <!-- ABOUT THIS DASHBOARD -->
+  <section class="section-alt">
+    <div class="section-inner" style="max-width: 860px;">
+      <p class="section-eyebrow">About this dashboard</p>
+      <h2 class="section-heading" style="font-size: 1.6rem; margin-bottom: 1rem;">
+        NSW Fuel Price, Insights and Trends
+      </h2>
+      <p style="font-size: 0.92rem; color: var(--navy-700); line-height: 1.8; margin-bottom: 0.75rem;">
+        This dashboard visualises petrol and diesel prices across New South Wales, updated monthly from the
+        <a href="https://www.fuelcheck.nsw.gov.au" target="_blank" rel="noopener"
+          style="color: var(--blue-500); text-decoration: none; border-bottom: 1px solid var(--blue-300);">
+          NSW Government FuelCheck program</a>.
+        It covers all major fuel types including E10, U91, P95, P98, diesel, and LPG across more than a
+        thousand stations statewide.
+      </p>
+      <p style="font-size: 0.92rem; color: var(--navy-700); line-height: 1.8;">
+        The data is loaded and transformed by a fully automated ELT pipeline built with Python, PostgreSQL,
+        and GitHub Actions. Read about how the pipeline works in the
+        <a href="/projects/project-fuel-price-pipeline.html"
+          style="color: var(--blue-500); text-decoration: none; border-bottom: 1px solid var(--blue-300);">
+          pipeline project write-up</a>.
+      </p>
     </div>
   </section>
 
