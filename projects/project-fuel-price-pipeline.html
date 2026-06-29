@@ -9,7 +9,8 @@
 
   <!-- SEO -->
   <title>Building a Cloud-Hosted Fuel Price Pipeline — Constellation Analytics</title>
-  <meta name="description" content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python — including structured logging, data quality checks, and autofixing stored procedures.">
+  <meta name="description"
+    content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python — including structured logging, data quality checks, and autofixing stored procedures.">
   <meta name="author" content="Paul Chapman">
   <link rel="canonical" href="https://constellation-analytics.com/projects/project-fuel-price-pipeline.html">
 
@@ -19,7 +20,8 @@
   <meta property="og:type" content="article">
   <meta property="og:locale" content="en_AU">
   <meta property="og:title" content="Building a Cloud-Hosted Fuel Price Pipeline — Constellation Analytics">
-  <meta property="og:description" content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python.">
+  <meta property="og:description"
+    content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python.">
   <meta property="og:image" content="https://constellation-analytics.com/projects/assets/fuel_pipeline.png">
 
   <!-- Schema -->
@@ -155,7 +157,9 @@
 
       <div class="callout callout-warning">
         <span class="callout-icon">⚠️</span>
-        <p>The core problem was not any single one of these issues — it was that they compounded. No logging meant errors were invisible. No remote access meant the pipeline was tied to one machine. No DQ layer meant bad data had nowhere to be caught. Fixing one without the others would not have solved much.</p>
+        <p>The core problem was not any single one of these issues — it was that they compounded. No logging meant
+          errors were invisible. No remote access meant the pipeline was tied to one machine. No DQ layer meant bad data
+          had nowhere to be caught. Fixing one without the others would not have solved much.</p>
       </div>
 
       <!-- THE GOAL -->
@@ -172,21 +176,26 @@
         </div>
         <div class="pillar-card">
           <div class="pillar-label">Storage</div>
-          <div class="pillar-desc">Neon PostgreSQL hosted in the cloud — no local database, accessible from anywhere</div>
+          <div class="pillar-desc">Neon PostgreSQL hosted in the cloud — no local database, accessible from anywhere
+          </div>
         </div>
         <div class="pillar-card">
           <div class="pillar-label">Scripts</div>
-          <div class="pillar-desc">Python modules version-controlled in GitHub — no local files, fully reproducible</div>
+          <div class="pillar-desc">Python modules version-controlled in GitHub — no local files, fully reproducible
+          </div>
         </div>
         <div class="pillar-card">
           <div class="pillar-label">Quality</div>
-          <div class="pillar-desc">Automated DQ checks and autofix stored procedures — bad data is caught and corrected before it reaches production</div>
+          <div class="pillar-desc">Automated DQ checks and autofix stored procedures — bad data is caught and corrected
+            before it reaches production</div>
         </div>
       </div>
 
       <div class="callout callout-key">
         <span class="callout-icon">🎯</span>
-        <p><strong>The goal:</strong> a fully automated, cloud-hosted ELT pipeline with zero local dependencies, structured logging on every run, and automated data quality checks that catch and fix problems before they reach production.</p>
+        <p><strong>The goal:</strong> a fully automated, cloud-hosted ELT pipeline with zero local dependencies,
+          structured logging on every run, and automated data quality checks that catch and fix problems before they
+          reach production.</p>
       </div>
 
       <style>
@@ -196,6 +205,7 @@
           gap: 0.85rem;
           margin: 1.5rem 0 2rem;
         }
+
         .pillar-card {
           background: var(--bg-subtle);
           border: 1px solid var(--neutral-100);
@@ -206,10 +216,12 @@
           flex-direction: column;
           gap: 0.35rem;
         }
+
         .pillar-icon {
           font-size: 1.2rem;
           margin-bottom: 0.1rem;
         }
+
         .pillar-label {
           font-size: 0.78rem;
           font-weight: 800;
@@ -217,11 +229,13 @@
           color: var(--navy-500);
           text-transform: uppercase;
         }
+
         .pillar-desc {
           font-size: 0.8rem;
           color: var(--text-muted);
           line-height: 1.6;
         }
+
         @media (max-width: 700px) {
           .pillar-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -231,22 +245,41 @@
 
       <!-- ENVIRONMENT -->
       <h2 id="environment">Environment and components</h2>
-      <p>The pipeline is made up of five distinct layers that work together: Python modules, API connections, stored procedures, the database, and logging.</p>
+      <p>The pipeline is made up of five distinct layers that work together: Python modules, API connections, stored
+        procedures, the database, and logging.</p>
 
-      <p><strong>Python modules</strong> handle orchestration, file retrieval, and data loading. They are thin by design. Each module is responsible for a single stage of the pipeline and hands off to the next via the orchestrator. Transformation and validation logic lives in the database, not in Python.</p>
+      <p><strong>Python modules</strong> handle orchestration, file retrieval, and data loading. They are thin by
+        design. Each module is responsible for a single stage of the pipeline and hands off to the next via the
+        orchestrator. Transformation and validation logic lives in the database, not in Python.</p>
 
-      <p><strong>API connections</strong> are how the Python modules talk to the outside world. SQLAlchemy manages the connection to Neon PostgreSQL, handling query execution and data loading. The NSW Government open data portal is called once per run by the file retrieval module to download the latest monthly file. GitHub's API is used throughout the pipeline to commit log files and config updates back to the repository.</p>
+      <p><strong>API connections</strong> are how the Python modules talk to the outside world. SQLAlchemy manages the
+        connection to Neon PostgreSQL, handling query execution and data loading. The NSW Government open data portal is
+        called once per run by the file retrieval module to download the latest monthly file. GitHub's API is used
+        throughout the pipeline to commit log files and config updates back to the repository.</p>
 
-      <p><strong>Stored procedures</strong> are where the meaningful logic lives. Because data is loaded into staging tables early, all quality checking, autofixing, and production promotion is written in SQL and executed as callable procedures from Python. This keeps the logic close to the data, version-controlled, and easy to test independently.</p>
+      <p><strong>Stored procedures</strong> are where the meaningful logic lives. Because data is loaded into staging
+        tables early, all quality checking, autofixing, and production promotion is written in SQL and executed as
+        callable procedures from Python. This keeps the logic close to the data, version-controlled, and easy to test
+        independently.</p>
 
       <p><strong>The database</strong> is a Neon PostgreSQL instance organised into three layers:</p>
       <ul>
-        <li><em>Staging tables</em> — temporary working tables that hold raw and partially processed data for the current run: <code>stg_fuel_price</code>, <code>stg_new_stations</code>, <code>stg_inactive_stations</code>, and <code>stg_updated_stations</code></li>
-        <li><em>Fact table</em> — <code>fact_fuel_prices</code>, the central table holding daily price observations that have passed quality checks and been promoted from staging</li>
-        <li><em>Dimension tables</em> — <code>dim_fuel_stations</code>, <code>dim_fuel_types</code>, and <code>dim_date</code>, which provide the reference data that fact records join to for analysis</li>
+        <li><em>Staging tables</em> — temporary working tables that hold raw and partially processed data for the
+          current run: <code>stg_fuel_price</code>, <code>stg_new_stations</code>, <code>stg_inactive_stations</code>,
+          and <code>stg_updated_stations</code></li>
+        <li><em>Fact table</em> — <code>fact_fuel_prices</code>, the central table holding daily price observations that
+          have passed quality checks and been promoted from staging</li>
+        <li><em>Dimension tables</em> — <code>dim_fuel_stations</code>, <code>dim_fuel_types</code>, and
+          <code>dim_date</code>, which provide the reference data that fact records join to for analysis</li>
       </ul>
 
-      <p><strong>Logging</strong> operates at two levels. The orchestrator generates a timestamped log file for every run, capturing the start and end of each module, any skip events, and the full stderr output of any failure before the workflow exits. These files are committed to GitHub immediately on failure and at the end of every successful run. Inside the database, the <code>sys_run_log</code> table tracks stored procedure execution, recording the procedure name, the operation performed, and the number of rows affected. The retention policy automatically clears workflow logs in GitHub older than 90 days and deletes database records older than 24 months.</p>
+      <p><strong>Logging</strong> operates at two levels. The orchestrator generates a timestamped log file for every
+        run, capturing the start and end of each module, any skip events, and the full stderr output of any failure
+        before the workflow exits. These files are committed to GitHub immediately on failure and at the end of every
+        successful run. Inside the database, the <code>sys_run_log</code> table tracks stored procedure execution,
+        recording the procedure name, the operation performed, and the number of rows affected. The retention policy
+        automatically clears workflow logs in GitHub older than 90 days and deletes database records older than 24
+        months.</p>
 
       <!-- ARCHITECTURE -->
       <h2 id="architecture">Architecture overview</h2>
@@ -266,16 +299,29 @@ on:
       </div>
 
       <p>
-        The key architectural decision was to push data into PostgreSQL as early as possible and do all meaningful
-        transformation and validation inside the database. This is an ELT approach: raw data lands in staging tables
-        first, and the logic lives in SQL from that point forward. The previous version processed everything in Python
-        before writing to the database. Moving to ELT means the transformation logic is closer to the data, easier to
-        test, and straightforward to extend.
+        The key architectural decision was to push data into PostgreSQL as early as possible and perform all
+        transformation
+        and validation inside the database. This follows an ELT approach, where raw data lands in staging tables first
+        and is
+        then transformed using SQL. Rather than processing data in Python before loading it, the transformation logic
+        now
+        lives alongside the data itself, making it easier to test, maintain, and extend.
+      </p>
+
+      <p>
+        This architecture closely mirrors the patterns promoted by dbt, with data flowing through staging, intermediate,
+        and
+        mart layers using version-controlled SQL. Centralising business logic in SQL stored procedures improves
+        transparency,
+        keeps transformations close to the data, and supports better testing, documentation, and long-term
+        maintainability.
       </p>
 
       <div class="callout callout-info">
         <span class="callout-icon">ℹ️</span>
-        <p>This is an ELT pipeline, not ETL. The distinction matters: data lands in PostgreSQL first, and all transformation, quality checking, and promotion logic lives in SQL stored procedures. Python modules are thin orchestration layers only — they do not process data themselves.</p>
+        <p>This is an ELT pipeline, not ETL. The distinction matters: data lands in PostgreSQL first, and all
+          transformation, quality checking, and promotion logic lives in SQL stored procedures. Python modules are thin
+          orchestration layers only — they do not process data themselves.</p>
       </div>
 
       <!-- ORCHESTRATOR -->
@@ -327,7 +373,9 @@ on:
       </p>
       <div class="callout callout-tip">
         <span class="callout-icon">💡</span>
-        <p>Pushing the log to GitHub on failure before the workflow exits was one of the most useful decisions in the build. Without it, a failed run in a cloud environment leaves nothing behind to debug. With it, there is always a retrievable record regardless of where the pipeline stopped.</p>
+        <p>Pushing the log to GitHub on failure before the workflow exits was one of the most useful decisions in the
+          build. Without it, a failed run in a cloud environment leaves nothing behind to debug. With it, there is
+          always a retrievable record regardless of where the pipeline stopped.</p>
       </div>
 
       <p>
@@ -363,12 +411,18 @@ on:
         everything after that happens inside PostgreSQL via stored procedures.
       </p>
       <ol>
-        <li><strong>file_retrieval.py</strong> hits the NSW Government endpoint, downloads the monthly FuelCheck Excel file, converts it to CSV, and commits it to the repository.</li>
-        <li><strong>transform_data.py</strong> does light Python-side cleaning, expands the monthly snapshot into a complete daily price time series, and loads it into <code>stg_fuel_price</code>.</li>
-        <li><strong>api_integration.py</strong> identifies new stations, inactive stations, and stations with name or address changes, writing results to the relevant staging tables.</li>
-        <li><strong>data_quality.py</strong> calls two stored procedures in sequence: <code>check_data_quality()</code> to surface defects, then <code>update_data_quality_autofix()</code> to resolve what it can.</li>
-        <li><strong>data_update.py</strong> promotes validated staging data into the production fact and dimension tables.</li>
-        <li><strong>retention_policy.py</strong> runs last, deleting workflow logs older than 90 days from GitHub and fact data older than 24 months from the database.</li>
+        <li><strong>file_retrieval.py</strong> hits the NSW Government endpoint, downloads the monthly FuelCheck Excel
+          file, converts it to CSV, and commits it to the repository.</li>
+        <li><strong>transform_data.py</strong> does light Python-side cleaning, expands the monthly snapshot into a
+          complete daily price time series, and loads it into <code>stg_fuel_price</code>.</li>
+        <li><strong>api_integration.py</strong> identifies new stations, inactive stations, and stations with name or
+          address changes, writing results to the relevant staging tables.</li>
+        <li><strong>data_quality.py</strong> calls two stored procedures in sequence: <code>check_data_quality()</code>
+          to surface defects, then <code>update_data_quality_autofix()</code> to resolve what it can.</li>
+        <li><strong>data_update.py</strong> promotes validated staging data into the production fact and dimension
+          tables.</li>
+        <li><strong>retention_policy.py</strong> runs last, deleting workflow logs older than 90 days from GitHub and
+          fact data older than 24 months from the database.</li>
       </ol>
 
       <!-- DATA QUALITY -->
@@ -380,9 +434,10 @@ on:
       <p>
         <code>check_data_quality()</code> runs a series of named checks. Each check has a defect code (e.g.
         <code>MIS_01</code>, <code>INC_04</code>) and writes results to <code>dq_issues</code> using
-        <code>INSERT ... ON CONFLICT DO UPDATE</code>, so re-runs are idempotent. At the start of every run, all
-        existing defects are marked inactive and any that are not re-detected are deleted at the end, leaving only
-        live issues in the table.
+        <code>INSERT ... ON CONFLICT DO UPDATE</code>, so re-runs are idempotent. The pipeline can be re-run on the same
+        data without creating duplicates or drifting state, which matters once a monthly job is unattended in CI. At the
+        start of every run, all existing defects are marked inactive and any that are not re-detected are deleted at the end,
+        leaving only live issues in the table.
       </p>
       <p>
         Here is an example check. <code>MIS_01</code> identifies price records in staging that cannot be matched
@@ -450,7 +505,8 @@ WHERE dim.stationid = dup.stationid
 AND dup.rn = 1;</code></pre>
       </div>
 
-      <p>Every fix is logged to <code>sys_run_log</code> with a row count, giving a complete audit trail of what was corrected on each run.</p>
+      <p>Every fix is logged to <code>sys_run_log</code> with a row count, giving a complete audit trail of what was
+        corrected on each run.</p>
 
       <!-- DATA MODEL -->
       <h2 id="data-model">The data model</h2>
@@ -463,15 +519,20 @@ AND dup.rn = 1;</code></pre>
 
       <!-- DOCUMENTATION -->
       <h2 id="documentation">Documentation</h2>
-      <p>Every Python module and stored procedure in this project is documented using a consistent spec format. The headings are the same across every component:</p>
+      <p>Every Python module and stored procedure in this project is documented using a consistent spec format. The
+        headings are the same across every component:</p>
       <ul>
         <li><strong>Module overview</strong> — the purpose of the module in plain language</li>
-        <li><strong>Upstream dependencies</strong> — what this module relies on to run (other modules, files, environment variables)</li>
+        <li><strong>Upstream dependencies</strong> — what this module relies on to run (other modules, files,
+          environment variables)</li>
         <li><strong>Downstream dependencies</strong> — what relies on this module having run successfully</li>
-        <li><strong>Inputs and outputs</strong> — exactly what the module consumes and produces, including file paths, database tables, and config values</li>
-        <li><strong>Logic and steps</strong> — execution broken into named blocks so the intent of each stage is clear without reading the code</li>
+        <li><strong>Inputs and outputs</strong> — exactly what the module consumes and produces, including file paths,
+          database tables, and config values</li>
+        <li><strong>Logic and steps</strong> — execution broken into named blocks so the intent of each stage is clear
+          without reading the code</li>
         <li><strong>Conditional checks</strong> — situations where the module exits early or skips, and why</li>
-        <li><strong>Error handling and logging</strong> — how failures are captured, logged, and surfaced to the orchestrator</li>
+        <li><strong>Error handling and logging</strong> — how failures are captured, logged, and surfaced to the
+          orchestrator</li>
         <li><strong>Helper functions</strong> — reusable functions defined in the module and what they do</li>
       </ul>
       <p>
@@ -561,7 +622,8 @@ AND dup.rn = 1;</code></pre>
         </div>
       </div>
 
-      <a href="https://github.com/Constellation-Analytics/NSW-Fuel-Price-Insights" target="_blank" class="sidebar-github">
+      <a href="https://github.com/Constellation-Analytics/NSW-Fuel-Price-Insights" target="_blank"
+        class="sidebar-github">
         <img src="/assets/github.png" alt="GitHub">
         View on GitHub
       </a>
