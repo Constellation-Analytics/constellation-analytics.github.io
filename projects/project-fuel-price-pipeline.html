@@ -309,11 +309,9 @@ on:
       </p>
 
       <p>
-        This architecture closely mirrors the patterns promoted by dbt, with data flowing through staging, intermediate,
-        and
-        mart layers using version-controlled SQL. Centralising business logic in SQL stored procedures improves
-        transparency,
-        keeps transformations close to the data, and supports better testing, documentation, and long-term
+        This architecture closely mirrors the patterns promoted by dbt, with data flowing through staging layers 
+        before promoting the data to production layers in SQL. Centralising business logic in SQL stored procedures improves
+        transparency,keeps transformations close to the data, and supports better testing, documentation, and long-term
         maintainability.
       </p>
 
