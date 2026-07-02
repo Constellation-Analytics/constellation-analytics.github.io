@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Page setup -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#213345">
+
+  <!-- SEO -->
+  <title>NSW Fuel Price - Power BI Dashboard — Constellation Analytics</title>
+  <meta name="description"
+    content="Building a Power BI dashboard on top of a custom PostgreSQL and Python data pipeline, using NSW Government FuelCheck data to uncover fuel price trends across the state.">
+  <meta name="author" content="Paul Chapman">
+  <link rel="canonical" href="https://constellation-analytics.com/projects/project-fuel-price-insights.html">
+
+  <!-- Open Graph -->
+  <meta property="og:url" content="https://constellation-analytics.com/projects/project-fuel-price-insights.html">
+  <meta property="og:site_name" content="Constellation Analytics">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:title" content="NSW Fuel Price - Power BI Dashboard — Constellation Analytics">
+  <meta property="og:description"
+    content="A Power BI dashboard built on a custom PostgreSQL and Python pipeline, turning NSW Government FuelCheck data into fuel price trends.">
+  <meta property="og:image" content="https://constellation-analytics.com/projects/assets/fuel_insights.png">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "NSW Fuel Price - Power BI Dashboard",
+    "description": "A Power BI dashboard built on a custom PostgreSQL and Python pipeline, turning NSW Government FuelCheck data into fuel price trends.",
+    "author": {
+      "@type": "Person",
+      "name": "Paul Chapman",
+      "url": "https://constellation-analytics.com"
+    },
+    "datePublished": "2023-06-01",
+    "url": "https://constellation-analytics.com/projects/project-fuel-price-insights.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Constellation Analytics",
+      "url": "https://constellation-analytics.com"
+    }
+  }
+  </script>
+
+  <!-- Assets -->
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+</head>
+
+<body id="top">
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+      <div>
+        <a class="breadcrumb" href="/">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <a class="breadcrumb" href="/projects.html">
+          <span>/</span>
+          Projects
+        </a>
+      </div>
+
+      <div class="proj-meta-row">
+        <span class="proj-published">Published February 2025 </span>
+      </div>
+
+      <h1 class="proj-page-title">NSW Fuel Price<br>Power BI Dashboard</h1>
+
+      <p class="proj-page-summary">
+        In 2016 the NSW Government made fuel price data public through FuelCheck NSW. The tool is great for finding
+        the cheapest fuel today, but it does not show long-term trends. I built a PostgreSQL and Python pipeline
+        and a Power BI dashboard to answer that question instead.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">Python</span>
+        <span class="tech-pill primary">PostgreSQL</span>
+        <span class="tech-pill primary">Power BI</span>
+        <span class="tech-pill">DAX</span>
+      </div>
+
+      <a href="/pages/NSW-Fuel-Price-Insights.html" target="_blank" class="proj-live-cta">
+        <span class="dot"></span>
+        View the live dashboard →
+      </a>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Personal Project</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Scope</span>
+          <span class="proj-stat-value">Pipeline + BI Dashboard</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Goal</span>
+          <span class="proj-stat-value">Fuel Price Trend Insights</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Data source</span>
+          <span class="proj-stat-value">NSW Government FuelCheck</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <!-- INTRO + PROBLEM -->
+      <h2 id="background">From daily prices to long-term trends</h2>
+      <p>
+        In 2016 the NSW Government introduced mandatory price reporting for fuel stations across the state, and made
+        the data public through FuelCheck NSW. It is a genuinely useful tool. On any given day, a driver can find the
+        cheapest station nearby. But it stops there. There is no way to see how prices move over time, so it cannot
+        help anyone plan ahead.
+      </p>
+      <p>
+        My goal was to build on the same publicly available data from Data NSW and answer a different set of
+        questions. What is the average fuel price by city or region? How much do prices vary between stations in
+        the same area? What are the historical trends? Which stations and brands are consistently cheapest or most
+        expensive? Do prices move by day of the week, or by season?
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The goal:</strong> turn a same-day price lookup tool into a proper trend analysis dashboard, built
+          on a pipeline I owned end to end, from raw API and file ingestion through to a two-page Power BI report.</p>
+      </div>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">🔗</span>
+        <p><strong>This project has since been rebuilt.</strong> The local PostgreSQL pipeline described below now
+          runs as a fully automated, cloud-hosted ELT system on GitHub Actions and Neon. See
+          <a href="/projects/project-fuel-price-pipeline.html">NSW Fuel Price - Cloud Data Pipeline</a>
+          for the rebuild.</p>
+      </div>
+
+      <!-- ENVIRONMENT -->
+      <h2 id="environment">Development approach and environments</h2>
+      <p>For this project I used PostgreSQL for database storage, Python for API connections and data processing,
+        and Power BI for visualisation.</p>
+
+      <div class="clearfix">
+        <figure class="proj-figure float-right">
+        <img src="/projects/assets/fuel_dashboard_file_naming.png" alt="Dev and Prod versions of the ingestion and dictionary update scripts">
+        <figcaption>Scripts were versioned as separate Dev and Prod files while a feature was
+          being tested, then the Dev was promoted to Prod once it was confirmed to be working.</figcaption>
+      </figure>
+
+      <p>
+        To manage risk, I split the build across two separate environments: Development and Production. Every
+        feature was built and tested in Development first, and only moved to Production once it was working as
+        expected. Coming from ETL tools like Talend and pipelines in Microsoft Fabric, I also mapped out each
+        transformation visually in PowerPoint before building it, the same way you would lay out stages in an ETL
+        workflow.
+      </p> 
+
+      </div>
+<div class="clearfix">
+      
+
+      <figure class="proj-figure float-right">
+        <img src="/projects/assets/fuel_dashboard_schemas.png" alt="Separate dev and prod schemas in the PostgreSQL database">
+        <figcaption>The database mirrored the same split, with dedicated dev and prod schemas.</figcaption>
+      </figure>
+
+      <p>
+        This split ran through every layer of the build. Scripts were duplicated into Dev and Prod versions while a
+        feature was being tested, and the database itself had separate Dev and Prod schemas so nothing untested
+        could touch live data.
+      </p>
+      </div>
+
+
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-label">Ingestion</div>
+          <div class="pillar-desc">Station data from the DataNSW API, monthly price files from the government portal
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Processing</div>
+          <div class="pillar-desc">Python and Pandas for cleaning, regex parsing, and reshaping into a daily time
+            series</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Storage</div>
+          <div class="pillar-desc">PostgreSQL, accessed through SQLAlchemy, split into staging and production tables
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Visualisation</div>
+          <div class="pillar-desc">A two-page Power BI report with custom DAX for time period and distance filtering
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .pillar-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.85rem;
+          margin: 1.5rem 0 2rem;
+        }
+
+        .pillar-card {
+          background: var(--bg-subtle);
+          border: 1px solid var(--neutral-100);
+          border-top: 3px solid var(--blue-500);
+          border-radius: 10px;
+          padding: 1.1rem 1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+        }
+
+        .pillar-label {
+          font-size: 0.78rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          color: var(--navy-500);
+          text-transform: uppercase;
+        }
+
+        .pillar-desc {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+          .pillar-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      </style>
+
+      <!-- STATION DICTIONARY -->
+      <h2 id="station-dictionary">Initial setup: the fuel station dictionary</h2>
+      <p>
+        Before any prices could be loaded, I needed a reliable reference table of every fuel station in the state.
+        This started with the ingestion of fuel station information from the API, including station name, address,
+        brand, and coordinates.
+      </p>
+      <ul>
+        <li><strong>Ingestion</strong> — JSON responses from the API were parsed and normalised into a structured
+          Pandas DataFrame.</li>
+        <li><strong>Transformation</strong> — regular expressions extracted street, town, and postcode from the raw
+          address field, a <code>last_update</code> column was added, and the remaining columns were renamed for
+          consistency.</li>
+        <li><strong>Data quality check</strong> — the dataset was split in two. Rows where street, town, and postcode
+          were extracted successfully went one way. Rows where the address format was too inconsistent to parse went
+          into a separate table for manual review.</li>
+        <li><strong>Storage</strong> — connected to PostgreSQL via SQLAlchemy, and inserted clean rows into
+          <code>temp_fuel_station_dict</code>, with the rest going into <code>temp_dict_to_clean</code>.</li>
+      </ul>
+      <p>
+        The original scope also included enriching this table with a secondary postcode dataset. I dropped that
+        later in the build, it added complexity without giving the level of insight I expected.
+      </p>
+
+      <!-- FACT TABLE -->
+      <h2 id="fact-table">Monthly data ingestion: the fuel price fact table</h2>
+      <p>
+        The NSW Government publishes fuel price data between the 15th and 20th of each month, as an Excel or CSV
+        file. These files are saved locally and processed through a dedicated dataflow. This step needed the most
+        data engineering, because prices are only reported when they change. In hindsight, this is a classic change
+        data capture (CDC) pattern, where the source only gives you a new record when a value changes rather than a
+        full daily snapshot. To analyse trends properly, I needed a row for every station, every fuel type, every
+        single day, not just the days a price changed.
+      </p>
+ 
+      <figure class="proj-figure">
+        <img src="/projects/assets/fuel_dashboard_cdc.png" alt="Before, during, and after example of turning change data into a continuous daily series">
+        <figcaption>The source data only has a row when the price changes (Before). The
+          transformation fills in every day in between (During), producing a complete daily series with a row per
+          station, fuel type, and day (After).</figcaption>
+      </figure>
+
+      <h3>Importing and matching</h3>
+      <ul>
+        <li>A tkinter file picker selects the input file, and the script detects whether it is Excel or CSV.</li>
+        <li>An active station query pulls the current <code>fuel_station_dict</code> from PostgreSQL.</li>
+        <li>The input data is left-joined to the station dictionary on service station name and address to attach a
+          <code>stationid</code>.</li>
+        <li>Columns are selected and renamed to <code>stationid</code>, <code>fuelcode</code>, <code>date</code>, and
+          <code>price</code>, and the date column is normalised to a proper datetime.</li>
+      </ul>
+
+      <h3>Building a complete daily series</h3>
+      <p>The goal here is one row per fuel station, per fuel type, per day.</p>
+      <ul>
+        <li>Extracted every unique station and fuel code pair present in the file.</li>
+        <li>Queried historical prices for the last day of the previous month, to give the series a starting point.
+        </li>
+        <li>Unioned current and previous station-fuel combinations, then generated a full date range across the
+          month.</li>
+        <li>Cross-joined the station-fuel combinations with that date range, giving a complete daily grid before any
+          prices are attached.</li>
+      </ul>
+
+      <h3>Averaging, filling, and finalising</h3>
+      <p>
+        A small number of stations update their price more than once a day, so the average price per day is
+        calculated first. From there, the previous month's prices are joined to the expanded grid, followed by the
+        average prices for each station, fuel type, and day combination.
+      </p>
+      <ul>
+        <li><strong>Forward fill</strong> — missing prices within each station-fuel group are filled forward from the
+          last known price.</li>
+        <li><strong>Cleaning</strong> — rows still missing a price after the forward fill are removed, and the data
+          is filtered down to the current month only.</li>
+        <li><strong>Unique identifier</strong> — a <code>record_id</code> is generated for each row using an MD5
+          hash.</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <p>A stored procedure runs once a month to remove rows where a station has not reported a price in the last
+          90 days, so an old price cannot silently carry forward forever.</p>
+      </div>
+
+      <p>
+        Before anything is written to the database, a final validation checks that every station in the fact table
+        can be matched to a record in the dictionary. If any cannot, they are saved to a CSV for manual investigation
+        and the script stops there. If everything matches, the data is inserted into PostgreSQL through SQLAlchemy.
+      </p>
+
+      <!-- DICTIONARY CHECK -->
+      <h2 id="dictionary-check">Monthly data check: keeping the station dictionary current</h2>
+      <p>
+        The DataNSW API returns a real-time list of active fuel stations, and that list is constantly changing.
+        The monthly data check compares that live list against the database to catch what has changed since last
+        time.
+      </p>
+      <ul>
+        <li><strong>Join the tables</strong> — a full join between the API data and the database table, so nothing
+          on either side gets missed.</li>
+        <li><strong>Compare</strong> — the join surfaces new stations present in the API but not the database,
+          inactive stations present in the database but no longer in the API, and updated stations where the name or
+          address has changed.</li>
+        <li><strong>Stored procedure</strong> — truncates the staging tables for deleted, updated, and new records
+          ahead of the next load.</li>
+        <li><strong>Insert</strong> — the changes are loaded into the database, then manually validated before being
+          merged into the main dictionary table.</li>
+      </ul>
+
+      <!-- VISUALISATION -->
+      <h2 id="visualisation">Data visualisation and DAX</h2>
+      <p>
+        Two features in the dashboard took a disproportionate amount of time to get right: a time period filter
+        for previous week, month, six months, or year, and a distance filter for finding stations within a set
+        radius of a chosen town.
+      </p>
+
+      <h3>Time period filter</h3>
+      <p>
+        This was built with inspiration from an SQLBI article on the topic, using a new <code>Previous Date</code>
+        table, the functions <code>DATESINPERIOD()</code>, <code>REMOVEFILTERS()</code>, <code>KEEPFILTERS()</code>,
+        and <code>USERELATIONSHIP()</code>, and calculation groups built in Tabular Editor with
+        <code>SELECTEDMEASURE()</code>.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">DAX</span>
+        <pre><code class="language-sql">VAR NumOfMonths = -12
+VAR ReferenceDate = MAX ( 'DateTable'[Date] )
+VAR PreviousDates =
+    DATESINPERIOD (
+        'Previous Dates'[Date],
+        ReferenceDate,
+        NumOfMonths,
+        MONTH
+    )
+VAR Result =
+    CALCULATE (
+        Selectedmeasure(),
+        REMOVEFILTERS ( 'DateTable' ),
+        KEEPFILTERS ( PreviousDates ),
+        USERELATIONSHIP ( 'Previous Dates'[Date], 'DateTable'[Date] )
+    )
+RETURN Result</code></pre>
+      </div>
+
+      <h3>Distance filter</h3>
+      <p>
+        This one took longer. The original concept came from a How to Power BI tutorial, which I then adapted to fit
+        my own data model. It uses a calculated table holding the average latitude and longitude for each town,
+        built from the station dictionary and not connected to any other table in the model. A parameter with a
+        slicer controls the distance in kilometres, and a second slicer selects the town. From there:
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">DAX</span>
+        <pre><code class="language-sql">-- Filtering measure
+Location Filter = IF ( [Distance] <= [Distance Parameter Value], 1, 0 )
+
+-- Filtered version of each measure used on the page, e.g. the card visual
+Average Price_Filtered =
+CALCULATE (
+    AVERAGE ( 'prod fuel_prices'[price] ),
+    FILTER ( 'prod fuel_station_dict', [Location Filter] = 1 )
+)</code></pre>
+      </div>
+
+      <p>
+        The map visual is then filtered at the visual level, using the location filter measure to only show rows
+        equal to one.
+      </p>
+
+      <!-- RESULTS -->
+      <h2 id="results">The result</h2>
+      <p>
+        The final dashboard is a two-page report with a selection panel at the top, where users choose their fuel
+        type and analysis period.
+      </p>
+
+      <p>
+        The main page gives high-level insight at a state level, letting users track their selected fuel over time
+        and see which fuels are cheapest or most expensive. The second page goes deeper, letting a user pick their
+        town and find the best day of the week to buy, along with the average price for stations in their area.
+        Together, the report is built to support real purchase decisions, not just same-day lookups.
+      </p>
+
+      <figure class="proj-figure">
+        <img src="/projects/assets/fuel_dashboard_dashboard1.png" alt="Main dashboard page showing state-level fuel price trends over time">
+        <figcaption>The main page shows fuel price trends at a state level, letting users track their selected fuel over time
+          and compare cheapest and most expensive options.</figcaption>
+      </figure>
+
+      <figure class="proj-figure">
+        <img src="/projects/assets/fuel_dashboard_dashboard2.png" alt="Second dashboard page showing town-level pricing by day of week">
+        <figcaption>The second page lets users pick their town and find the best day of the week to buy, along with the average
+          price for stations in the area.</figcaption>
+      </figure>
+
+      <p style="text-align:center; margin: 1.5rem 0 2rem;">
+        <a href="/projects/project-fuel-price-insights.html" target="_blank" class="tech-pill primary" style="text-decoration:none;">View the live dashboard →</a>
+      </p>
+
+      <!-- CHALLENGES -->
+      <h2 id="challenges">Challenges overcome</h2>
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>Inconsistent data from the source.</strong> Early on, the dataset created a new record whenever a
+          station changed address. That behaviour changed partway through, and existing stations began updating
+          their address in place instead. I had to rework the change-detection logic to correctly track stations
+          through both patterns.</p>
+      </div>
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>Complex distance filtering.</strong> Getting an accurate, radius-based filter working in Power BI
+          took extensive testing. Balancing precise calculations against report performance was the main tension
+          to manage.</p>
+      </div>
+
+      <!-- REFLECTIONS -->
+      <h2 id="reflections">Personal reflection</h2>
+      <p>
+        This has been my most comprehensive and rewarding project to date. It pulled together data engineering, API
+        integration, SQL, and Power BI into one end-to-end solution. I rarely get to work across all those areas on
+        a single project, so having access to this dataset let me apply and sharpen the full set of skills at once.
+      </p>
+      <p>
+        Looking ahead, I want to extend the dashboard with real-time data, optimise it for mobile, and explore
+        forecasting models to predict where fuel prices are heading next.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the dashboard design? <a href="/#contact">Get in touch.</a>
+      </p>
+
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <!-- TOC -->
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">From daily prices to long-term trends</a></li>
+          <li class="toc-item"><a href="#environment" class="toc-link">Development approach and environments</a></li>
+          <li class="toc-item"><a href="#station-dictionary" class="toc-link">The fuel station dictionary</a></li>
+          <li class="toc-item"><a href="#fact-table" class="toc-link">The fuel price fact table</a></li>
+          <li class="toc-item"><a href="#dictionary-check" class="toc-link">Keeping the dictionary current</a></li>
+          <li class="toc-item"><a href="#visualisation" class="toc-link">Data visualisation and DAX</a></li>
+          <li class="toc-item"><a href="#results" class="toc-link">The result</a></li>
+          <li class="toc-item"><a href="#challenges" class="toc-link">Challenges overcome</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Personal reflection</a></li>
+        </ul>
+      </div>
+
+      <!-- Project details -->
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Personal Project</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Data source</span>
+            <span class="sidebar-info-value">NSW Government FuelCheck</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">Python</span>
+              <span class="sidebar-pill">PostgreSQL</span>
+              <span class="sidebar-pill">Power BI</span>
+              <span class="sidebar-pill">DAX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related project -->
+      <a href="/projects/project-fuel-price-pipeline.html" class="sidebar-related-card">
+        <div class="sidebar-related-heading">Related Project</div>
+        <div class="sidebar-related-title">NSW Fuel Price - Cloud Data Pipeline</div>
+        <div class="sidebar-related-desc">The data pipeline behind this dashboard, rebuilt for GitHub Actions and
+          Neon with automated data quality checks.</div>
+      </a>
+
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://github.com/Constellation-Analytics" target="_blank"><img src="/assets/github.png"></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
