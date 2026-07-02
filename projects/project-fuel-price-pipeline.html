@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#213345">
 
   <!-- SEO -->
-  <title>Building a Cloud-Hosted Fuel Price Pipeline — Constellation Analytics</title>
+  <title>NSW Fuel Price - Cloud Data Pipeline — Constellation Analytics</title>
   <meta name="description"
     content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python — including structured logging, data quality checks, and autofixing stored procedures.">
   <meta name="author" content="Paul Chapman">
@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="Constellation Analytics">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="en_AU">
-  <meta property="og:title" content="Building a Cloud-Hosted Fuel Price Pipeline — Constellation Analytics">
+  <meta property="og:title" content="NSW Fuel Price - Cloud Data Pipeline — Constellation Analytics">
   <meta property="og:description"
     content="How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python.">
   <meta property="og:image" content="https://constellation-analytics.com/projects/assets/fuel_pipeline.png">
@@ -29,7 +29,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Building a Cloud-Hosted Fuel Price Pipeline",
+    "headline": "NSW Fuel Price - Cloud Data Pipeline",
     "description": "How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions, Neon PostgreSQL, and Python.",
     "author": {
       "@type": "Person",
@@ -98,7 +98,7 @@
         <span class="proj-published">Published April 2026</span>
       </div>
 
-      <h1 class="proj-page-title">Building a Cloud-Hosted<br>Fuel Price Pipeline</h1>
+      <h1 class="proj-page-title">NSW Fuel Price<br>Cloud Data Pipeline</h1>
 
       <p class="proj-page-summary">
         How I replaced a manual monthly process with a fully automated ELT pipeline using GitHub Actions,
@@ -142,24 +142,31 @@
       <!-- INTRO + PROBLEM -->
       <h2 id="background">From manual process to automated pipeline</h2>
       <p>
-        Every month, the NSW Government publishes a dataset through its FuelCheck program listing petrol prices
-        across the state. It covers every major fuel type including E10, U91, P95, P98, diesel, and LPG, across
-        more than a thousand stations. It is genuinely useful data. And for a while, I had been processing it
-        manually.
+        This pipeline feeds the NSW Fuel Price Power BI Dashboard, pulling monthly price data from the NSW
+        Government's FuelCheck program across every major fuel type and more than a thousand stations. The dashboard
+        build covered the data model and DAX. This one covers what changed underneath it: the pipeline moved from a
+        manual local process to a fully automated, cloud-hosted system.
       </p>
       <p>
         The old process had a consistent set of problems. I had to check the NSW Government website each month to
         see if a new file was available, then download it and run a Python script locally. Errors required manual
         investigation with no structured log to reference. The database lived on my PC with no remote access, so
-        nothing ran if I was not at my desk. And there was no data quality layer at all — a bad record either
+        nothing ran if I was not at my desk. And there was no data quality layer at all. A bad record either
         caused a crash or slipped through silently into the fact table.
       </p>
 
       <div class="callout callout-warning">
         <span class="callout-icon">⚠️</span>
-        <p>The core problem was not any single one of these issues — it was that they compounded. No logging meant
+        <p>The core problem was not any single one of these issues. It was that they compounded. No logging meant
           errors were invisible. No remote access meant the pipeline was tied to one machine. No DQ layer meant bad data
           had nowhere to be caught. Fixing one without the others would not have solved much.</p>
+      </div>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">🔗</span>
+        <p><strong>New here?</strong> This project rebuilds the data layer behind an existing dashboard. For the
+          original end-to-end build, including the Power BI report and DAX, see
+          <a href="/projects/project-fuel-price-insights.html">NSW Fuel Price - Power BI Dashboard</a>.</p>
       </div>
 
       <!-- THE GOAL -->
@@ -624,6 +631,14 @@ AND dup.rn = 1;</code></pre>
         class="sidebar-github">
         <img src="/assets/github.png" alt="GitHub">
         View on GitHub
+      </a>
+
+      <!-- Related project -->
+      <a href="/projects/project-fuel-price-insights.html" class="sidebar-related-card">
+        <div class="sidebar-related-heading">Original Project</div>
+        <div class="sidebar-related-title">NSW Fuel Price - Power BI Dashboard</div>
+        <div class="sidebar-related-desc">The end-to-end dashboard build this pipeline feeds, covering the data
+          model, DAX, and Power BI report.</div>
       </a>
 
     </aside>
