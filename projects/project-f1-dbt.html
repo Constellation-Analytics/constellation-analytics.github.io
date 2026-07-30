@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Page setup -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#213345">
+
+  <!-- SEO -->
+  <title>Formula 1 dbt Analytics Engineering Project — Constellation Analytics</title>
+  <meta name="description"
+    content="A hands on dbt project built on Formula 1 race data in Neon PostgreSQL, designed to map every layer of the build to a domain on the dbt Analytics Engineer certification exam.">
+  <meta name="author" content="Paul Chapman">
+  <link rel="canonical" href="https://constellation-analytics.com/projects/project-f1-dbt.html">
+
+  <!-- Open Graph -->
+  <meta property="og:url" content="https://constellation-analytics.com/projects/project-f1-dbt.html">
+  <meta property="og:site_name" content="Constellation Analytics">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:title" content="Formula 1 dbt Analytics Engineering Project — Constellation Analytics">
+  <meta property="og:description"
+    content="A dbt project built on Formula 1 race data, structured so each build decision maps to a domain on the dbt Analytics Engineer exam.">
+  <meta property="og:image" content="https://constellation-analytics.com/projects/assets/f1_dbt_hero.png">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Formula 1 dbt Analytics Engineering Project",
+    "description": "A dbt project built on Formula 1 race data, structured so each build decision maps to a domain on the dbt Analytics Engineer exam.",
+    "author": {
+      "@type": "Person",
+      "name": "Paul Chapman",
+      "url": "https://constellation-analytics.com"
+    },
+    "datePublished": "2026-07-13",
+    "url": "https://constellation-analytics.com/projects/project-f1-dbt.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Constellation Analytics",
+      "url": "https://constellation-analytics.com"
+    }
+  }
+  </script>
+
+  <!-- Assets -->
+  <link rel="icon" type="image/ico" href="/assets/logo/Logo Icon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/projects/style_projects.css">
+
+  <!-- Prism CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+
+  <!-- Prism core first -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+  <!-- Language support -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+</head>
+
+<body id="top">
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logo/CA-Logo-Landscape.png" alt="Constellation Analytics" class="logo-img"></a>
+    <ul>
+      <li><a href="/" class="nav-links">HOME</a></li>
+      <li><a href="/#skills" class="nav-links">EXPERTISE</a></li>
+      <li><a href="/projects.html" class="nav-links" style="color:var(--blue-500)">PROJECTS</a></li>
+      <li><a href="/#about" class="nav-links">ABOUT</a></li>
+      <li><a href="/#contact" class="nav-cta">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="proj-page-header">
+    <div class="proj-page-header-inner">
+      <div>
+        <a class="breadcrumb" href="/">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <a class="breadcrumb" href="/projects.html">
+          <span>/</span>
+          Projects
+        </a>
+      </div>
+
+      <div class="proj-meta-row">
+        <span class="proj-published">Published July 2026</span>
+      </div>
+
+      <h1 class="proj-page-title">Formula 1 dbt<br>Analytics Engineering Project</h1>
+
+      <p class="proj-page-summary">
+        A practice dbt project built to prepare for the dbt Analytics Engineer certification exam.
+        Formula 1 race data sits in a Neon PostgreSQL database, and dbt handles the transformation
+        from raw data through staging, intermediate, and mart layers, with every build decision mapped back to an exam
+        domain.
+      </p>
+
+      <div class="proj-tech-row">
+        <span class="tech-pill primary">dbt-core</span>
+        <span class="tech-pill primary">PostgreSQL (Neon)</span>
+        <span class="tech-pill primary">Python</span>
+        <span class="tech-pill">Jinja</span>
+      </div>
+
+      <div class="proj-stats-row">
+        <div class="proj-stat">
+          <span class="proj-stat-label">Type</span>
+          <span class="proj-stat-value">Personal Project</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Scope</span>
+          <span class="proj-stat-value">dbt Pipeline, Exam Prep</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Goal</span>
+          <span class="proj-stat-value">dbt Analytics Engineer Certification</span>
+        </div>
+        <div class="proj-stat">
+          <span class="proj-stat-label">Data source</span>
+          <span class="proj-stat-value">Kaggle Formula 1 Dataset</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="proj-content-layout">
+
+    <article class="proj-article">
+
+      <!-- INTRO + PROBLEM -->
+      <h2 id="background">Building to learn</h2>
+      <p>
+        The dbt Analytics Engineer was on my list of goals for 2026. Along with extensive study of the materials, I
+        wanted to
+        get hands on practice
+        and build a real-world project that maps back to the exam domains.
+      </p>
+      <p>
+        I picked Formula 1 racing data as the subject, mostly because it's a dataset I find genuinely interesting
+        to work with. Races, drivers, constructors, results, and lap times going back through F1 history, all
+        supplied as CSV files on Kaggle. The project is not trying to model every corner of that dataset. It's about
+        touching as many dbt features as possible to get hands on experinece with the tool.
+      </p>
+
+      <div class="callout callout-key">
+        <span class="callout-icon">🎯</span>
+        <p><strong>The goal:</strong> a working dbt project where every layer, from sources and seeds through to a
+          contracted mart, maps back to a specific topic on the official dbt Labs study guide. </p>
+      </div>
+
+      <!-- IMAGE PLACEHOLDER -->
+      <figure class="proj-figure">
+        <img src="/projects/assets/f1_dbt_dag.png"
+          alt="dbt DAG showing staging, intermediate, and mart layers for the F1 project">
+        <figcaption>[Placeholder: screenshot of the project's DAG from dbt docs, showing staging, intermediate,
+          and mart layers]</figcaption>
+      </figure>
+
+      <!-- INFRASTRUCTURE -->
+      <h2 id="infrastructure">Infrastructure: Neon, seeds, and sources</h2>
+      <p>
+        The database sits on Neon, a hosted PostgreSQL service, managed day to day through pgAdmin. Connecting dbt
+        to Neon needs <code>sslmode: require</code> set in the profile, and the project runs in its own Python
+        virtual environment (Python 3.12.10, dbt-core 1.9.0, dbt-postgres 1.9.0) to keep it isolated from other
+        projects.
+      </p>
+      <p>
+        Loading data used a hybrid approach on purpose, since the exam expects an analytics engineer to know when
+        to use each. Large tables, like lap times at over 500,000 rows, were loaded into a raw schema in Neon and
+        declared as dbt sources. Small, static, lookup style tables, like circuits and constructors, went in as
+        seeds instead. Seeds are meant for small reference data, not big transactional tables, and the project
+        follows that distinction deliberately rather than loading everything the same way.
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar-card">
+          <div class="pillar-label">Sources</div>
+          <div class="pillar-desc">10 large tables loaded into a raw schema in Neon, declared as dbt sources</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Seeds</div>
+          <div class="pillar-desc">3 small lookup tables (status, circuits, constructors) loaded as seeds</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Staging</div>
+          <div class="pillar-desc">13 models, one per source or seed, using the standard two CTE pattern</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-label">Marts</div>
+          <div class="pillar-desc">A single contracted mart, one row per driver, career to date</div>
+        </div>
+      </div>
+
+      <!-- STAGING TO INTERMEDIATE -->
+      <h2 id="staging-intermediate">From staging to intermediate: joins and grain</h2>
+      <p>
+        All 13 staging models follow the same two CTE pattern, a <code>source</code> CTE and a
+        <code>renamed</code> CTE, and all run as views. Casting and renaming happen here. Filtering and business
+        logic are pushed downstream, with one exception: genuinely broken data can be filtered out at the staging
+        layer, since that's a data quality problem rather than business logic.
+      </p>
+      <p>
+        The intermediate layer is where the real modeling work sits. Four models make up this layer.
+      </p>
+      <ul>
+        <li><strong><code>int_pitstops</code></strong> — a summary model over pit stop data.</li>
+        <li><strong><code>int_results_enriched</code></strong> — grain of one row per driver per race. Anchored
+          on <code>stg_results</code> with left joins out to races, drivers, and constructors. Includes a grid
+          position versus race position comparison, which folded a separate planned model into this one instead of
+          needing its own.</li>
+        <li><strong><code>int_constructor_season_performance</code></strong> — constructor performance aggregated
+          to season level.</li>
+        <li><strong><code>int_driver_season_performance</code></strong> — grain of one row per driver per season,
+          built on top of <code>int_results_enriched</code>.</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <p><strong>Grain discipline matters here.</strong> Joins at the intermediate layer are left joins anchored
+          on whichever table defines the grain, with everything else pulled in as descriptive detail. That avoids
+          silently dropping or duplicating rows when two tables don't line up cleanly.</p>
+      </div>
+
+      <!-- INCREMENTAL -->
+      <h2 id="incremental">Incremental models and raw loading</h2>
+      <p>
+        <code>int_pitstops</code> and <code>int_results_enriched</code> are both materialized as incremental
+        models, using <code>is_incremental()</code> with <code>incremental_strategy='append'</code>. The staging
+        models feeding them, <code>stg_pitstops</code> and <code>stg_results</code>, stay as views, since they
+        only cast and rename. The compute savings from an incremental build matter at the intermediate layer,
+        where the heavier joins and aggregation actually live.
+      </p>
+      <p>
+        Growing the raw data itself is a separate job from dbt's incremental logic. A single Python script handles
+        that side, checking the current maximum ID already sitting in Neon for four source tables (pit stops,
+        constructor results, races, and results) and inserting only the rows past that point. Only once new rows
+        exist in the raw table does dbt's own incremental materialization come into play, to avoid reprocessing
+        rows that were already transformed on a prior run.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">SQL</span>
+        <pre><code class="language-sql">-- int_results_enriched.sql, incremental logic
+
+select *
+from renamed
+
+&#123;% if is_incremental() %&#125;
+where result_id > (select max(result_id) from &#123;&#123; this &#125;&#125;)
+&#123;% endif %&#125;</code></pre>
+      </div>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>A silent config failure.</strong> The incremental model SQL files originally used
+          <code>strategy='append'</code> in a config block. The correct property name is
+          <code>incremental_strategy</code>. The wrong key didn't throw an error, it was just silently ignored.
+          Fixed by standardizing on <code>schema.yml</code> as the single source of truth for config, and removing
+          config blocks from the model SQL files entirely.
+        </p>
+      </div>
+
+      <!-- MART AND GOVERNANCE -->
+      <h2 id="governance">The mart, and a contract that actually failed once</h2>
+      <p>
+        <code>mart_driver_career_stats</code> is the project's one mart, one row per driver, career to date. It
+        pulls career wins and podiums from <code>int_driver_season_performance</code>, exact race level dates
+        (first race, first and last win, first and last podium) from <code>int_results_enriched</code>, date of
+        birth from <code>stg_drivers</code>, and championship logic joined directly from
+        <code>stg_driver_standings</code>, since that was judged a one-off aggregation not worth its own
+        intermediate model.
+      </p>
+      <p>
+        Model governance is the exam domain this mart demonstrates most directly. All 18 columns are declared in
+        <code>schema.yml</code> with a <code>data_type</code>, the contract is enforced with
+        <code>contract.enforced: true</code>, and there's a <code>not_null</code> constraint on
+        <code>driver_id</code>.
+      </p>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>The contract caught a real type mismatch.</strong> The first contracted build failed.
+          <code>race_starts</code>, <code>career_wins</code>, <code>career_podiums</code>, and
+          <code>career_championships_won</code> are built from <code>count()</code> and <code>sum()</code> in
+          Postgres, which return <code>bigint</code>, not <code>integer</code>, even over integer columns. The
+          contract declared <code>integer</code>. Fixed by casting these columns to <code>integer</code> in the
+          model SQL, rather than loosening the contract to match whatever Postgres happened to produce.
+        </p>
+      </div>
+
+      <!-- IMAGE PLACEHOLDER -->
+      <figure class="proj-figure">
+        <img src="/projects/assets/f1_dbt_contract_error.png"
+          alt="Terminal output showing the dbt contract type mismatch error and the fix">
+        <figcaption>[Placeholder: terminal screenshot of the contract failure on bigint versus integer, and the
+          successful run after the cast was added]</figcaption>
+      </figure>
+
+      <!-- TESTS -->
+      <h2 id="tests">Tests, tags, groups, and documentation</h2>
+      <p>
+        Generic tests cover the core grain and join integrity checks. <code>unique</code> and
+        <code>not_null</code> sit on <code>driver_id</code>, <code>race_id</code>, <code>constructor_id</code>,
+        and <code>result_id</code> across the staging models, and <code>relationships</code> tests confirm
+        <code>stg_results</code> joins cleanly to both <code>stg_drivers</code> and <code>stg_constructors</code>.
+      </p>
+      <p>
+        Singular tests, a custom generic test, and the <code>dbt_utils</code> package were all deliberately scoped
+        out. A duplicate driver-per-race singular test and a non-negative points custom test were both considered
+        and judged unnecessary against the generic coverage already in place, given the wide-not-deep goal of the
+        project. Adding a package purely to enable one test is a legitimate thing to skip, not every gap needs a
+        new dependency closed around it.
+      </p>
+      <p>
+        All 18 models carry tags for fact versus dimension and staging versus intermediate versus mart, and are
+        assigned to one of three groups (drivers, constructors, races) through <code>_groups.yml</code>.
+        Model-level descriptions are set in <code>schema.yml</code>, and <code>dbt docs generate</code> plus
+        <code>dbt docs serve</code> both run cleanly, with tags and groups showing up correctly in the docs site.
+        Column-level documentation was deliberately left out, kept at model level only, in keeping with the
+        wide-not-deep approach.
+      </p>
+
+      <!-- IMAGE PLACEHOLDER -->
+      <figure class="proj-figure">
+        <img src="/projects/assets/f1_dbt_docs_site.png" alt="dbt docs site showing model tags and group assignments">
+        <figcaption>[Placeholder: screenshot of the dbt docs site, showing a model's tags, group, and description]
+        </figcaption>
+      </figure>
+
+      <!-- DATA LIMITATION -->
+      <h2 id="data-limitation">A real limitation in the source data</h2>
+      <p>
+        Results in this dataset are recorded as at the checkered flag, the moment the race ends. When the FIA
+        changes a result afterward, for example applying a time penalty that promotes another driver, that change
+        is never reflected retroactively in <code>results.csv</code>.
+      </p>
+      <p>
+        A concrete example turned up during the build. Lewis Hamilton finished a race in 7th, and was later
+        promoted to 6th after Charles Leclerc received a post-race penalty. The source data still shows the
+        original, pre-penalty positions. That means <code>position</code>, and anything derived from it, like win
+        counts in <code>int_driver_season_performance</code> or podium counts in
+        <code>mart_driver_career_stats</code>, reflect race-day classification rather than final official
+        classification.
+      </p>
+      <p>
+        There's no field in the dataset showing the corrected result, so no test can catch this. It's documented
+        here as a limitation of the source data, not a bug in the pipeline.
+      </p>
+
+      <!-- DBT STATE -->
+      <h2 id="state">Leveraging dbt state</h2>
+      <p>
+        This domain got a full hands-on pass rather than a quick mention. The workflow: build a baseline manifest,
+        store it in a <code>state/</code> directory, then run <code>dbt build --select state:modified --state
+        state</code> to only rebuild what actually changed.
+      </p>
+
+      <div class="pre-wrap">
+        <span class="pre-lang">Bash</span>
+        <pre><code class="language-python">dbt run --select state:modified --state ./state
+dbt build --select state:modified --state ./state</code></pre>
+      </div>
+
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>The <code>--state</code> flag points to a directory, not a file.</strong> An early attempt
+          pointed <code>--state</code> directly at <code>manifest.json</code>, which failed. It needs the
+          directory containing that file instead.</p>
+      </div>
+      <p>
+        Testing this further confirmed a distinction that's easy to miss: description-only changes in
+        <code>schema.yml</code> don't trigger <code>state:modified</code> by default, since that selector tracks
+        changes to compiled output and config, not documentation metadata. Picking up description changes needs
+        <code>state:modified.persisted_descriptions</code> instead.
+      </p>
+
+      <!-- SCOPE DECISIONS -->
+      <h2 id="scope">What was deliberately left out</h2>
+      <p>
+        Snapshots were considered for <code>driver_standings</code> or <code>constructor_standings</code>, along
+        with a computed current-driver flag. Both were scrapped. Snapshots exist to track slowly changing
+        dimensions on a live, mutable source, and this project's standings tables are historical and load-once,
+        with no natural row-level change for a snapshot to capture. A current-driver flag is answerable just by
+        filtering the most recent season, with no change tracking needed. A synthetic workaround, manually editing
+        rows to fake a change, was considered and rejected as dishonest to the exam prep goal. Better to document
+        the gap plainly than manufacture a fake use case.
+      </p>
+      <p>
+        This kind of decision matters as much as the parts that got built. Choosing not to build something, once
+        reasoned through, is different from a gap left by accident, and the project documentation treats both with
+        the same level of detail.
+      </p>
+
+      <!-- CHALLENGES -->
+      <h2 id="challenges">Challenges overcome</h2>
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>A schema mismatch on seed load.</strong> <code>dbt seed</code> loaded all four seed tables into
+          the <code>public</code> schema instead of the intended one. The base schema value in
+          <code>profiles.yml</code> had been left at <code>public</code> from initial setup. Fixed by changing it
+          to <code>dev</code>, then rerunning <code>dbt seed --full-refresh</code> to rebuild the tables in the
+          correct schema.
+        </p>
+      </div>
+      <div class="callout callout-warning">
+        <span class="callout-icon">⚠️</span>
+        <p><strong>A config key that looked right but wasn't.</strong> The same category of failure showed up
+          twice in this project. A mismatched <code>seeds</code> key in <code>dbt_project.yml</code>, and later
+          <code>strategy='append'</code> instead of <code>incremental_strategy='append'</code> in a model config
+          block. Neither raised an error. Both were just silently ignored, which is arguably worse than a hard
+          failure, since nothing flags that the setting did nothing.
+        </p>
+      </div>
+
+      <!-- REFLECTIONS -->
+      <h2 id="reflections">Personal reflection</h2>
+      <p>
+        This project set out to be a study tool first and a portfolio piece second, and that ordering shaped every
+        decision along the way. Checking the build plan against the official dbt Labs study guide partway through
+        was a useful gut check. It caught that the guide's domain structure had moved from 8 domains to 7, and it
+        surfaced a few real gaps, like macros and Jinja, source freshness, and model versioning, that hadn't been
+        on the radar until then.
+      </p>
+      <p>
+        The most useful parts of the project ended up being the errors, not the clean runs. The seed schema bug,
+        the silently ignored config key, and the contract catching a real bigint versus integer mismatch all taught
+        more about how dbt actually behaves than the models that worked on the first try.
+      </p>
+      <p>
+        Next up: building out macros and Jinja with two small hands-on examples, adding an exposure and source
+        freshness checks, and a model version to round out the governance domain alongside the contract already in
+        place.
+      </p>
+
+      <hr>
+
+      <p style="font-size: 0.82rem; color: var(--neutral-500);">
+        Questions about this project or the dbt build? <a href="/#contact">Get in touch.</a>
+      </p>
+
+      <a href="#top" class="back-to-top">↑ Back to top</a>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="proj-sidebar">
+
+      <!-- TOC -->
+      <div class="toc-card">
+        <div class="toc-heading">Contents</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#background" class="toc-link">Building to learn, not just to finish</a></li>
+          <li class="toc-item"><a href="#infrastructure" class="toc-link">Infrastructure: Neon, seeds, and sources</a>
+          </li>
+          <li class="toc-item"><a href="#staging-intermediate" class="toc-link">From staging to intermediate</a></li>
+          <li class="toc-item"><a href="#incremental" class="toc-link">Incremental models and raw loading</a></li>
+          <li class="toc-item"><a href="#governance" class="toc-link">The mart and model governance</a></li>
+          <li class="toc-item"><a href="#tests" class="toc-link">Tests, tags, groups, and docs</a></li>
+          <li class="toc-item"><a href="#data-limitation" class="toc-link">A real source data limitation</a></li>
+          <li class="toc-item"><a href="#state" class="toc-link">Leveraging dbt state</a></li>
+          <li class="toc-item"><a href="#scope" class="toc-link">What was deliberately left out</a></li>
+          <li class="toc-item"><a href="#challenges" class="toc-link">Challenges overcome</a></li>
+          <li class="toc-item"><a href="#reflections" class="toc-link">Personal reflection</a></li>
+        </ul>
+      </div>
+
+      <!-- Project details -->
+      <div class="sidebar-info-card">
+        <div class="sidebar-info-heading">Project Details</div>
+        <div class="sidebar-info-row">
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Type</span>
+            <span class="sidebar-info-value">Personal Project</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Data source</span>
+            <span class="sidebar-info-value">Kaggle Formula 1 Dataset</span>
+          </div>
+          <div class="sidebar-info-item">
+            <span class="sidebar-info-label">Stack</span>
+            <div class="sidebar-tech-pills">
+              <span class="sidebar-pill">dbt-core</span>
+              <span class="sidebar-pill">PostgreSQL</span>
+              <span class="sidebar-pill">Python</span>
+              <span class="sidebar-pill">Jinja</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paul Chapman<br>© 2026 Constellation Analytics</p>
+    <img src="/assets/logo/CA-Logo-Main.png" alt="Constellation Analytics" class="footer-logo">
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/paul-j-chapman/" target="_blank"><img src="/assets/linkedin.png"></a>
+      <a href="https://github.com/Constellation-Analytics" target="_blank"><img src="/assets/github.png"></a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
