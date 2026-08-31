@@ -164,9 +164,9 @@
 
       <!-- IMAGE PLACEHOLDER -->
       <figure class="proj-figure">
-        <img src="/projects/assets/f1_dbt_dag.png"
+        <img src="/projects/assets/dbt_dag.png"
           alt="dbt DAG showing staging, intermediate, and mart layers for the F1 project">
-        <figcaption>[Placeholder: screenshot of the project's DAG from dbt docs, showing staging, intermediate,
+        <figcaption>[Screenshot of the project's DAG from dbt docs, showing staging, intermediate,
           and mart layers]</figcaption>
       </figure>
 
@@ -296,19 +296,19 @@ where result_id > (select max(result_id) from &#123;&#123; this &#125;&#125;)
         <p><strong>The contract caught a real type mismatch.</strong> The first contracted build failed.
           <code>race_starts</code>, <code>career_wins</code>, <code>career_podiums</code>, and
           <code>career_championships_won</code> are built from <code>count()</code> and <code>sum()</code> in
-          Postgres, which return <code>bigint</code>, not <code>integer</code>, even over integer columns. The
-          contract declared <code>integer</code>. Fixed by casting these columns to <code>integer</code> in the
+          Postgres, which return <code>bigint</code>, not <code>integer</code>, whereas the
+          contract is declared as<code>integer</code>. Fixed by casting these columns to <code>integer</code> in the
           model SQL, rather than loosening the contract to match whatever Postgres happened to produce.
         </p>
       </div>
 
-      <!-- IMAGE PLACEHOLDER -->
+      <!-- IMAGE PLACEHOLDER 
       <figure class="proj-figure">
         <img src="/projects/assets/f1_dbt_contract_error.png"
           alt="Terminal output showing the dbt contract type mismatch error and the fix">
         <figcaption>[Placeholder: terminal screenshot of the contract failure on bigint versus integer, and the
           successful run after the cast was added]</figcaption>
-      </figure>
+      </figure> -->
 
       <!-- TESTS -->
       <h2 id="tests">Tests, tags, groups, and documentation</h2>
@@ -336,8 +336,8 @@ where result_id > (select max(result_id) from &#123;&#123; this &#125;&#125;)
 
       <!-- IMAGE PLACEHOLDER -->
       <figure class="proj-figure">
-        <img src="/projects/assets/f1_dbt_docs_site.png" alt="dbt docs site showing model tags and group assignments">
-        <figcaption>[Placeholder: screenshot of the dbt docs site, showing a model's tags, group, and description]
+        <img src="/projects/assets/dbt_documentation.png" alt="dbt docs site showing model tags and group assignments">
+        <figcaption>[Screenshot of the dbt docs site, showing a model's tags, group, and description]
         </figcaption>
       </figure>
 
